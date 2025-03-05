@@ -1,6 +1,8 @@
 export interface Admin{
     id:number;
-    Nom:string;    
+    Nom:string;  
+      
     password:string;
+    
   
 }
