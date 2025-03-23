@@ -4,8 +4,10 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes =[
+  { path: 'admin', component: AdminComponent },
   {
     path: '',
     redirectTo: 'dashboard',
