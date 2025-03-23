@@ -6,9 +6,12 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+//import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AdminComponent } from './admin/admin.component';
-
+import { EtudiantFormComponent } from './etudiant-form/etudiant-form.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmdialogComponent } from './confirmdialog/confirmdialog.component';
+import { AdminLayoutModule } from './layouts/admin-layout/admin-layout.module';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -18,11 +21,17 @@ import { AdminComponent } from './admin/admin.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MatDialogModule,
+    AdminLayoutModule,
+    
+    
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
     AdminComponent,
+    EtudiantFormComponent,
+    ConfirmdialogComponent,
+    
 
   ],
   providers: [],

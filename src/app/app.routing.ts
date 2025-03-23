@@ -5,9 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AdminComponent } from './admin/admin.component';
+import { EtudiantFormComponent } from './etudiant-form/etudiant-form.component';
 
 const routes: Routes =[
   { path: 'admin', component: AdminComponent },
+  { path: 'admin/:id/edit', component: EtudiantFormComponent }, // Add this route
   {
     path: '',
     redirectTo: 'dashboard',
