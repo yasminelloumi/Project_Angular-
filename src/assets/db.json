@@ -1,16 +1,7 @@
 {
   "Etudiants": [
     {
-      "id": 1,
-      "NumeroUnique": 123456,
-      "Nom": "Dupont",
-      "Prenom": "Jean",
-      "email": "jean.dupont@example.com",
-      "password": "monMotDePasseSecret",
-      "niveau": "Licence 2"
-    },
-    {
-      "id": 2,
+      "id": "2",
       "NumeroUnique": 987654,
       "Nom": "Lemoine",
       "Prenom": "Alice",
@@ -19,7 +10,7 @@
       "niveau": "Master 1"
     },
     {
-      "id": 3,
+      "id": "3",
       "NumeroUnique": 654321,
       "Nom": "Bernard",
       "Prenom": "Lucas",
@@ -30,7 +21,7 @@
   ],
   "Parant": [
     {
-      "id": 1,
+      "id": "1",
       "NumeroUnique": 123456,
       "Nom": "Martin",
       "Prenom": "Sophie",
@@ -38,7 +29,7 @@
       "password": "parentSecret123"
     },
     {
-      "id": 2,
+      "id": "2",
       "NumeroUnique": 987654,
       "Nom": "Lemoine",
       "Prenom": "Marc",
@@ -46,7 +37,7 @@
       "password": "parentAlice123"
     },
     {
-      "id": 3,
+      "id": "3",
       "NumeroUnique": 654321,
       "Nom": "Bernard",
       "Prenom": "Sophie",
@@ -56,7 +47,7 @@
   ],
   "Cours": [
     {
-      "id": 1,
+      "id": "1",
       "titre": "Introduction à la programmation",
       "contenu": "Ce cours couvre les bases de la programmation en utilisant Python.",
       "niveau": "Licence 1"
