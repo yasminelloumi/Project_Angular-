@@ -28,8 +28,7 @@ import { AdminLayoutModule } from './layouts/admin-layout/admin-layout.module';
   ],
   declarations: [
     AppComponent,
-    AdminComponent,
-    EtudiantFormComponent,
+    
     ConfirmdialogComponent,
     
 

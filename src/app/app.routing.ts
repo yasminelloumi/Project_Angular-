@@ -7,20 +7,13 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AdminComponent } from './admin/admin.component';
 import { EtudiantFormComponent } from './etudiant-form/etudiant-form.component';
 
-const routes: Routes =[
+const routes: Routes = [
   { path: 'admin', component: AdminComponent },
-  { path: 'admin/:id/edit', component: EtudiantFormComponent }, // Add this route
+  { path: 'admin/:id/edit', component: EtudiantFormComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  }, {
-    path: '',
-    component: AdminLayoutComponent,
-    children: [{
-      path: '',
-      loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
-    }]
+    loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
   }
 ];
 

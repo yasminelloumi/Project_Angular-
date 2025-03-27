@@ -19,6 +19,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { AdminLayoutComponent } from './admin-layout.component';
 import { ComponentsModule } from '../../components/components.module';
+import { EtudiantFormComponent } from 'app/etudiant-form/etudiant-form.component';
+import { AdminComponent } from 'app/admin/admin.component';
 
 @NgModule({
   imports: [
@@ -43,7 +45,9 @@ import { ComponentsModule } from '../../components/components.module';
     IconsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    AdminLayoutComponent, // Declared here
+    AdminLayoutComponent, 
+    AdminComponent,
+    EtudiantFormComponent,// Declared here
   ]
 })
 export class AdminLayoutModule {}
