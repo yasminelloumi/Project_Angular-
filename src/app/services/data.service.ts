@@ -4,7 +4,7 @@ import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Etudiant } from 'Modeles/Etudiant'; 
 import { Parant } from 'Modeles/Parant'; 
-import { EtudiantParant } from 'Modeles/etudiant-parant.interface'; 
+import { EtudiantParant } from 'Modeles/Etudiant-parant.interface'; 
 
 
 @Injectable({
