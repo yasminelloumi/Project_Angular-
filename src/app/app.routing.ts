@@ -4,6 +4,9 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { CourseLevelComponent } from './course-level/course-level.component';
+
+
 
 const routes: Routes =[
   {
@@ -17,6 +20,11 @@ const routes: Routes =[
       path: '',
       loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
     }]
+  },
+  {
+    path: 'Cours/:id', 
+    pathMatch: 'full',
+    component: CourseLevelComponent
   }
 ];
 

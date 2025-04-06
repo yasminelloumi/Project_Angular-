@@ -1,32 +1,116 @@
 {
-    "Etudiants": [
+  "Etudiants": [
+    {
+      "id": 1,
+      "NumeroUnique": 123456,
+      "Nom": "Dupont",
+      "Prenom": "Jean",
+      "email": "jean.dupont@example.com",
+      "password": "monMotDePasseSecret",
+      "niveau": "Licence 2"
+    }
+  ],
+  "Parant": [
+    {
+      "id": 1,
+      "NumeroUnique": 123456,
+      "Nom": "Martin",
+      "Prenom": "Sophie",
+      "email": "sophie.martin@example.com",
+      "password": "parentSecret123"
+    }
+  ],
+  "Cours": [
+    {
+      "id": 1,
+      "titre": "Introduction to Programming",
+      "contenu": "This course covers the basics of programming using Python.",
+      "niveau": "Level 1",
+      "imageUrl": "assets/img/python.jpg",
+      "etapes": [
         {
-            "id": 1,
-            "NumeroUnique": 123456,
-            "Nom": "Dupont",
-            "Prenom": "Jean",
-            "email": "jean.dupont@example.com",
-            "password": "monMotDePasseSecret",
-            "niveau": "Licence 2"
-          }
-    ],
-    "Parant": [
+          "id": 1,
+          "titre": "Step 1: Python Basics",
+          "description": "Introduction to variables and data types.",
+          "ordre": 1,
+          "estComplete": false
+        },
         {
-        "id": 1,
-        "NumeroUnique": 123456,
-        "Nom": "Martin",
-        "Prenom": "Sophie",
-        "email": "sophie.martin@example.com",
-        "password": "parentSecret123"
-      }
-    ],
-    "Cours":[
+          "id": 2,
+          "titre": "Step 2: Loops and Conditions",
+          "description": "Learn how to use loops and conditions.",
+          "ordre": 2,
+          "estComplete": false
+        },
         {
-            "id": 1,
-            "titre": "Introduction à la programmation",
-            "contenu": "Ce cours couvre les bases de la programmation en utilisant Python.",
-            "niveau": "Licence 1"
-          }
-    ]
-    
+          "id": 3,
+          "titre": "Step 3: Final Project",
+          "description": "Create a small Python program.",
+          "ordre": 3,
+          "estComplete": false
+        }
+        
+      ]
+    },
+    {
+      "id": 2,
+      "titre": "Introduction to AI",
+      "contenu": "Discover the basics of Artificial Intelligence.",
+      "niveau": "Beginner",
+      "imageUrl": "assets/img/IA.jpg",
+      "etapes": [
+        {
+          "id": 1,
+          "titre": "Step 1: What is AI?",
+          "description": "Introduction to Artificial Intelligence.",
+          "ordre": 1,
+          "estComplete": false
+        },
+        {
+          "id": 2,
+          "titre": "Step 2: Intelligent Robots",
+          "description": "Discover robots and how they learn.",
+          "ordre": 2,
+          "estComplete": false
+        },
+        {
+          "id": 3,
+          "titre": "Step 3: Final Quiz",
+          "description": "Test your knowledge.",
+          "ordre": 3,
+          "estComplete": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "titre": "Game Development with Scratch",
+      "contenu": "Create your own games using Scratch.",
+      "niveau": "Beginner",
+      "imageUrl": "assets/img/scrach.jpg",
+      "etapes": [
+        {
+          "id": 1,
+          "titre": "Step 1: Discover Scratch",
+          "description": "Learn the basics of Scratch.",
+          "ordre": 1,
+          "estComplete": false
+        },
+        {
+          "id": 2,
+          "titre": "Step 2: Create a Simple Game",
+          "description": "Build your first game.",
+          "ordre": 2,
+          "estComplete": false
+        },
+        {
+          "id": 3,
+          "titre": "Step 3: Advanced Game",
+          "description": "Add features and make it fun!",
+          "ordre": 3,
+          "estComplete": false
+        }
+      ]
+    }
+  ]
 }
