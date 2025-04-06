@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { EtudiantParant } from 'Modeles/etudiant-parant.interface';
+import { EtudiantParant } from 'Modeles/Etudiant-parant.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmdialogComponent } from 'app/confirmdialog/confirmdialog.component';
 //import { ConfirmdialogComponent } from '../confirmdialog/confirmdialog.component';

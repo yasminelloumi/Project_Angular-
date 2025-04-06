@@ -7,32 +7,31 @@ import { AuthService } from 'app/services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  email: string = '';
+  password: string = '';
 
-  email : string = '';
-  password : string = '';
-
-  constructor(private auth : AuthService) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
   register() {
-
-    if(this.email == '') {
-      alert('Please enter email');
+    // Optional: Keep these checks if you want immediate feedback before calling the service
+    if (this.email === '') {
+      this.auth.showNotification('Please enter email', 'top', 'center');
       return;
     }
 
-    if(this.password == '') {
-      alert('Please enter password');
+    if (this.password === '') {
+      this.auth.showNotification('Please enter password', 'top', 'center');
       return;
     }
 
-    this.auth.register(this.email,this.password);
+    // Call the register method which will handle success/error notifications
+    this.auth.register(this.email, this.password);
     
+    // Clear the fields (this will happen regardless of success/failure)
     this.email = '';
     this.password = '';
-
   }
-
 }

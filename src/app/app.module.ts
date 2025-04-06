@@ -16,7 +16,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 const firebaseConfig = {
   apiKey: "AIzaSyBvQeRsvCIQLdIskCpBa788Tggc3RvV0Hw",
   authDomain: "labg5-5cc36.firebaseapp.com",
@@ -39,7 +39,8 @@ const firebaseConfig = {
     AdminLayoutModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
        
   ],
   declarations: [
