@@ -1,23 +1,48 @@
 {
   "Etudiants": [
     {
-      "id": 1,
-      "NumeroUnique": 123456,
-      "Nom": "Dupont",
-      "Prenom": "Jean",
-      "email": "jean.dupont@example.com",
-      "password": "monMotDePasseSecret",
-      "niveau": "Licence 2"
+      "id": "2",
+      "NumeroUnique": 987654,
+      "Nom": "Lemoine",
+      "Prenom": "Alice",
+      "email": "alice.lemoine@example.com",
+      "password": "motDePasseAlice",
+      "niveau": "Master 1"
+    },
+    {
+      "id": "3",
+      "NumeroUnique": 654321,
+      "Nom": "Bernard",
+      "Prenom": "Lucas",
+      "email": "lucas.bernard@example.com",
+      "password": "motDePasseLucas",
+      "niveau": "Licence 3"
     }
   ],
   "Parant": [
     {
-      "id": 1,
+      "id": "1",
       "NumeroUnique": 123456,
       "Nom": "Martin",
       "Prenom": "Sophie",
       "email": "sophie.martin@example.com",
       "password": "parentSecret123"
+    },
+    {
+      "id": "2",
+      "NumeroUnique": 987654,
+      "Nom": "Lemoine",
+      "Prenom": "Marc",
+      "email": "marc.lemoine@example.com",
+      "password": "parentAlice123"
+    },
+    {
+      "id": "3",
+      "NumeroUnique": 654321,
+      "Nom": "Bernard",
+      "Prenom": "Sophie",
+      "email": "sophie.bernard@example.com",
+      "password": "parentLucas456"
     }
   ],
   "Cours": [

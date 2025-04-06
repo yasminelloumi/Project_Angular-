@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+
+<div class="content">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <!-- Employees Stats Table -->
+  <div class="card">
+    <div class="card-header card-header-warning">
+      <h4 class="card-title">Utulisateur</h4>
+      <p class="card-category">les étudiant et leur parents</p>
+    </div>
+    <div class="card-body table-responsive">
+      <table class="table table-hover">
+        <thead class="text-warning">
+          <th>ID</th>
+          <th>NumeroUnique</th>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>email</th>
+          <th>niveau</th>
+          <th>Nom de parent</th>
+          <th>Email de parent</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of dataSource">
+            <td>{{ item.id }}</td>
+            <td>{{ item.NumeroUnique }}</td>
+            <td>{{ item.Nom }}</td>
+            <td>{{ item.Prenom }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.niveau }}</td>
+            <td>{{ item.NomParent }}</td>
+            <td>{{ item.EmailParent }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm" (click)="edit(item.id)">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="delete(item.id)">Delete</button>
+            </td>
+          </tr>
+          <tr *ngIf="dataSource.length === 0">
+            <td colspan="9">No data available</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
