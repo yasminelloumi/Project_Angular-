@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
-//import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AdminComponent } from './admin/admin.component';
 import { EtudiantFormComponent } from './etudiant-form/etudiant-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -17,6 +16,9 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LevelContentComponent } from './level-content/level-content.component';
+import { CourseLevelComponent } from './course-level/course-level.component';
+
 const firebaseConfig = {
   apiKey: "AIzaSyBvQeRsvCIQLdIskCpBa788Tggc3RvV0Hw",
   authDomain: "labg5-5cc36.firebaseapp.com",
@@ -26,12 +28,6 @@ const firebaseConfig = {
   appId: "1:324165329501:web:206ad4f0d508b7cd3a63b4",
   measurementId: "G-H4J59GF4GJ"
 };
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { LevelContentComponent } from './level-content/level-content.component';
-import { CourseLevelComponent } from './course-level/course-level.component';
-
-
-
 
 @NgModule({
   imports: [
@@ -43,25 +39,18 @@ import { CourseLevelComponent } from './course-level/course-level.component';
     RouterModule,
     AppRoutingModule,
     MatDialogModule,
-    AdminLayoutModule,
+    AdminLayoutModule, // Ensure this module declares AdminLayoutComponent
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    FormsModule,
     MatSnackBarModule
-       
   ],
   declarations: [
     AppComponent,
-    
     ConfirmdialogComponent,
-          LoginComponent,
-          RegisterComponent,
-    AdminLayoutComponent,
-    LevelContentComponent,
-    CourseLevelComponent,
-   
-  
-
+    LoginComponent,
+    RegisterComponent,
+    //LevelContentComponent,
+    //CourseLevelComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { CourseLevelComponent } from 'app/course-level/course-level.component';
+import { MapsComponent } from 'app/maps/maps.component';
 
 const routes: Routes = [
   {

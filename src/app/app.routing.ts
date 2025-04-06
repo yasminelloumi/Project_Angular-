@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
@@ -15,6 +15,7 @@ import { TypographyComponent } from './typography/typography.component';
 import { IconsComponent } from './icons/icons.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
+import { CourseLevelComponent } from './course-level/course-level.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route to login
@@ -22,17 +23,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin/:id/edit', component: EtudiantFormComponent },
-  { 
-import { CourseLevelComponent } from './course-level/course-level.component';
 
-
-
-const routes: Routes =[
   {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  }, {
     path: '',
     component: AdminLayoutComponent,
     children: [
@@ -43,31 +35,34 @@ const routes: Routes =[
       { path: 'icons', component: IconsComponent },
       { path: 'notifications', component: NotificationsComponent },
       { path: 'upgrade', component: UpgradeComponent },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
-    ]
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./layouts/admin-layout/admin-layout.module').then(
+            (m) => m.AdminLayoutModule
+          ),
+      },
+    ],
   },
-  
-  { path: '**', redirectTo: 'login' } // Fallback to login
-    children: [{
-      path: '',
-      loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
-    }]
-  },
+
   {
-    path: 'Cours/:id', 
+    path: 'Cours/:id',
     pathMatch: 'full',
-    component: CourseLevelComponent
-  }
+    component: CourseLevelComponent,
+  },
+
+  { path: '**', redirectTo: 'login' }, // Fallback to login
 ];
+
 @NgModule({
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes,{
-       useHash: true
-    })
+    RouterModule.forRoot(routes, {
+      useHash: true,
+    }),
   ],
-  exports: [
-  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
