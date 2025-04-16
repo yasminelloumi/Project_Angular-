@@ -6,5 +6,7 @@ export interface Etudiant{
     email:string;
     password:string;
     niveau:string;
+    firebaseUid:string;
+    role:string;
     
 }

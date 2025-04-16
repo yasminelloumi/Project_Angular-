@@ -1,48 +1,67 @@
-{
+{"Admin":[
+  {
+    "id": 1,
+    "email": "admin@gmail.com",
+    "password": "admin123",
+    "role": "admin",
+    "Nom": "School Administrator",
+    "firebaseUID": "CbZBIYE5rYRoX0XbA4GrNLJaXWv2"
+  }
+],
   "Etudiants": [
     {
-      "id": "2",
+      "id": 2,
       "NumeroUnique": 987654,
       "Nom": "Lemoine",
       "Prenom": "Alice",
       "email": "alice.lemoine@example.com",
       "password": "motDePasseAlice",
-      "niveau": "Master 1"
+      "niveau": "Master 1",
+      "firebaseUid": "eTnonBOPAZXibyQX94dhruO4EYh2",
+      "role": "etudiant"
     },
     {
-      "id": "3",
-      "NumeroUnique": 654321,
+      "id": 3,
+      "NumeroUnique": 123456,
       "Nom": "Bernard",
       "Prenom": "Lucas",
       "email": "lucas.bernard@example.com",
       "password": "motDePasseLucas",
-      "niveau": "Licence 3"
+      "niveau": "Licence 3",
+      "firebaseUid": "",
+      "role": "etudiant"
     }
   ],
   "Parant": [
     {
-      "id": "1",
+      "id": 1,
       "NumeroUnique": 123456,
       "Nom": "Martin",
       "Prenom": "Sophie",
       "email": "sophie.martin@example.com",
-      "password": "parentSecret123"
+      "password": "parentSecret123",
+      "firebaseUid": "",
+      "role": "Parent"
     },
     {
-      "id": "2",
+      "id": 2,
       "NumeroUnique": 987654,
       "Nom": "Lemoine",
       "Prenom": "Marc",
       "email": "marc.lemoine@example.com",
-      "password": "parentAlice123"
+      "password": "parentAlice123",
+      "firebaseUid": "",
+      "role": "Parent"
     },
     {
-      "id": "3",
+      "id": 3,
       "NumeroUnique": 654321,
       "Nom": "Bernard",
       "Prenom": "Sophie",
       "email": "sophie.bernard@example.com",
-      "password": "parentLucas456"
+      "password": "parentLucas456",
+      "firebaseUid": "",
+      "role": ""
     }
   ],
   "Cours": [

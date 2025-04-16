@@ -15,16 +15,11 @@ export class AuthService {
     private snackBar: MatSnackBar  // Added this line
   ) { }
 
-  login(email: string, password: string) {
-    this.fireauth.signInWithEmailAndPassword(email, password).then(() => {
-      alert("Login Successful");
-      localStorage.setItem('token', 'true');
-      this.router.navigate(['/dashboard']);
-    }, err => {
-      alert("Something went wrong");
-      this.router.navigate(['/login']);
-    })
-  }
+  // auth.service.ts
+login(email: string, password: string): Promise<any> {
+  return this.fireauth.signInWithEmailAndPassword(email, password);
+}
+
 
   //register method
   register(email: string, password: string) {

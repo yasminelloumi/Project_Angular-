@@ -5,5 +5,7 @@ export interface Parant{
     Prenom:string;
     email:string;
     password:string; 
+    firebaseUid:string;
+    role:string;
     
 }

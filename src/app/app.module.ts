@@ -20,13 +20,13 @@ import { LevelContentComponent } from './level-content/level-content.component';
 import { CourseLevelComponent } from './course-level/course-level.component';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBvQeRsvCIQLdIskCpBa788Tggc3RvV0Hw",
-  authDomain: "labg5-5cc36.firebaseapp.com",
-  projectId: "labg5-5cc36",
-  storageBucket: "labg5-5cc36.firebasestorage.app",
-  messagingSenderId: "324165329501",
-  appId: "1:324165329501:web:206ad4f0d508b7cd3a63b4",
-  measurementId: "G-H4J59GF4GJ"
+  apiKey: "AIzaSyDu5VmAEsVFy_AiddbbMixP8eE9w5JCI_4",
+  authDomain: "e-learning-f2bb9.firebaseapp.com",
+  projectId: "e-learning-f2bb9",
+  storageBucket: "e-learning-f2bb9.firebasestorage.app",
+  messagingSenderId: "509328860393",
+  appId: "1:509328860393:web:74372302fc801520d3bc78",
+  measurementId: "G-ZBS5L03LZ4"
 };
 
 @NgModule({
