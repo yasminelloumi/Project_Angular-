@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LevelContentComponent } from './level-content/level-content.component';
 import { CourseLevelComponent } from './course-level/course-level.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDu5VmAEsVFy_AiddbbMixP8eE9w5JCI_4",
@@ -49,6 +50,7 @@ const firebaseConfig = {
     ConfirmdialogComponent,
     LoginComponent,
     RegisterComponent,
+    AdminHomeComponent,
     //LevelContentComponent,
     //CourseLevelComponent
   ],

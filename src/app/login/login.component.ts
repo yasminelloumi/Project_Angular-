@@ -30,9 +30,11 @@ export class LoginComponent implements OnInit {
     }
   
     this.auth.login(this.email, this.password)
-      .then(userCredential => {
-        const firebaseUid = userCredential.user?.uid;
+    .then(userCredential => {
+      console.log('Firebase login success:', userCredential); // ✅ Add this
   
+      const firebaseUid = userCredential.user?.uid;
+        
         // 🔍 Search in Etudiants
         this.http.get<any[]>(`http://localhost:3000/Etudiants?firebaseUid=${firebaseUid}`)
           .subscribe(etudiants => {
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
                   if (admins.length > 0) {
                     localStorage.setItem('user', JSON.stringify(admins[0]));
                     localStorage.setItem('role', 'admin');
-                    this.router.navigate(['/dashboard']);
+                    this.router.navigate(['/adminehome']);
                   } else {
                     // 🔍 Search in Parant
                     this.http.get<any[]>(`http://localhost:3000/Parant?firebaseUid=${firebaseUid}`)
