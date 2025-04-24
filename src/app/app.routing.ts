@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin/:id/edit', component: EtudiantFormComponent },
-  {path:'adminehome', component: AdminHomeComponent},
+  
 
   {
     path: '',
@@ -36,8 +36,12 @@ const routes: Routes = [
       { path: 'typography', component: TypographyComponent },
       { path: 'icons', component: IconsComponent },
       { path: 'notifications', component: NotificationsComponent },
-      { path: 'upgrade', component: UpgradeComponent },
-      
+      { path: 'upgrade',pathMatch: 'full', component: UpgradeComponent },
+      { 
+        path: 'adminehome', 
+        component: AdminHomeComponent,
+          
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
         path: '',

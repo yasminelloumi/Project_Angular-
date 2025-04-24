@@ -1,11 +1,42 @@
-<!-- admin-home.component.html -->
 <div class="admin-container">
     <h1>👑 Admin Dashboard</h1>
     <p>Welcome, Admin! Here you can manage courses, users, and more.</p>
-  
-    <div class="actions">
-      <a routerLink="/manage-courses" class="btn btn-primary">Manage Courses</a>
-      <a routerLink="/admin" class="btn btn-secondary">Manage Users</a>
+    
+    <div class="row">
+        <!-- Card 1 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top img-thumbnail" style="max-height: 150px; width: auto;" src="/assets/img/member.jpg" alt="member">
+                <div class="card-body">
+                    <h5 class="card-title">Users Management</h5>
+                    <p class="card-text">Manage all user accounts, permissions, and access levels.</p>
+                    <a routerLink="/admin" class="btn btn-info">Manage Users</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top img-thumbnail" style="max-height: 150px; width: auto;" src="/assets/img/manage-courses.png" alt="Courses">
+                <div class="card-body">
+                    <h5 class="card-title">Course Management</h5>
+                    <p class="card-text">Create, edit, and organize all course materials.</p>
+                    <a routerLink="/manage-courses" class="btn btn-success">Manage Courses</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top img-thumbnail" style="max-height: 150px; width: auto;" src="/assets/img/manage-courses.png" alt="Other">
+                <div class="card-body">
+                    <h5 class="card-title">System Settings</h5>
+                    <p class="card-text">Configure platform settings and preferences.</p>
+                    <a routerLink="/system-settings" class="btn btn-warning">Settings</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  
+</div>
