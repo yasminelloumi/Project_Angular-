@@ -19,6 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LevelContentComponent } from './level-content/level-content.component';
 import { CourseLevelComponent } from './course-level/course-level.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDu5VmAEsVFy_AiddbbMixP8eE9w5JCI_4",
@@ -31,6 +32,7 @@ const firebaseConfig = {
 };
 
 @NgModule({
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   imports: [
     BrowserAnimationsModule,
     FormsModule,
@@ -54,7 +56,7 @@ const firebaseConfig = {
     //LevelContentComponent,
     //CourseLevelComponent
   ],
-  providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -38,8 +38,7 @@ const routes: Routes = [
       { path: 'notifications', component: NotificationsComponent },
       { path: 'upgrade',pathMatch: 'full', component: UpgradeComponent },
       { 
-        path: 'adminehome', 
-        component: AdminHomeComponent,
+        path: 'adminehome',  component: AdminHomeComponent,
           
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
