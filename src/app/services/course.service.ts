@@ -21,12 +21,12 @@ export class CoursService {
   }
 
   getAllCours(): Observable<Cours[]> {
-    return this.http.get<Cours[]>(`${this.apiUrl}/cours`);
+    return this.http.get<Cours[]>(`${this.apiUrl}/Cours`);
   }
 
   getCoursWithEtapes(id: number): Observable<Cours> {
     return forkJoin({
-      cours: this.http.get<Cours>(`${this.apiUrl}/cours/${id}`),
+      cours: this.http.get<Cours>(`${this.apiUrl}/Cours/${id}`),
       etapes: this.http.get<Etape[]>(`${this.apiUrl}/etapes?coursId=${id}`)
     }).pipe(
       map(result => ({
@@ -37,11 +37,11 @@ export class CoursService {
   }
 
   createCours(cours: Omit<Cours, 'id'>): Observable<Cours> {
-    return this.http.post<Cours>(`${this.apiUrl}/cours`, cours);
+    return this.http.post<Cours>(`${this.apiUrl}/Cours`, cours);
   }
 
   updateCours(id: number, cours: Partial<Cours>): Observable<Cours> {
-    return this.http.patch<Cours>(`${this.apiUrl}/cours/${id}`, cours);
+    return this.http.patch<Cours>(`${this.apiUrl}/Cours/${id}`, cours);
   }
 
   deleteCours(id: number): Observable<void> {
@@ -52,7 +52,7 @@ export class CoursService {
         );
         return forkJoin(deleteRequests.length ? deleteRequests : [null]);
       }),
-      switchMap(() => this.http.delete<void>(`${this.apiUrl}/cours/${id}`))
+      switchMap(() => this.http.delete<void>(`${this.apiUrl}/Cours/${id}`))
     );
   }
 }

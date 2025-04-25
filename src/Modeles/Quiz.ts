@@ -1,5 +1,6 @@
-export interface Quiz{
-    id:number;
-    question:Array<string>   
-    
+export interface Quiz {
+    question: string;
+    options: string[];
+    correctAnswer: string;
+
 }

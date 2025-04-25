@@ -1,82 +1,69 @@
-
 <app-navbar></app-navbar>
 <div class="form-container">
-    <div *ngIf="isLoading" class="loading">
-      <div class="loading-spinner"></div>
-      <p>Chargement du cours...</p>
-    </div>
-  
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-      <div class="mt-4">
-        <a [routerLink]="['/cours']" class="btn btn-primary">Retour aux cours</a>
-      </div>
-    </div>
-  
-    <div *ngIf="!isLoading && !errorMessage">
-      <nav class="breadcrumb">
-        <a [routerLink]="['/cours']">Cours</a>
-        <span class="separator">/</span>
-        <span *ngIf="isEditMode">Modifier le cours</span>
-        <span *ngIf="!isEditMode">Nouveau cours</span>
-      </nav>
-  
-      <div class="form-header">
-        <h1>{{ isEditMode ? 'Modifier le cours' : 'Créer un nouveau cours' }}</h1>
-      </div>
-  
-      <form [formGroup]="coursForm" (ngSubmit)="onSubmit()" class="course-form">
-        <div class="form-group">
-          <label for="titre">Titre du cours</label>
-          <input 
-            type="text" 
-            id="titre" 
-            formControlName="titre" 
-            class="form-control" 
-            [class.is-invalid]="coursForm.get('titre')?.invalid && coursForm.get('titre')?.touched"
-          />
-          <div *ngIf="coursForm.get('titre')?.invalid && coursForm.get('titre')?.touched" class="error-feedback">
-            <span *ngIf="coursForm.get('titre')?.errors?.['required']">Le titre est requis</span>
-            <span *ngIf="coursForm.get('titre')?.errors?.['minlength']">Le titre doit avoir au moins 3 caractères</span>
-            <span *ngIf="coursForm.get('titre')?.errors?.['maxlength']">Le titre ne peut pas dépasser 100 caractères</span>
-          </div>
-        </div>
-  
-        <div class="form-group">
-          <label for="cotenu">Contenu du cours</label>
-          <textarea 
-            id="cotenu" 
-            formControlName="cotenu" 
-            rows="6" 
-            class="form-control" 
-            [class.is-invalid]="coursForm.get('cotenu')?.invalid && coursForm.get('cotenu')?.touched"
-          ></textarea>
-          <div *ngIf="coursForm.get('cotenu')?.invalid && coursForm.get('cotenu')?.touched" class="error-feedback">
-            <span *ngIf="coursForm.get('cotenu')?.errors?.['required']">Le contenu est requis</span>
-            <span *ngIf="coursForm.get('cotenu')?.errors?.['minlength']">Le contenu doit avoir au moins 10 caractères</span>
-          </div>
-        </div>
-  
-        <div class="form-group">
-          <label for="niveau">Niveau</label>
-          <select 
-            id="niveau" 
-            formControlName="niveau" 
-            class="form-control"
-          >
-            <option *ngFor="let niveau of niveaux" [value]="niveau">{{ niveau }}</option>
-          </select>
-        </div>
-  
-        <div class="form-actions">
-          <button type="button" [routerLink]="isEditMode ? ['/cours', coursId] : ['/cours']" class="btn btn-cancel">
-            Annuler
-          </button>
-          <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
-            <span *ngIf="isSubmitting" class="spinner"></span>
-            {{ isEditMode ? 'Mettre à jour' : 'Créer' }}
-          </button>
-        </div>
-      </form>
+  <div *ngIf="isLoading" class="loading">
+    <div class="loading-spinner"></div>
+    <p>Chargement du cours...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+    <div class="mt-4">
+      <a [routerLink]="['/cours']" class="btn btn-primary">Retour aux cours</a>
     </div>
   </div>
+
+  <div *ngIf="!isLoading && !errorMessage">
+    <nav class="breadcrumb">
+      <a [routerLink]="['/cours']">Cours</a>
+      <span class="separator">/</span>
+      <span *ngIf="isEditMode">Modifier le cours</span>
+      <span *ngIf="!isEditMode">Nouveau cours</span>
+    </nav>
+
+    <div class="form-header">
+      <h1>{{ isEditMode ? 'Modifier le cours' : 'Créer un nouveau cours' }}</h1>
+    </div>
+
+    <form [formGroup]="coursForm" (ngSubmit)="onSubmit()" class="course-form">
+      <div class="form-group">
+        <label for="titre">Titre du cours</label>
+        <input type="text" id="titre" formControlName="titre" class="form-control"
+          [class.is-invalid]="coursForm.get('titre')?.invalid && coursForm.get('titre')?.touched" />
+        <div *ngIf="coursForm.get('titre')?.invalid && coursForm.get('titre')?.touched" class="error-feedback">
+          <span *ngIf="coursForm.get('titre')?.errors?.['required']">Le titre est requis</span>
+          <span *ngIf="coursForm.get('titre')?.errors?.['minlength']">Le titre doit avoir au moins 3 caractères</span>
+          <span *ngIf="coursForm.get('titre')?.errors?.['maxlength']">Le titre ne peut pas dépasser 100
+            caractères</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="contenu">Contenu du cours</label>
+        <textarea id="contenu" formControlName="contenu" rows="6" class="form-control"
+          [class.is-invalid]="coursForm.get('contenu')?.invalid && coursForm.get('contenu')?.touched"></textarea>
+        <div *ngIf="coursForm.get('contenu')?.invalid && coursForm.get('contenu')?.touched" class="error-feedback">
+          <span *ngIf="coursForm.get('contenu')?.errors?.['required']">Le contenu est requis</span>
+          <span *ngIf="coursForm.get('contenu')?.errors?.['minlength']">Le contenu doit avoir au moins 10
+            caractères</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="niveau">Niveau</label>
+        <select id="niveau" formControlName="niveau" class="form-control">
+          <option *ngFor="let niveau of niveaux" [value]="niveau">{{ niveau }}</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" [routerLink]="isEditMode ? ['/cours', coursId] : ['/cours']" class="btn btn-cancel">
+          Annuler
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+          <span *ngIf="isSubmitting" class="spinner"></span>
+          {{ isEditMode ? 'Mettre à jour' : 'Créer' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

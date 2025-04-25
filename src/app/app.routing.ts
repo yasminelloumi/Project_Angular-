@@ -65,13 +65,13 @@ const routes: Routes = [
   },
 
   {
-    path: 'Cours/:id',
+    path: 'cours/:id',
     pathMatch: 'full',
     component: CourseLevelComponent,
   },
 
   {
-    path: 'course/:courseId/level/:levelId',
+    path: 'cours/:courseId/level/:levelId',
     pathMatch: 'full',
     component: LevelContentComponent
   },

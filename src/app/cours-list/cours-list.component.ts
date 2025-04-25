@@ -49,7 +49,7 @@ export class CoursListComponent implements OnInit {
     this.filteredCours = this.cours.filter(cours => {
       const matchesSearch = this.searchTerm === '' || 
         cours.titre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        cours.cotenu.toLowerCase().includes(this.searchTerm.toLowerCase());
+        cours.contenu.toLowerCase().includes(this.searchTerm.toLowerCase());
       
       const matchesNiveau = this.selectedNiveau === '' ||
         cours.niveau === this.selectedNiveau;

@@ -38,7 +38,7 @@ export class CoursFormComponent implements OnInit {
   initForm(): void {
     this.coursForm = this.fb.group({
       titre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      cotenu: ['', [Validators.required, Validators.minLength(10)]],
+      contenu: ['', [Validators.required, Validators.minLength(10)]],
       niveau: ['Débutant', Validators.required]
     });
   }
@@ -62,7 +62,7 @@ export class CoursFormComponent implements OnInit {
       next: (cours) => {
         this.coursForm.patchValue({
           titre: cours.titre,
-          cotenu: cours.cotenu,
+          contenu: cours.contenu,
           niveau: cours.niveau
         });
         this.isLoading = false;

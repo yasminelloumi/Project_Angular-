@@ -1,62 +1,57 @@
 <app-navbar></app-navbar>
 <div class="courses-container">
-    <header class="page-header">
-      <h1>Gestion des Cours</h1>
-      <a [routerLink]="['/cours/new']" class="btn btn-primary">Ajouter un cours</a>
-    </header>
-  
-    <div class="filters-section">
-      <div class="search-box">
-        <input 
-          type="text" 
-          [(ngModel)]="searchTerm" 
-          (input)="onSearchChange()"
-          placeholder="Rechercher un cours..." 
-          class="search-input"
-        />
+  <header class="page-header">
+    <h1>Gestion des Cours</h1>
+    <a [routerLink]="['/cours/new']" class="btn btn-primary">Ajouter un cours</a>
+  </header>
+
+  <div class="filters-section">
+    <div class="search-box">
+      <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Rechercher un cours..."
+        class="search-input" />
+    </div>
+
+    <div class="niveau-filter">
+      <select [(ngModel)]="selectedNiveau" (change)="onNiveauChange()" class="niveau-select">
+        <option value="">Tous les niveaux</option>
+        <option *ngFor="let niveau of niveaux" [value]="niveau">{{ niveau }}</option>
+      </select>
+
+      <button (click)="resetFilters()" class="btn btn-reset" *ngIf="searchTerm || selectedNiveau">
+        Réinitialiser
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <div class="loading-spinner"></div>
+    <p>Chargement des cours...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && filteredCours.length === 0" class="no-courses">
+    <p>Aucun cours trouvé. Veuillez ajuster vos filtres ou ajouter un nouveau cours.</p>
+  </div>
+
+  <div class="courses-grid" *ngIf="!isLoading && filteredCours.length > 0">
+    <div *ngFor="let cours of filteredCours" class="course-card">
+      <div class="course-header">
+        <h2 class="course-title">{{ cours.titre }}</h2>
+        <span class="niveau-badge" [ngClass]="'niveau-' + cours.niveau.toLowerCase()">
+          {{ cours.niveau }}
+        </span>
       </div>
-      
-      <div class="niveau-filter">
-        <select [(ngModel)]="selectedNiveau" (change)="onNiveauChange()" class="niveau-select">
-          <option value="">Tous les niveaux</option>
-          <option *ngFor="let niveau of niveaux" [value]="niveau">{{ niveau }}</option>
-        </select>
-        
-        <button (click)="resetFilters()" class="btn btn-reset" *ngIf="searchTerm || selectedNiveau">
-          Réinitialiser
-        </button>
-      </div>
-    </div>
-  
-    <div *ngIf="isLoading" class="loading">
-      <div class="loading-spinner"></div>
-      <p>Chargement des cours...</p>
-    </div>
-  
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
-  
-    <div *ngIf="!isLoading && !errorMessage && filteredCours.length === 0" class="no-courses">
-      <p>Aucun cours trouvé. Veuillez ajuster vos filtres ou ajouter un nouveau cours.</p>
-    </div>
-  
-    <div class="courses-grid" *ngIf="!isLoading && filteredCours.length > 0">
-      <div *ngFor="let cours of filteredCours" class="course-card">
-        <div class="course-header">
-          <h2 class="course-title">{{ cours.titre }}</h2>
-          <span class="niveau-badge" [ngClass]="'niveau-' + cours.niveau.toLowerCase()">
-            {{ cours.niveau }}
-          </span>
-        </div>
-        
-        <p class="course-content">{{ cours.cotenu }}</p>
-        
-        <div class="card-actions">
-          <a [routerLink]="['/cours', cours.id]" class="btn btn-view">Voir</a>
-          <a [routerLink]="['/cours', cours.id, 'edit']" class="btn btn-edit">Modifier</a>
-          <button (click)="deleteCours(cours.id, $event)" class="btn btn-delete">Supprimer</button>
-        </div>
+
+      <p class="course-content">{{ cours.contenu }}</p>
+
+      <div class="card-actions">
+        <a [routerLink]="['/cours', cours.id]" class="btn btn-view">Voir</a>
+        <a [routerLink]="['/cours', cours.id, 'edit']" class="btn btn-edit">Modifier</a>
+        <button (click)="deleteCours(cours.id, $event)" class="btn btn-delete">Supprimer</button>
       </div>
     </div>
   </div>
+</div>

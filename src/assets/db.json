@@ -128,82 +128,136 @@
       "role": "Parent"
     }
   ],
-  "cours": [
+  "Cours": [
     {
-      "id": "1",
-      "titre": "Introduction à Angular test",
-      "cotenu": "Ce cours vous apprendra les bases d'Angular, un framework JavaScript populaire pour la création d'applications web.",
-      "niveau": "Débutant"
+      "id": 1,
+      "titre": "Introduction to Programming",
+      "contenu": "This course covers the basics of programming using Python.",
+      "niveau": "Level 1",
+      "imageUrl": "assets/img/python.jpg",
+      "etapes": [
+        {
+          "id": 1,
+          "titre": "Step 1: Python Basics",
+          "description": "Introduction to variables and data types.",
+          "contentType": "video",
+          "contentData": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          "ordre": 1,
+          "estComplete": false
+        },
+        {
+          "id": 2,
+          "titre": "Step 2: Loops and Conditions",
+          "description": "Learn how to use loops and conditions.",
+          "contentType": "text",
+          "contentData": "Loops allow you to repeat a block of code multiple times. In Python, you can use `for` and `while` loops. Conditions are used with `if`, `elif`, and `else` statements to control the flow of your program.",
+          "ordre": 2,
+          "estComplete": false
+        },
+        {
+          "id": 3,
+          "titre": "Step 3: Functions",
+          "description": "Learn about functions in Python.",
+          "contentType": "video",
+          "contentData": "https://www.youtube.com/embed/anotherVideoId",
+          "ordre": 3,
+          "estComplete": false
+        },
+        {
+          "id": 4,
+          "titre": "Step 4: Advanced Python",
+          "description": "Explore advanced Python concepts.",
+          "contentType": "text",
+          "contentData": "Advanced Python includes topics like object-oriented programming, decorators, and generators.",
+          "ordre": 4,
+          "estComplete": false
+        },
+        {
+          "id": 5,
+          "titre": "Step 5: Final Quiz",
+          "description": "Test your knowledge with a quiz.",
+          "contentType": "quiz",
+          "contentData": [
+            {
+              "question": "What is a variable in Python?",
+              "options": ["A loop", "A condition", "A container for data", "A function"],
+              "correctAnswer": "A container for data"
+            },
+            {
+              "question": "Which keyword is used for a loop in Python?",
+              "options": ["if", "for", "function", "class"],
+              "correctAnswer": "for"
+            }
+          ],
+          "ordre": 5,
+          "estComplete": false
+        }
+      ]
     },
     {
-      "id": "2",
-      "titre": "Développement avancé avec Angular",
-      "cotenu": "Approfondissez vos connaissances d'Angular avec ce cours qui couvre les sujets avancés.",
-      "niveau": "Avancé"
-    },
-    {
-      "id": "3",
-      "titre": "TypeScript pour débutants",
-      "cotenu": "Apprenez les bases du langage TypeScript, un sur-ensemble de JavaScript qui ajoute des types statiques.",
-      "niveau": "Débutant"
-    }
-  ],
-  "etapes": [
-    {
-      "id": "1",
-      "titre": "Installation d'Angular CLI",
-      "contenu": "Dans cette étape, vous apprendrez à installer Angular CLI, l'outil de ligne de commande officiel pour Angular.",
-      "ordre": 1,
-      "estComplete": false,
-      "coursId": 1
-    },
-    {
-      "id": "2",
-      "titre": "Création d'un nouveau projet",
-      "contenu": "Découvrez comment créer un nouveau projet Angular avec Angular CLI.",
-      "ordre": 2,
-      "estComplete": false,
-      "coursId": 1
-    },
-    {
-      "id": "3",
-      "titre": "Components et modules",
-      "contenu": "Apprenez les concepts fondamentaux de components et modules dans Angular.",
-      "ordre": 3,
-      "estComplete": false,
-      "coursId": 1
-    },
-    {
-      "id": "4",
-      "titre": "RxJS avancé",
-      "contenu": "Utilisation avancée de RxJS pour la gestion des données asynchrones.",
-      "ordre": 1,
-      "estComplete": false,
-      "coursId": 2
-    },
-    {
-      "id": "5",
-      "titre": "NgRx pour la gestion d'état",
-      "contenu": "Implémentation de NgRx pour une gestion d'état efficace dans les applications Angular.",
-      "ordre": 2,
-      "estComplete": false,
-      "coursId": 2
-    },
-    {
-      "id": "6",
-      "titre": "Types de base",
-      "contenu": "Introduction aux types de base en TypeScript.",
-      "ordre": 1,
-      "estComplete": false,
-      "coursId": 3
-    },
-    {
-      "id": "3be3",
-      "titre": "quizzes ",
-      "contenu": "testest oui non ",
-      "ordre": 4,
-      "estComplete": false,
-      "coursId": 1
+      "id": 2,
+      "titre": "Introduction to AI",
+      "contenu": "Discover the basics of Artificial Intelligence.",
+      "niveau": "Beginner",
+      "imageUrl": "assets/img/IA.jpg",
+      "etapes": [
+        {
+          "id": 1,
+          "titre": "Step 1: What is AI?",
+          "description": "Introduction to Artificial Intelligence.",
+          "contentType": "video",
+          "contentData": "https://www.youtube.com/embed/aiIntroVideoId",
+          "ordre": 1,
+          "estComplete": false
+        },
+        {
+          "id": 2,
+          "titre": "Step 2: Intelligent Robots",
+          "description": "Discover robots and how they learn.",
+          "contentType": "text",
+          "contentData": "Robots use AI to learn from their environment and make decisions.",
+          "ordre": 2,
+          "estComplete": false
+        },
+        {
+          "id": 3,
+          "titre": "Step 3: Machine Learning Basics",
+          "description": "Learn the basics of machine learning.",
+          "contentType": "video",
+          "contentData": "https://www.youtube.com/embed/mlBasicsVideoId",
+          "ordre": 3,
+          "estComplete": false
+        },
+        {
+          "id": 4,
+          "titre": "Step 4: AI Applications",
+          "description": "Explore real-world applications of AI.",
+          "contentType": "text",
+          "contentData": "AI is used in healthcare, finance, and more.",
+          "ordre": 4,
+          "estComplete": false
+        },
+        {
+          "id": 5,
+          "titre": "Step 5: Final Quiz",
+          "description": "Test your knowledge with a quiz.",
+          "contentType": "quiz",
+          "contentData": [
+            {
+              "question": "What does AI stand for?",
+              "options": ["Artificial Intelligence", "Automated Information", "Advanced Interaction", "Artificial Interaction"],
+              "correctAnswer": "Artificial Intelligence"
+            },
+            {
+              "question": "Which field uses AI for diagnosis?",
+              "options": ["Finance", "Healthcare", "Education", "Construction"],
+              "correctAnswer": "Healthcare"
+            }
+          ],
+          "ordre": 5,
+          "estComplete": false
+        }
+      ]
     }
   ]
 }

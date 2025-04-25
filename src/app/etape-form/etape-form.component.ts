@@ -99,7 +99,7 @@ export class EtapeFormComponent implements OnInit {
       next: (etape) => {
         this.etapeForm.patchValue({
           titre: etape.titre,
-          contenu: etape.contenu,
+          contenu: etape.description,
           ordre: etape.ordre,
           estComplete: etape.estComplete
         });
