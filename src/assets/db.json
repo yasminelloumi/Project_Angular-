@@ -1,16 +1,17 @@
-{"Admin":[
-  {
-    "id": 1,
-    "email": "admin@gmail.com",
-    "password": "admin123",
-    "role": "admin",
-    "Nom": "School Administrator",
-    "firebaseUID": "CbZBIYE5rYRoX0XbA4GrNLJaXWv2"
-  }
-],
+{
+  "Admin": [
+    {
+      "id": "1",
+      "email": "admin@gmail.com",
+      "password": "admin123",
+      "role": "admin",
+      "Nom": "School Administrator",
+      "firebaseUID": "CbZBIYE5rYRoX0XbA4GrNLJaXWv2"
+    }
+  ],
   "Etudiants": [
     {
-      "id": 2,
+      "id": "2",
       "NumeroUnique": 987654,
       "Nom": "Lemoine",
       "Prenom": "Alice",
@@ -21,7 +22,7 @@
       "role": "etudiant"
     },
     {
-      "id": 3,
+      "id": "3",
       "NumeroUnique": 123456,
       "Nom": "Bernard",
       "Prenom": "Lucas",
@@ -34,7 +35,7 @@
   ],
   "Parant": [
     {
-      "id": 1,
+      "id": "1",
       "NumeroUnique": 123456,
       "Nom": "Martin",
       "Prenom": "Sophie",
@@ -44,7 +45,7 @@
       "role": "Parent"
     },
     {
-      "id": 2,
+      "id": "2",
       "NumeroUnique": 987654,
       "Nom": "Lemoine",
       "Prenom": "Marc",
@@ -54,7 +55,7 @@
       "role": "Parent"
     },
     {
-      "id": 3,
+      "id": "3",
       "NumeroUnique": 654321,
       "Nom": "Bernard",
       "Prenom": "Sophie",
@@ -64,97 +65,74 @@
       "role": ""
     }
   ],
-  "Cours": [
+  "cours": [
     {
-      "id": 1,
-      "titre": "Introduction to Programming",
-      "contenu": "This course covers the basics of programming using Python.",
-      "niveau": "Level 1",
-      "imageUrl": "assets/img/python.jpg",
-      "etapes": [
-        {
-          "id": 1,
-          "titre": "Step 1: Python Basics",
-          "description": "Introduction to variables and data types.",
-          "ordre": 1,
-          "estComplete": false
-        },
-        {
-          "id": 2,
-          "titre": "Step 2: Loops and Conditions",
-          "description": "Learn how to use loops and conditions.",
-          "ordre": 2,
-          "estComplete": false
-        },
-        {
-          "id": 3,
-          "titre": "Step 3: Final Project",
-          "description": "Create a small Python program.",
-          "ordre": 3,
-          "estComplete": false
-        }
-        
-      ]
+      "id": "1",
+      "titre": "Introduction à Angular",
+      "cotenu": "Ce cours vous apprendra les bases d'Angular, un framework JavaScript populaire pour la création d'applications web.",
+      "niveau": "Débutant"
     },
     {
-      "id": 2,
-      "titre": "Introduction to AI",
-      "contenu": "Discover the basics of Artificial Intelligence.",
-      "niveau": "Beginner",
-      "imageUrl": "assets/img/IA.jpg",
-      "etapes": [
-        {
-          "id": 1,
-          "titre": "Step 1: What is AI?",
-          "description": "Introduction to Artificial Intelligence.",
-          "ordre": 1,
-          "estComplete": false
-        },
-        {
-          "id": 2,
-          "titre": "Step 2: Intelligent Robots",
-          "description": "Discover robots and how they learn.",
-          "ordre": 2,
-          "estComplete": false
-        },
-        {
-          "id": 3,
-          "titre": "Step 3: Final Quiz",
-          "description": "Test your knowledge.",
-          "ordre": 3,
-          "estComplete": false
-        }
-      ]
+      "id": "2",
+      "titre": "Développement avancé avec Angular",
+      "cotenu": "Approfondissez vos connaissances d'Angular avec ce cours qui couvre les sujets avancés.",
+      "niveau": "Avancé"
     },
     {
-      "id": 3,
-      "titre": "Game Development with Scratch",
-      "contenu": "Create your own games using Scratch.",
-      "niveau": "Beginner",
-      "imageUrl": "assets/img/scrach.jpg",
-      "etapes": [
-        {
-          "id": 1,
-          "titre": "Step 1: Discover Scratch",
-          "description": "Learn the basics of Scratch.",
-          "ordre": 1,
-          "estComplete": false
-        },
-        {
-          "id": 2,
-          "titre": "Step 2: Create a Simple Game",
-          "description": "Build your first game.",
-          "ordre": 2,
-          "estComplete": false
-        },
-        {
-          "id": 3,
-          "titre": "Step 3: Advanced Game",
-          "description": "Add features and make it fun!",
-          "ordre": 3,
-          "estComplete": false
-        }
-      ]
+      "id": "3",
+      "titre": "TypeScript pour débutants",
+      "cotenu": "Apprenez les bases du langage TypeScript, un sur-ensemble de JavaScript qui ajoute des types statiques.",
+      "niveau": "Débutant"
+    }
+  ],
+  "etapes": [
+    {
+      "id": "1",
+      "titre": "Installation d'Angular CLI",
+      "contenu": "Dans cette étape, vous apprendrez à installer Angular CLI, l'outil de ligne de commande officiel pour Angular.",
+      "ordre": 1,
+      "estComplete": false,
+      "coursId": 1
+    },
+    {
+      "id": "2",
+      "titre": "Création d'un nouveau projet",
+      "contenu": "Découvrez comment créer un nouveau projet Angular avec Angular CLI.",
+      "ordre": 2,
+      "estComplete": false,
+      "coursId": 1
+    },
+    {
+      "id": "3",
+      "titre": "Components et modules",
+      "contenu": "Apprenez les concepts fondamentaux de components et modules dans Angular.",
+      "ordre": 3,
+      "estComplete": false,
+      "coursId": 1
+    },
+    {
+      "id": "4",
+      "titre": "RxJS avancé",
+      "contenu": "Utilisation avancée de RxJS pour la gestion des données asynchrones.",
+      "ordre": 1,
+      "estComplete": false,
+      "coursId": 2
+    },
+    {
+      "id": "5",
+      "titre": "NgRx pour la gestion d'état",
+      "contenu": "Implémentation de NgRx pour une gestion d'état efficace dans les applications Angular.",
+      "ordre": 2,
+      "estComplete": false,
+      "coursId": 2
+    },
+    {
+      "id": "6",
+      "titre": "Types de base",
+      "contenu": "Introduction aux types de base en TypeScript.",
+      "ordre": 1,
+      "estComplete": false,
+      "coursId": 3
     }
   ]
 }

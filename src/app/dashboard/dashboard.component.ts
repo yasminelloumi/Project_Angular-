@@ -1,6 +1,6 @@
 // dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
-import { CourseService } from '../services/course.service';
+import { CoursService } from '../services/course.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +10,7 @@ import { CourseService } from '../services/course.service';
 export class DashboardComponent implements OnInit {
   courses: any[] = [];
 
-  constructor(private courseService: CourseService) {}
+  constructor(private courseService: CoursService) {}
 
   ngOnInit() {
     this.loadCourses();

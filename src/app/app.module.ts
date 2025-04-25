@@ -18,8 +18,12 @@ import { RegisterComponent } from './register/register.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LevelContentComponent } from './level-content/level-content.component';
 import { CourseLevelComponent } from './course-level/course-level.component';
-import { AdminHomeComponent } from './admin-home/admin-home.component';
+import {  AdminDashboardComponent } from './admin-home/admin-home.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { CoursDetailComponent } from './cours-detail/cours-detail.component';
+import { CoursFormComponent } from './cours-form/cours-form.component';
+import { CoursListComponent } from './cours-list/cours-list.component';
+import { EtapeFormComponent } from './etape-form/etape-form.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDu5VmAEsVFy_AiddbbMixP8eE9w5JCI_4",
@@ -33,6 +37,16 @@ const firebaseConfig = {
 
 @NgModule({
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+
+  declarations: [
+    AppComponent,
+    ConfirmdialogComponent,
+    LoginComponent,
+    RegisterComponent,
+   
+    //LevelContentComponent,
+    //CourseLevelComponent
+  ],
   imports: [
     BrowserAnimationsModule,
     FormsModule,
@@ -42,19 +56,15 @@ const firebaseConfig = {
     RouterModule,
     AppRoutingModule,
     MatDialogModule,
-    AdminLayoutModule, // Ensure this module declares AdminLayoutComponent
+    // AdminLayoutModule, // Ensure this module declares AdminLayoutComponent
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    MatSnackBarModule
-  ],
-  declarations: [
-    AppComponent,
-    ConfirmdialogComponent,
-    LoginComponent,
-    RegisterComponent,
-    AdminHomeComponent,
-    //LevelContentComponent,
-    //CourseLevelComponent
+    MatSnackBarModule,
+    CoursDetailComponent,
+    CoursFormComponent,
+  CoursListComponent,
+  EtapeFormComponent,
+  CoursDetailComponent,AdminDashboardComponent
   ],
 
   bootstrap: [AppComponent]

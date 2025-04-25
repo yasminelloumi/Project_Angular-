@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CourseService } from '../services/course.service';
+import { CoursService } from '../services/course.service';
 
 @Component({
   selector: 'app-course-level',
@@ -11,7 +11,7 @@ export class CourseLevelComponent implements OnInit {
   courseId: number = 0;
   selectedCourse: any = null;
 
-  constructor(private route: ActivatedRoute, private courseService: CourseService) {}
+  constructor(private route: ActivatedRoute, private courseService: CoursService) {}
 
   ngOnInit(): void {
     this.courseId = Number(this.route.snapshot.paramMap.get('id'));

@@ -1,0 +1,77 @@
+<div class="course-detail-container">
+    <div *ngIf="isLoading" class="loading">
+      <div class="loading-spinner"></div>
+      <p>Chargement du cours...</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+      <div class="mt-4">
+        <a [routerLink]="['/cours']" class="btn btn-primary">Retour aux cours</a>
+      </div>
+    </div>
+  
+    <div *ngIf="!isLoading && !errorMessage && cours" class="course-content">
+      <nav class="breadcrumb">
+        <a [routerLink]="['/cours']">Cours</a>
+        <span class="separator">/</span>
+        <span>{{ cours.titre }}</span>
+      </nav>
+  
+      <header class="course-header">
+        <div>
+          <h1>{{ cours.titre }}</h1>
+          <span class="niveau-badge" [ngClass]="'niveau-' + cours.niveau.toLowerCase()">
+            {{ cours.niveau }}
+          </span>
+        </div>
+        
+        <div class="action-buttons">
+          <a [routerLink]="['/cours', cours.id, 'edit']" class="btn btn-edit">Modifier le cours</a>
+          <button (click)="deleteCours()" class="btn btn-delete">Supprimer le cours</button>
+        </div>
+      </header>
+  
+      <div class="course-description">
+        <h2>Description</h2>
+        <p>{{ cours.cotenu }}</p>
+      </div>
+  
+      <div class="steps-section">
+        <div class="steps-header">
+          <h2>Étapes du cours</h2>
+          <a [routerLink]="['/cours', cours.id, 'etape', 'new']" class="btn btn-primary">
+            Ajouter une étape
+          </a>
+        </div>
+  
+        <div *ngIf="etapes.length === 0" class="no-steps">
+          <p>Aucune étape n'a été ajoutée à ce cours.</p>
+        </div>
+  
+        <div *ngIf="etapes.length > 0" class="steps-list">
+          <div *ngFor="let etape of etapes; let i = index" class="step-card" [class.completed]="etape.estComplete">
+            <div class="step-order">{{ etape.ordre }}</div>
+            
+            <div class="step-content">
+              <h3>{{ etape.titre }}</h3>
+              <p>{{ etape.contenu }}</p>
+              
+              <div class="step-actions">
+                <button (click)="toggleEtapeCompletion(etape)" class="btn btn-toggle">
+                  {{ etape.estComplete ? 'Marquer comme non terminée' : 'Marquer comme terminée' }}
+                </button>
+                <a [routerLink]="['/cours', cours.id, 'etape', etape.id, 'edit']" class="btn btn-edit">Modifier</a>
+                <button (click)="deleteEtape(etape.id)" class="btn btn-delete">Supprimer</button>
+              </div>
+            </div>
+  
+            <div class="completion-status">
+              <div class="status-indicator" [class.completed]="etape.estComplete"></div>
+              <span>{{ etape.estComplete ? 'Terminée' : 'Non terminée' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

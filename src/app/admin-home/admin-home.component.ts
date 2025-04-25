@@ -1,15 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-home',
+  selector: 'app-admin-dashboard',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './admin-home.component.html',
   styleUrls: ['./admin-home.component.scss']
 })
-export class AdminHomeComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class AdminDashboardComponent {
+  cards = [
+    {
+      title: 'Users Management',
+      description: 'Manage all user accounts, permissions, and access levels.',
+      icon: '👥',
+      route: '/admin',
+      buttonText: 'Manage Users',
+      buttonClass: 'btn-info',
+      stats: {
+        total: 256,
+        active: 180
+      }
+    },
+    {
+      title: 'Course Management',
+      description: 'Create, edit, and organize all course materials.',
+      icon: '📚',
+      route: '/cours',
+      buttonText: 'Manage Courses',
+      buttonClass: 'btn-success',
+      stats: {
+        total: 12,
+        active: 8
+      }
+    },
+    {
+      title: 'System Settings',
+      description: 'Configure platform settings and preferences.',
+      icon: '⚙️',
+      route: '/system-settings',
+      buttonText: 'Settings',
+      buttonClass: 'btn-warning',
+      stats: {
+        total: 24,
+        active: 20
+      }
+    }
+  ];
 }
