@@ -1,0 +1,256 @@
+.courses-container {
+    padding: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  .filters-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .search-box {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  .search-input:focus {
+    border-color: #0057B7;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 87, 183, 0.2);
+  }
+  
+  .niveau-filter {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .niveau-select {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 1rem;
+    min-width: 150px;
+  }
+  
+  .btn {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn-primary {
+    background-color: #0057B7;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #004494;
+  }
+  
+  .btn-reset {
+    background-color: #f5f5f5;
+    color: #666;
+  }
+  
+  .btn-reset:hover {
+    background-color: #e5e5e5;
+  }
+  
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .course-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .course-header {
+    padding: 1.25rem 1.25rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .course-title {
+    font-size: 1.25rem;
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .niveau-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .niveau-débutant {
+    background-color: #e6f4ea;
+    color: #137333;
+  }
+  
+  .niveau-intermédiaire {
+    background-color: #fef7e0;
+    color: #b06000;
+  }
+  
+  .niveau-avancé {
+    background-color: #fce8e6;
+    color: #c53929;
+  }
+  
+  .course-content {
+    padding: 0 1.25rem 1.25rem;
+    color: #666;
+    flex-grow: 1;
+    margin: 0;
+  }
+  
+  .card-actions {
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+  }
+  
+  .btn-view {
+    background-color: #f0f0f0;
+    color: #555;
+  }
+  
+  .btn-view:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .btn-edit {
+    background-color: #00A3A3;
+    color: white;
+  }
+  
+  .btn-edit:hover {
+    background-color: #008080;
+  }
+  
+  .btn-delete {
+    background-color: #FFE1DB;
+    color: #D62828;
+  }
+  
+  .btn-delete:hover {
+    background-color: #FFCCC2;
+  }
+  
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #0057B7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .error-message, .no-courses {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    color: #666;
+  }
+  
+  .error-message {
+    border-left: 4px solid #D62828;
+    color: #D62828;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .filters-section {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .search-box, .niveau-filter {
+      width: 100%;
+    }
+    
+    .card-actions {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .btn {
+      flex: 1;
+      min-width: 0;
+    }
+  }

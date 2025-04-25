@@ -16,6 +16,11 @@ import { IconsComponent } from './icons/icons.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { CourseLevelComponent } from './course-level/course-level.component';
+import { AdminDashboardComponent } from './admin-home/admin-home.component';
+import { CoursListComponent } from './cours-list/cours-list.component';
+import { CoursFormComponent } from './cours-form/cours-form.component';
+import { EtapeFormComponent } from './etape-form/etape-form.component';
+import { CoursDetailComponent } from './cours-detail/cours-detail.component';
 import { LevelContentComponent } from './level-content/level-content.component';
 
 const routes: Routes = [
@@ -24,6 +29,16 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin/:id/edit', component: EtudiantFormComponent },
+  { path: 'cours', component: CoursListComponent },
+  { path: 'cours/new', component: CoursFormComponent },
+  { path: 'cours/:id', component: CoursDetailComponent },
+  { path: 'cours/:id/edit', component: CoursFormComponent },
+  { path: 'cours/:coursId/etape/new', component: EtapeFormComponent },
+  { path: 'cours/:coursId/etape/:etapeId/edit', component: EtapeFormComponent },
+  { 
+    path: 'adminehome',  component:  AdminDashboardComponent,
+      
+  },
 
   {
     path: '',
@@ -35,8 +50,10 @@ const routes: Routes = [
       { path: 'typography', component: TypographyComponent },
       { path: 'icons', component: IconsComponent },
       { path: 'notifications', component: NotificationsComponent },
-      { path: 'upgrade', component: UpgradeComponent },
+      { path: 'upgrade',pathMatch: 'full', component: UpgradeComponent },
+      
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      
       {
         path: '',
         loadChildren: () =>

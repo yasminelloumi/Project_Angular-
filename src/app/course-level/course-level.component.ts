@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CourseService } from '../services/course.service';
+import { CoursService } from '../services/course.service';
 
 @Component({
   selector: 'app-course-level',
@@ -23,7 +23,7 @@ export class CourseLevelComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private courseService: CourseService,
+    private courseService: CoursService,
     private router: Router
   ) {}
 

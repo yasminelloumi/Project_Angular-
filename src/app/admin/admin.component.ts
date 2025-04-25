@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { EtudiantParant } from 'Modeles/Etudiant-parant.interface';
+import { EtudiantParant } from 'Modeles/etudiant-parant.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmdialogComponent } from 'app/confirmdialog/confirmdialog.component';
-//import { ConfirmdialogComponent } from '../confirmdialog/confirmdialog.component';
+
+
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-admin',
@@ -28,7 +31,9 @@ export class AdminComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location,
+
   ) {}
 
   ngOnInit(): void {
@@ -68,4 +73,11 @@ export class AdminComponent implements OnInit {
   edit(id: number) {
     this.router.navigate(['admin', id, 'edit']);
   }
+  goBack(): void {
+    console.log("Retour button clicked");
+    this.router.navigate(['/adminehome']);
+  }
+  
+  
+  
 }

@@ -18,18 +18,35 @@ import { RegisterComponent } from './register/register.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LevelContentComponent } from './level-content/level-content.component';
 import { CourseLevelComponent } from './course-level/course-level.component';
+import {  AdminDashboardComponent } from './admin-home/admin-home.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { CoursDetailComponent } from './cours-detail/cours-detail.component';
+import { CoursFormComponent } from './cours-form/cours-form.component';
+import { CoursListComponent } from './cours-list/cours-list.component';
+import { EtapeFormComponent } from './etape-form/etape-form.component';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBvQeRsvCIQLdIskCpBa788Tggc3RvV0Hw",
-  authDomain: "labg5-5cc36.firebaseapp.com",
-  projectId: "labg5-5cc36",
-  storageBucket: "labg5-5cc36.firebasestorage.app",
-  messagingSenderId: "324165329501",
-  appId: "1:324165329501:web:206ad4f0d508b7cd3a63b4",
-  measurementId: "G-H4J59GF4GJ"
+  apiKey: "AIzaSyDu5VmAEsVFy_AiddbbMixP8eE9w5JCI_4",
+  authDomain: "e-learning-f2bb9.firebaseapp.com",
+  projectId: "e-learning-f2bb9",
+  storageBucket: "e-learning-f2bb9.firebasestorage.app",
+  messagingSenderId: "509328860393",
+  appId: "1:509328860393:web:74372302fc801520d3bc78",
+  measurementId: "G-ZBS5L03LZ4"
 };
 
 @NgModule({
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+
+  declarations: [
+    AppComponent,
+    ConfirmdialogComponent,
+    LoginComponent,
+    RegisterComponent,
+   
+    //LevelContentComponent,
+    //CourseLevelComponent
+  ],
   imports: [
     BrowserAnimationsModule,
     FormsModule,
@@ -39,20 +56,17 @@ const firebaseConfig = {
     RouterModule,
     AppRoutingModule,
     MatDialogModule,
-    AdminLayoutModule, // Ensure this module declares AdminLayoutComponent
+    // AdminLayoutModule, // Ensure this module declares AdminLayoutComponent
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CoursDetailComponent,
+    CoursFormComponent,
+  CoursListComponent,
+  EtapeFormComponent,
+  CoursDetailComponent,AdminDashboardComponent
   ],
-  declarations: [
-    AppComponent,
-    ConfirmdialogComponent,
-    LoginComponent,
-    RegisterComponent,
-    //LevelContentComponent,
-    //CourseLevelComponent
-  ],
-  providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

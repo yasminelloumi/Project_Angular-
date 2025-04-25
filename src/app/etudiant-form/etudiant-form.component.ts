@@ -16,7 +16,9 @@ export class EtudiantFormComponent implements OnInit {
     Prenom: '',
     email: '',
     password: '',
-    niveau: ''
+    niveau: '',
+    firebaseUid: '',
+    role: ''
   };
   id: number;
 
