@@ -1,9 +1,19 @@
+.page-container {
+  padding-top: 60px; 
+ 
+  height: calc(100vh - 60px); /* Hauteur de la page moins le navbar */
+
+  
+  justify-content: center;
+  align-items: center;
+  background-color: #09bec5;
+  overflow: hidden;
+}
+
 .map-container {
   position: relative;
   width: 100%;
-  height: 90vh;
-  overflow: hidden;
-  background-color: #40c4ff;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,31 +21,44 @@
 
 .map-background {
   width: 100%;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
+  height: 100%;
+  object-fit: contain; /* Conserve les proportions de l'image sans zoom */
+  object-position: center; /* Centre l'image */
+}
+
+.level-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .level-btn {
-  position: absolute;
+  position: relative;
   width: 5vw;
   height: 5vw;
   min-width: 50px;
   min-height: 50px;
-  max-width: 90px;
-  max-height: 90px;
+  max-width: 70px;
+  max-height: 70px;
   background-color: #6a0dad;
   color: white;
-  font-size: 1.2vw;
+  font-size: 1.5vw;
   font-weight: bold;
+  font-family: 'Arial', sans-serif;
   border-radius: 50%;
-  border: 3px solid white;
+  border: none;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: transform 0.3s, background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
 }
 
-.level-btn:hover {
+.level-btn:hover:not(.disabled) {
   transform: scale(1.1);
 }
 
@@ -43,6 +66,26 @@
   background-color: #4caf50;
   border-color: gold;
   animation: pulse 1s infinite alternate;
+}
+
+.disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.start-here {
+  position: absolute;
+  top: -40px;
+  right: -60px;
+  background-color: #6a0dad;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transform: rotate(10deg);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes pulse {
@@ -54,21 +97,45 @@
   }
 }
 
-/* Texte dans les boutons responsive */
-.level-btn::after {
-  content: attr(data-level);
-  display: block;
+.no-course {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  font-size: 1.5rem;
+  color: #333;
 }
 
-/* Responsive font size */
+/* Responsive adjustments */
 @media (max-width: 768px) {
+  .page-container {
+    padding-left: 0; /* Supprime l'espace du menu sur petits écrans */
+    width: 100vw;
+  }
+
   .level-btn {
     font-size: 2vw;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .start-here {
+    font-size: 0.8rem;
+    top: -30px;
+    right: -50px;
   }
 }
 
 @media (max-width: 480px) {
   .level-btn {
     font-size: 3vw;
+    min-width: 35px;
+    min-height: 35px;
+  }
+
+  .start-here {
+    font-size: 0.6rem;
+    top: -25px;
+    right: -40px;
   }
 }

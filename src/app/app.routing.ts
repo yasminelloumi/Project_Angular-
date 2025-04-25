@@ -16,6 +16,7 @@ import { IconsComponent } from './icons/icons.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { CourseLevelComponent } from './course-level/course-level.component';
+import { LevelContentComponent } from './level-content/level-content.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route to login
@@ -52,6 +53,12 @@ const routes: Routes = [
     component: CourseLevelComponent,
   },
 
+  {
+    path: 'course/:courseId/level/:levelId',
+    pathMatch: 'full',
+    component: LevelContentComponent
+  },
+
   { path: '**', redirectTo: 'login' }, // Fallback to login
 ];
 
@@ -65,4 +72,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
