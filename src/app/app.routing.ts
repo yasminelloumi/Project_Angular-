@@ -34,7 +34,10 @@ const routes: Routes = [
   { path: 'cours/:id/edit', component: CoursFormComponent },
   { path: 'cours/:coursId/etape/new', component: EtapeFormComponent },
   { path: 'cours/:coursId/etape/:etapeId/edit', component: EtapeFormComponent },
-  
+  { 
+    path: 'adminehome',  component:  AdminDashboardComponent,
+      
+  },
 
   {
     path: '',
@@ -47,10 +50,7 @@ const routes: Routes = [
       { path: 'icons', component: IconsComponent },
       { path: 'notifications', component: NotificationsComponent },
       { path: 'upgrade',pathMatch: 'full', component: UpgradeComponent },
-      { 
-        path: 'adminehome',  component:  AdminDashboardComponent,
-          
-      },
+      
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       
       {

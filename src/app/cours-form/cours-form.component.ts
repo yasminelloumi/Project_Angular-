@@ -5,11 +5,12 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { CoursService } from '../services/course.service';
 
 import { Cours } from 'Modeles/Cours';
+import { ComponentsModule } from 'app/components/components.module';
 
 @Component({
   selector: 'app-cours-form',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule,ComponentsModule],
   templateUrl: './cours-form.component.html',
   styleUrls: ['./cours-form.component.scss']
 })

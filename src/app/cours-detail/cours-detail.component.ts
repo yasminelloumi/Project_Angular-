@@ -6,11 +6,12 @@ import { CoursService } from '../services/course.service';
 import { EtapeService } from '../services/etape.service';
 import { Cours } from 'Modeles/Cours';
 import { Etape } from 'Modeles/Etape';
+import { ComponentsModule } from 'app/components/components.module';
 
 @Component({
   selector: 'app-cours-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule,ComponentsModule],
   templateUrl: './cours-detail.component.html',
   styleUrls: ['./cours-detail.component.scss']
 })

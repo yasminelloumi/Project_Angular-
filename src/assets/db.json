@@ -31,6 +31,39 @@
       "niveau": "Licence 3",
       "firebaseUid": "",
       "role": "etudiant"
+    },
+    {
+      "id": "4",
+      "NumeroUnique": 987654,
+      "Nom": "Lemoine",
+      "Prenom": "Alice",
+      "email": "alice.lemoine@example.com",
+      "password": "motDePasseAlice",
+      "niveau": "Master 1",
+      "firebaseUid": "eTnonBOPAZXibyQX94dhruO4EYh2",
+      "role": "etudiant"
+    },
+    {
+      "id": "5",
+      "NumeroUnique": 123456,
+      "Nom": "Bernard",
+      "Prenom": "Lucas",
+      "email": "lucas.bernard@example.com",
+      "password": "motDePasseLucas",
+      "niveau": "Licence 3",
+      "firebaseUid": "",
+      "role": "etudiant"
+    },
+    {
+      "id": "5",
+      "NumeroUnique": 654321,
+      "Nom": "Durand",
+      "Prenom": "Emma",
+      "email": "emma.durand@example.com",
+      "password": "motDePasseEmma",
+      "niveau": "Licence 2",
+      "firebaseUid": "",
+      "role": "etudiant"
     }
   ],
   "Parant": [
@@ -63,12 +96,42 @@
       "password": "parentLucas456",
       "firebaseUid": "",
       "role": ""
+    },
+    {
+      "id": "4",
+      "NumeroUnique": 123456,
+      "Nom": "Bernard",
+      "Prenom": "Sophie",
+      "email": "sophie.bernard@example.com",
+      "password": "parentLucas456",
+      "firebaseUid": "",
+      "role": "Parent"
+    },
+    {
+      "id": "5",
+      "NumeroUnique": 987654,
+      "Nom": "Lemoine",
+      "Prenom": "Marc",
+      "email": "marc.lemoine@example.com",
+      "password": "parentAlice123",
+      "firebaseUid": "",
+      "role": "Parent"
+    },
+    {
+      "id": "6",
+      "NumeroUnique": 654321,
+      "Nom": "Durand",
+      "Prenom": "Claire",
+      "email": "claire.durand@example.com",
+      "password": "parentEmma789",
+      "firebaseUid": "",
+      "role": "Parent"
     }
   ],
   "cours": [
     {
       "id": "1",
-      "titre": "Introduction à Angular",
+      "titre": "Introduction à Angular test",
       "cotenu": "Ce cours vous apprendra les bases d'Angular, un framework JavaScript populaire pour la création d'applications web.",
       "niveau": "Débutant"
     },
@@ -133,6 +196,14 @@
       "ordre": 1,
       "estComplete": false,
       "coursId": 3
+    },
+    {
+      "id": "3be3",
+      "titre": "quizzes ",
+      "contenu": "testest oui non ",
+      "ordre": 4,
+      "estComplete": false,
+      "coursId": 1
     }
   ]
 }

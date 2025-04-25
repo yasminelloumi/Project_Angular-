@@ -6,11 +6,12 @@ import { CoursService } from '../services/course.service';
 import { EtapeService } from '../services/etape.service';
 import { Cours } from 'Modeles/Cours';
 import { Etape } from 'Modeles/Etape';
+import { ComponentsModule } from 'app/components/components.module';
 
 @Component({
   selector: 'app-etape-form',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule,ComponentsModule],
   templateUrl: './etape-form.component.html',
   styleUrls: ['./etape-form.component.scss']
 })
