@@ -130,10 +130,10 @@
   ],
   "Cours": [
     {
-      "id": 1,
+      "id": "1",
       "titre": "Introduction to Programming",
       "contenu": "This course covers the basics of programming using Python.",
-      "niveau": "Level 1",
+      "niveau": "Débutant",
       "imageUrl": "assets/img/python.jpg",
       "etapes": [
         {
@@ -180,12 +180,22 @@
           "contentData": [
             {
               "question": "What is a variable in Python?",
-              "options": ["A loop", "A condition", "A container for data", "A function"],
+              "options": [
+                "A loop",
+                "A condition",
+                "A container for data",
+                "A function"
+              ],
               "correctAnswer": "A container for data"
             },
             {
               "question": "Which keyword is used for a loop in Python?",
-              "options": ["if", "for", "function", "class"],
+              "options": [
+                "if",
+                "for",
+                "function",
+                "class"
+              ],
               "correctAnswer": "for"
             }
           ],
@@ -195,10 +205,10 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "titre": "Introduction to AI",
       "contenu": "Discover the basics of Artificial Intelligence.",
-      "niveau": "Beginner",
+      "niveau": "Débutant",
       "imageUrl": "assets/img/IA.jpg",
       "etapes": [
         {
@@ -245,12 +255,22 @@
           "contentData": [
             {
               "question": "What does AI stand for?",
-              "options": ["Artificial Intelligence", "Automated Information", "Advanced Interaction", "Artificial Interaction"],
+              "options": [
+                "Artificial Intelligence",
+                "Automated Information",
+                "Advanced Interaction",
+                "Artificial Interaction"
+              ],
               "correctAnswer": "Artificial Intelligence"
             },
             {
               "question": "Which field uses AI for diagnosis?",
-              "options": ["Finance", "Healthcare", "Education", "Construction"],
+              "options": [
+                "Finance",
+                "Healthcare",
+                "Education",
+                "Construction"
+              ],
               "correctAnswer": "Healthcare"
             }
           ],
@@ -258,6 +278,14 @@
           "estComplete": false
         }
       ]
+    },
+    {
+      "id": "4463",
+      "titre": "test",
+      "contenu": "frverwcvrfefrxzswsds",
+      "niveau": "Débutant",
+      "imageUrl": "frwerff",
+      "etapes": []
     }
   ]
 }

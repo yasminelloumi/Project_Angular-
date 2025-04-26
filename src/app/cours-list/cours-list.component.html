@@ -7,8 +7,13 @@
 
   <div class="filters-section">
     <div class="search-box">
-      <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" placeholder="Rechercher un cours..."
-        class="search-input" />
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="onSearchChange()"
+        placeholder="Rechercher un cours..."
+        class="search-input"
+      />
     </div>
 
     <div class="niveau-filter">
@@ -28,16 +33,23 @@
     <p>Chargement des cours...</p>
   </div>
 
-  <div *ngIf="errorMessage" class="error-message">
+  <div *ngIf="errorMessage && !isLoading" class="error-message">
     {{ errorMessage }}
+    <button (click)="loadCours()" class="btn btn-primary mt-2">Réessayer</button>
   </div>
 
   <div *ngIf="!isLoading && !errorMessage && filteredCours.length === 0" class="no-courses">
     <p>Aucun cours trouvé. Veuillez ajuster vos filtres ou ajouter un nouveau cours.</p>
   </div>
 
-  <div class="courses-grid" *ngIf="!isLoading && filteredCours.length > 0">
+  <div class="courses-grid" *ngIf="!isLoading && !errorMessage && filteredCours.length > 0">
     <div *ngFor="let cours of filteredCours" class="course-card">
+      <img
+        [src]="cours.imageUrl"
+        alt="{{ cours.titre }}"
+        class="course-image"
+        *ngIf="cours.imageUrl"
+      />
       <div class="course-header">
         <h2 class="course-title">{{ cours.titre }}</h2>
         <span class="niveau-badge" [ngClass]="'niveau-' + cours.niveau.toLowerCase()">

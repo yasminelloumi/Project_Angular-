@@ -39,9 +39,11 @@
     </div>
 
     <div class="steps-section">
-      <div class="steps-header">
+      <div *ngIf="cours" class="steps-header">
         <h2>Étapes du cours</h2>
-        <a [routerLink]="['/cours', cours.id, 'etape', 'new']" class="btn btn-primary">
+        <a [routerLink]="['/cours', cours.id, 'etape', 'new']" 
+           (click)="debugNavigation(cours.id)" 
+           class="btn btn-primary">
           Ajouter une étape
         </a>
       </div>
@@ -56,12 +58,13 @@
 
           <div class="step-content">
             <h3>{{ etape.titre }}</h3>
-            <p>{{ etape.contenu }}</p>
+            <p>{{ etape.description }}</p>
 
             <div class="step-actions">
               <button (click)="toggleEtapeCompletion(etape)" class="btn btn-toggle">
                 {{ etape.estComplete ? 'Marquer comme non terminée' : 'Marquer comme terminée' }}
               </button>
+              <a [routerLink]="['/cours', cours.id, 'etape', etape.id]" class="btn btn-view">Voir</a>
               <a [routerLink]="['/cours', cours.id, 'etape', etape.id, 'edit']" class="btn btn-edit">Modifier</a>
               <button (click)="deleteEtape(etape.id)" class="btn btn-delete">Supprimer</button>
             </div>

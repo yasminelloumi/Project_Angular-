@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, switchMap, map } from 'rxjs';
+import { Observable, forkJoin, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Cours } from 'Modeles/Cours';
 import { Etape } from 'Modeles/Etape';
+
+
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,49 +13,45 @@ import { Etape } from 'Modeles/Etape';
 export class CoursService {
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getCourses(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/Cours');
-  }
-
-  getCourseById(id: number): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/Cours/${id}`);
-  }
-
-  getAllCours(): Observable<Cours[]> {
+  // Fetch all courses
+  getCourses(): Observable<Cours[]> {
     return this.http.get<Cours[]>(`${this.apiUrl}/Cours`);
   }
 
+  // Fetch a single course by ID
+  getCourseById(id: number): Observable<Cours> {
+    return this.http.get<Cours>(`${this.apiUrl}/Cours/${id}`);
+  }
+
+  // Fetch all courses (alias for getCourses)
+  getAllCours(): Observable<Cours[]> {
+    return this.getCourses();
+  }
+
+  // Fetch a course with its etapes
   getCoursWithEtapes(id: number): Observable<Cours> {
-    return forkJoin({
-      cours: this.http.get<Cours>(`${this.apiUrl}/Cours/${id}`),
-      etapes: this.http.get<Etape[]>(`${this.apiUrl}/etapes?coursId=${id}`)
-    }).pipe(
-      map(result => ({
-        ...result.cours,
-        etapes: result.etapes.sort((a, b) => a.ordre - b.ordre)
+    return this.http.get<Cours>(`${this.apiUrl}/Cours/${id}`).pipe(
+      map(cours => ({
+        ...cours,
+        etapes: cours.etapes ? cours.etapes.sort((a, b) => a.ordre - b.ordre) : []
       }))
     );
   }
 
+  // Create a new course
   createCours(cours: Omit<Cours, 'id'>): Observable<Cours> {
-    return this.http.post<Cours>(`${this.apiUrl}/Cours`, cours);
+    return this.http.post<Cours>(`${this.apiUrl}/Cours`, { ...cours, etapes: [] });
   }
 
+  // Update an existing course
   updateCours(id: number, cours: Partial<Cours>): Observable<Cours> {
     return this.http.patch<Cours>(`${this.apiUrl}/Cours/${id}`, cours);
   }
 
+  // Delete a course
   deleteCours(id: number): Observable<void> {
-    return this.http.get<Etape[]>(`${this.apiUrl}/etapes?coursId=${id}`).pipe(
-      switchMap(etapes => {
-        const deleteRequests = etapes.map(etape =>
-          this.http.delete(`${this.apiUrl}/etapes/${etape.id}`)
-        );
-        return forkJoin(deleteRequests.length ? deleteRequests : [null]);
-      }),
-      switchMap(() => this.http.delete<void>(`${this.apiUrl}/Cours/${id}`))
-    );
+    return this.http.delete<void>(`${this.apiUrl}/Cours/${id}`);
   }
 }

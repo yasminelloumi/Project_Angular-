@@ -1,29 +1,43 @@
 <div class="page-container">
-  <div class="map-container" *ngIf="selectedCourse">
-    <img src="assets/img/map3.png" alt="Carte des niveaux" class="map-background" />
-
-    <!-- Boucle sur les niveaux -->
-    <div
-      *ngFor="let level of levels; let i = index"
-      class="level-wrapper"
-      [ngStyle]="{ top: level.position.top, left: level.position.left }"
-    >
-      <button
-        class="level-btn"
-        [ngClass]="{ completed: level.estComplete, disabled: level.disabled }"
-        [attr.data-level]="i + 1"
-        (click)="goToLevel(level)"
-        [disabled]="level.disabled"
-      >
-        {{ i + 1 }}
-      </button>
-      <!-- Indicateur "START HERE!" pour le niveau 1 -->
-      <div *ngIf="i === 0" class="start-here">START HERE!</div>
-    </div>
+  <div *ngIf="isLoading" class="loading">
+    <div class="loading-spinner"></div>
+    <p>Chargement du cours...</p>
   </div>
 
-  <!-- Message si aucun cours n'est trouvé -->
-  <div *ngIf="!selectedCourse" class="no-course">
-    <p>Cours non trouvé. Veuillez sélectionner un autre cours.</p>
+  <div *ngIf="errorMessage && !isLoading" class="error-message">
+    {{ errorMessage }}
+    <button (click)="loadCourse()" class="btn btn-primary mt-2">Réessayer</button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage">
+    <div class="map-container" *ngIf="selectedCourse">
+      <img src="assets/img/map3.png" alt="Carte des niveaux" class="map-background" />
+
+      <!-- Boucle sur les niveaux -->
+      <div
+        *ngFor="let level of levels; let i = index"
+        class="level-wrapper"
+        [ngStyle]="{ top: level.position.top, left: level.position.left }"
+      >
+        <button
+          class="level-btn"
+          [ngClass]="{ completed: level.estComplete, disabled: level.disabled }"
+          [attr.data-level]="i + 1"
+          (click)="goToLevel(level)"
+          [disabled]="level.disabled"
+          [attr.title]="level.titre"
+        >
+          {{ i + 1 }}
+        </button>
+        <!-- Indicateur "START HERE!" pour le niveau 1 -->
+        <div *ngIf="i === 0" class="start-here">START HERE!</div>
+      </div>
+    </div>
+
+    <!-- Message si aucun cours n'est trouvé -->
+    <div *ngIf="!selectedCourse" class="no-course">
+      <p>Cours non trouvé. Veuillez sélectionner un autre cours.</p>
+      <a [routerLink]="['/cours']" class="btn btn-primary">Retour aux cours</a>
+    </div>
   </div>
 </div>

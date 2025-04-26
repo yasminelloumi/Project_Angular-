@@ -8,10 +8,13 @@ import { Cours } from 'Modeles/Cours';
 import { Etape } from 'Modeles/Etape';
 import { ComponentsModule } from 'app/components/components.module';
 
+
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-etape-form',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule,ComponentsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, ComponentsModule],
   templateUrl: './etape-form.component.html',
   styleUrls: ['./etape-form.component.scss']
 })
@@ -25,6 +28,7 @@ export class EtapeFormComponent implements OnInit {
   isLoading: boolean = false;
   isSubmitting: boolean = false;
   errorMessage: string = '';
+  contentTypes: string[] = ['video', 'text', 'quiz'];
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +36,7 @@ export class EtapeFormComponent implements OnInit {
     private coursService: CoursService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -43,16 +47,20 @@ export class EtapeFormComponent implements OnInit {
   initForm(): void {
     this.etapeForm = this.fb.group({
       titre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      contenu: ['', [Validators.required, Validators.minLength(10)]],
+      description: ['', [Validators.required, Validators.minLength(10)]],
       ordre: [1, [Validators.required, Validators.min(1)]],
-      estComplete: [false]
+      estComplete: [false],
+      contentType: ['text', Validators.required],
+      contentData: ['']
     });
   }
 
   loadCoursId(): void {
-    this.coursId = Number(this.route.snapshot.paramMap.get('coursId'));
-    if (isNaN(this.coursId)) {
-      this.errorMessage = 'ID de cours invalide';
+    const coursIdParam = this.route.snapshot.paramMap.get('coursId');
+    this.coursId = coursIdParam ? Number(coursIdParam) : undefined;
+    if (!this.coursId || isNaN(this.coursId)) {
+      this.errorMessage = 'ID de cours invalide. Veuillez retourner à la liste des cours.';
+      this.isLoading = false;
       return;
     }
 
@@ -61,19 +69,16 @@ export class EtapeFormComponent implements OnInit {
       next: (cours) => {
         this.cours = cours;
         this.existingEtapes = cours.etapes || [];
-        
-        // Set default order to next position if creating new step
         if (!this.isEditMode) {
           const nextOrder = this.existingEtapes.length > 0
             ? Math.max(...this.existingEtapes.map(e => e.ordre)) + 1
             : 1;
           this.etapeForm.get('ordre')?.setValue(nextOrder);
         }
-        
         this.isLoading = false;
       },
       error: (error) => {
-        this.errorMessage = 'Erreur lors du chargement du cours';
+        this.errorMessage = 'Erreur lors du chargement du cours. Veuillez réessayer.';
         console.error('Error loading course:', error);
         this.isLoading = false;
       }
@@ -81,32 +86,46 @@ export class EtapeFormComponent implements OnInit {
   }
 
   determineMode(): void {
-    const id = this.route.snapshot.paramMap.get('etapeId');
-    if (id === 'new') {
+    const etapeIdParam = this.route.snapshot.paramMap.get('etapeId');
+    if (etapeIdParam === 'new') {
       this.isEditMode = false;
-    } else {
+    } else if (etapeIdParam) {
+      this.etapeId = Number(etapeIdParam);
+      if (isNaN(this.etapeId)) {
+        this.errorMessage = 'ID d\'étape invalide. Veuillez sélectionner une étape valide.';
+        this.isLoading = false;
+        return;
+      }
       this.isEditMode = true;
-      this.etapeId = Number(id);
       this.loadEtape();
+    } else {
+      this.errorMessage = 'Aucun ID d\'étape fourni. Veuillez utiliser "Nouvelle étape" ou sélectionner une étape.';
+      this.isLoading = false;
+      this.router.navigate(['/cours', this.coursId || ''], { replaceUrl: true }); // Redirect to course
     }
   }
 
   loadEtape(): void {
-    if (!this.etapeId) return;
-    
+    if (!this.coursId || !this.etapeId) {
+      this.errorMessage = 'ID de cours ou d\'étape manquant. Veuillez réessayer.';
+      return;
+    }
+
     this.isLoading = true;
-    this.etapeService.getEtape(this.etapeId).subscribe({
+    this.etapeService.getEtape(this.coursId, this.etapeId).subscribe({
       next: (etape) => {
         this.etapeForm.patchValue({
           titre: etape.titre,
-          contenu: etape.description,
+          description: etape.description,
           ordre: etape.ordre,
-          estComplete: etape.estComplete
+          estComplete: etape.estComplete,
+          contentType: etape.contentType,
+          contentData: etape.contentData
         });
         this.isLoading = false;
       },
       error: (error) => {
-        this.errorMessage = 'Erreur lors du chargement de l\'étape';
+        this.errorMessage = 'Erreur lors du chargement de l\'étape. Veuillez réessayer.';
         console.error('Error loading step:', error);
         this.isLoading = false;
       }
@@ -120,34 +139,34 @@ export class EtapeFormComponent implements OnInit {
     }
 
     if (!this.coursId) {
-      this.errorMessage = 'ID de cours manquant';
+      this.errorMessage = 'ID de cours manquant. Veuillez réessayer.';
       return;
     }
 
     this.isSubmitting = true;
-    const formValue = {
-      ...this.etapeForm.value,
-      coursId: this.coursId
-    };
+    this.errorMessage = '';
+    const formValue = this.etapeForm.value;
 
     if (this.isEditMode && this.etapeId) {
-      this.etapeService.updateEtape(this.etapeId, formValue).subscribe({
+      this.etapeService.updateEtape(this.coursId, this.etapeId, formValue).subscribe({
         next: () => {
+          this.isSubmitting = false;
           this.router.navigate(['/cours', this.coursId]);
         },
         error: (error) => {
-          this.errorMessage = 'Erreur lors de la mise à jour de l\'étape';
+          this.errorMessage = 'Erreur lors de la mise à jour de l\'étape.';
           console.error('Error updating step:', error);
           this.isSubmitting = false;
         }
       });
     } else {
-      this.etapeService.createEtape(formValue).subscribe({
+      this.etapeService.createEtape(this.coursId, formValue).subscribe({
         next: () => {
+          this.isSubmitting = false;
           this.router.navigate(['/cours', this.coursId]);
         },
         error: (error) => {
-          this.errorMessage = 'Erreur lors de la création de l\'étape';
+          this.errorMessage = 'Erreur lors de la création de l\'étape.';
           console.error('Error creating step:', error);
           this.isSubmitting = false;
         }

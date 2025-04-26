@@ -3,7 +3,13 @@
     max-width: 1200px;
     margin: 0 auto;
   }
-  
+  .course-image {
+    width: 100%; /* Full width of the card */
+    height: 150px; /* Fixed height for consistency */
+    object-fit: cover; /* Scale image to cover the area, cropping if needed */
+    border-radius: 4px; /* Rounded corners */
+    margin-bottom: 12px; /* Space below image */
+  }
   .page-header {
     display: flex;
     justify-content: space-between;

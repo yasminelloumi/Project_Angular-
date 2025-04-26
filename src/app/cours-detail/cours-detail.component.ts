@@ -8,10 +8,12 @@ import { Cours } from 'Modeles/Cours';
 import { Etape } from 'Modeles/Etape';
 import { ComponentsModule } from 'app/components/components.module';
 
+
+
 @Component({
   selector: 'app-cours-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule,ComponentsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ComponentsModule],
   templateUrl: './cours-detail.component.html',
   styleUrls: ['./cours-detail.component.scss']
 })
@@ -26,14 +28,15 @@ export class CoursDetailComponent implements OnInit {
     private router: Router,
     private coursService: CoursService,
     private etapeService: EtapeService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadCours();
   }
 
   loadCours(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const idParam = this.route.snapshot.paramMap.get('id');
+    const id = idParam ? Number(idParam) : NaN;
     if (isNaN(id)) {
       this.errorMessage = 'ID de cours invalide';
       this.isLoading = false;
@@ -55,23 +58,29 @@ export class CoursDetailComponent implements OnInit {
     });
   }
 
-  deleteEtape(id: number): void {
+  deleteEtape(etapeId: number): void {
+    if (!this.cours?.id) {
+      this.errorMessage = 'ID de cours manquant';
+      return;
+    }
     if (confirm('Êtes-vous sûr de vouloir supprimer cette étape ?')) {
-      this.etapeService.deleteEtape(id).subscribe({
+      this.etapeService.deleteEtape(this.cours.id, etapeId).subscribe({
         next: () => {
-          this.etapes = this.etapes.filter(e => e.id !== id);
+          this.etapes = this.etapes.filter(e => e.id !== etapeId);
         },
         error: (error) => {
           console.error('Error deleting step:', error);
-          alert('Erreur lors de la suppression de l\'étape');
+          this.errorMessage = 'Erreur lors de la suppression de l\'étape';
         }
       });
     }
   }
 
   deleteCours(): void {
-    if (!this.cours) return;
-    
+    if (!this.cours?.id) {
+      this.errorMessage = 'ID de cours manquant';
+      return;
+    }
     if (confirm('Êtes-vous sûr de vouloir supprimer ce cours et toutes ses étapes ?')) {
       this.coursService.deleteCours(this.cours.id).subscribe({
         next: () => {
@@ -79,23 +88,28 @@ export class CoursDetailComponent implements OnInit {
         },
         error: (error) => {
           console.error('Error deleting course:', error);
-          alert('Erreur lors de la suppression du cours');
+          this.errorMessage = 'Erreur lors de la suppression du cours';
         }
       });
     }
   }
 
   toggleEtapeCompletion(etape: Etape): void {
-    const updatedEtape = { ...etape, estComplete: !etape.estComplete };
-    this.etapeService.updateEtape(etape.id, { estComplete: !etape.estComplete }).subscribe({
+    if (!this.cours?.id) {
+      this.errorMessage = 'ID de cours manquant';
+      return;
+    }
+    const updatedData = { estComplete: !etape.estComplete };
+    this.etapeService.updateEtape(this.cours.id, etape.id, updatedData).subscribe({
       next: (updated) => {
         const index = this.etapes.findIndex(e => e.id === etape.id);
         if (index !== -1) {
-          this.etapes[index] = { ...this.etapes[index], ...updated };
+          this.etapes[index] = updated;
         }
       },
       error: (error) => {
         console.error('Error updating step completion:', error);
+        this.errorMessage = 'Erreur lors de la mise à jour de l\'étape';
       }
     });
   }
