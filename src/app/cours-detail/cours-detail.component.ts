@@ -22,6 +22,7 @@ export class CoursDetailComponent implements OnInit {
   etapes: Etape[] = [];
   isLoading: boolean = true;
   errorMessage: string = '';
+  coursId?: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,7 +43,7 @@ export class CoursDetailComponent implements OnInit {
       this.isLoading = false;
       return;
     }
-
+    this.coursId = id; // Set coursId
     this.isLoading = true;
     this.coursService.getCoursWithEtapes(id).subscribe({
       next: (data) => {
@@ -115,6 +116,12 @@ export class CoursDetailComponent implements OnInit {
   }
   debugNavigation(id: number): void {
     console.log('Navigating to add step for course ID:', id);
+    this.router.navigate(['/cours', id, 'etape', 'new']).then(success => {
+      console.log('Navigation success:', success);
+    }).catch(err => {
+      console.error('Navigation error:', err);
+    });
   }
+  
   
 }
