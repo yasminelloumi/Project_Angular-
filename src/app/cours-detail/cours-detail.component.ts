@@ -113,4 +113,8 @@ export class CoursDetailComponent implements OnInit {
       }
     });
   }
+  debugNavigation(id: number): void {
+    console.log('Navigating to add step for course ID:', id);
+  }
+  
 }

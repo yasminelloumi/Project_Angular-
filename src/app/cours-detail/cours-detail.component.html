@@ -41,11 +41,9 @@
     <div class="steps-section">
       <div *ngIf="cours" class="steps-header">
         <h2>Étapes du cours</h2>
-        <a [routerLink]="['/cours', cours.id, 'etape', 'new']" 
-           (click)="debugNavigation(cours.id)" 
-           class="btn btn-primary">
-          Ajouter une étape
-        </a>
+        <button [routerLink]="['/cours', coursId, 'etape', 'new']" class="btn btn-primary">Ajouter une étape</button>
+
+       
       </div>
 
       <div *ngIf="etapes.length === 0" class="no-steps">
