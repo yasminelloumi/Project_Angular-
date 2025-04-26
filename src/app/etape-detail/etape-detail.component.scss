@@ -1,0 +1,206 @@
+.etape-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+  }
+  
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #0057B7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .error-message {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border-left: 4px solid #D62828;
+    color: #D62828;
+  }
+  
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+  }
+  
+  .breadcrumb a {
+    color: #0057B7;
+    text-decoration: none;
+  }
+  
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  
+  .separator {
+    margin: 0 0.5rem;
+    color: #666;
+  }
+  
+  .etape-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .etape-header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .completion-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: inline-block;
+  }
+  
+  .completion-status.completed {
+    background-color: #e6f4ea;
+    color: #137333;
+  }
+  
+  .completion-status.not-completed {
+    background-color: #fce8e6;
+    color: #c53929;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 0.75rem;
+  }
+  
+  .btn {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn-primary {
+    background-color: #0057B7;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #004494;
+  }
+  
+  .btn-edit {
+    background-color: #00A3A3;
+    color: white;
+  }
+  
+  .btn-edit:hover {
+    background-color: #008080;
+  }
+  
+  .btn-delete {
+    background-color: #FFE1DB;
+    color: #D62828;
+  }
+  
+  .btn-delete:hover {
+    background-color: #FFCCC2;
+  }
+  
+  .btn-toggle {
+    background-color: #f0f0f0;
+    color: #555;
+  }
+  
+  .btn-toggle:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .etape-description,
+  .etape-content-data {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+  
+  .etape-description h2,
+  .etape-content-data h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .etape-description p,
+  .content-text p {
+    margin: 0;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .content-video video,
+  .content-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .navigation {
+    margin-top: 2rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .etape-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .action-buttons {
+      width: 100%;
+    }
+  
+    .btn {
+      flex: 1;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .etape-header {
+      gap: 1rem;
+    }
+  
+    .btn {
+      width: 100%;
+    }
+  }
