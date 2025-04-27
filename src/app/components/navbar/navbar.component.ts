@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,13 +11,13 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
     location: Location;
-      mobile_menu_visible: any = 0;
+    mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    constructor(location: Location, private element: ElementRef, private router: Router) {
       this.location = location;
-          this.sidebarVisible = false;
+      this.sidebarVisible = false;
     }
 
     ngOnInit(){
@@ -52,8 +52,6 @@ export class NavbarComponent implements OnInit {
         body.classList.remove('nav-open');
     };
     sidebarToggle() {
-        // const toggleButton = this.toggleButton;
-        // const body = document.getElementsByTagName('body')[0];
         var $toggle = document.getElementsByClassName('navbar-toggler')[0];
 
         if (this.sidebarVisible === false) {
@@ -64,7 +62,6 @@ export class NavbarComponent implements OnInit {
         const body = document.getElementsByTagName('body')[0];
 
         if (this.mobile_menu_visible == 1) {
-            // $('html').removeClass('nav-open');
             body.classList.remove('nav-open');
             if ($layer) {
                 $layer.remove();
@@ -82,7 +79,6 @@ export class NavbarComponent implements OnInit {
             var $layer = document.createElement('div');
             $layer.setAttribute('class', 'close-layer');
 
-
             if (body.querySelectorAll('.main-panel')) {
                 document.getElementsByClassName('main-panel')[0].appendChild($layer);
             }else if (body.classList.contains('off-canvas-sidebar')) {
@@ -93,7 +89,7 @@ export class NavbarComponent implements OnInit {
                 $layer.classList.add('visible');
             }, 100);
 
-            $layer.onclick = function() { //asign a function
+            $layer.onclick = function() {
               body.classList.remove('nav-open');
               this.mobile_menu_visible = 0;
               $layer.classList.remove('visible');
@@ -105,14 +101,13 @@ export class NavbarComponent implements OnInit {
 
             body.classList.add('nav-open');
             this.mobile_menu_visible = 1;
-
         }
     };
 
     getTitle(){
       var titlee = this.location.prepareExternalUrl(this.location.path());
       if(titlee.charAt(0) === '#'){
-          titlee = titlee.slice( 1 );
+          titlee = titlee.slice(1);
       }
 
       for(var item = 0; item < this.listTitles.length; item++){
@@ -121,5 +116,11 @@ export class NavbarComponent implements OnInit {
           }
       }
       return 'Dashboard';
+    }
+
+    logout() {
+        localStorage.removeItem('user');
+        localStorage.removeItem('role');
+        this.router.navigate(['/login']);
     }
 }
