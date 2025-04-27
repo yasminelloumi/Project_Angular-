@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,19 +6,18 @@ import { CoursService } from '../services/course.service';
 import { EtapeService } from '../services/etape.service';
 import { Cours } from 'Modeles/Cours';
 import { Etape } from 'Modeles/Etape';
-import { ComponentsModule } from 'app/components/components.module';
+import { ComponentsModule } from '../components/components.module';
 import { Subscription } from 'rxjs';
-
-import { map } from 'rxjs/operators';
+import { QuizEditorComponent } from '../quiz-editor/quiz-editor.component';
 
 @Component({
   selector: 'app-etape-form',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, ComponentsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, ComponentsModule, QuizEditorComponent],
   templateUrl: './etape-form.component.html',
   styleUrls: ['./etape-form.component.scss']
 })
-export class EtapeFormComponent implements OnInit {
+export class EtapeFormComponent implements OnInit, OnDestroy {
   etapeForm!: FormGroup;
   isEditMode: boolean = false;
   etapeId?: number;
@@ -30,6 +29,7 @@ export class EtapeFormComponent implements OnInit {
   errorMessage: string = '';
   contentTypes: string[] = ['video', 'text', 'quiz'];
   routeSub?: Subscription;
+  showQuizEditor: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -72,6 +72,22 @@ export class EtapeFormComponent implements OnInit {
         this.router.navigate(['/cours', this.coursId || ''], { replaceUrl: true });
       }
     });
+
+    // Listen for content type changes to show/hide quiz editor
+    this.etapeForm.get('contentType')?.valueChanges.subscribe(value => {
+      this.showQuizEditor = value === 'quiz';
+      
+      // Clear contentData if switching from quiz to something else
+      if (value !== 'quiz') {
+        this.etapeForm.get('contentData')?.setValue('');
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
+    }
   }
 
   initForm(): void {
@@ -115,28 +131,6 @@ export class EtapeFormComponent implements OnInit {
     });
   }
 
-  determineMode(): void {
-    const etapeIdParam = this.route.snapshot.paramMap.get('etapeId');
-    const coursIdParam = this.route.snapshot.paramMap.get('coursId');
-    console.log('etapeIdParam:', etapeIdParam, 'coursIdParam:', coursIdParam); // Debug log
-  
-    if (this.route.snapshot.url.some(segment => segment.path === 'new')) {
-      this.isEditMode = false;
-    } else if (etapeIdParam) {
-      this.etapeId = Number(etapeIdParam);
-      if (isNaN(this.etapeId)) {
-        this.errorMessage = 'ID d\'étape invalide. Veuillez sélectionner une étape valide.';
-        this.isLoading = false;
-        return;
-      }
-      this.isEditMode = true;
-      this.loadEtape();
-    } else {
-      this.errorMessage = 'Aucun ID d\'étape fourni. Veuillez utiliser "Nouvelle étape" ou sélectionner une étape.';
-      this.isLoading = false;
-      this.router.navigate(['/cours', this.coursId || ''], { replaceUrl: true }); // Redirect to course
-    }
-  }
   loadEtape(): void {
     if (!this.coursId || !this.etapeId) {
       this.errorMessage = 'ID de cours ou d\'étape manquant. Veuillez réessayer.';
@@ -154,6 +148,10 @@ export class EtapeFormComponent implements OnInit {
           contentType: etape.contentType,
           contentData: etape.contentData
         });
+        
+        // If this is a quiz type, set the flag to show the quiz editor
+        this.showQuizEditor = etape.contentType === 'quiz';
+        
         this.isLoading = false;
       },
       error: (error) => {

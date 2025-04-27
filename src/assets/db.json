@@ -294,7 +294,17 @@
       "contenu": "frverwcvrfefrxzswsds",
       "niveau": "Débutant",
       "imageUrl": "assets/img/IA.jpg",
-      "etapes": []
+      "etapes": [
+        {
+          "titre": "test ",
+          "description": "gvfhghiklkjmlkm",
+          "ordre": 1,
+          "estComplete": false,
+          "contentType": "quiz",
+          "contentData": "{\"questions\":[{\"id\":1745780063817,\"text\":\" hbhnmj ,njbgfctrc\",\"type\":\"multiple-choice\",\"options\":[{\"id\":1745780069298,\"text\":\"Vrai\",\"isCorrect\":true},{\"id\":1745780069299,\"text\":\"Faux\",\"isCorrect\":false},{\"id\":1745780114305,\"text\":\"test lgvb\",\"isCorrect\":false}]},{\"id\":1745780146225,\"text\":\"\",\"type\":\"multiple-choice\",\"options\":[{\"id\":1745780146225,\"text\":\"\",\"isCorrect\":false},{\"id\":1745780146225,\"text\":\"\",\"isCorrect\":false}]}]}",
+          "id": 1
+        }
+      ]
     }
   ]
 }

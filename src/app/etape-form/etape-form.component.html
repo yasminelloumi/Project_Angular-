@@ -65,23 +65,49 @@
           class="form-control"
           [class.is-invalid]="etapeForm.get('contentType')?.invalid && etapeForm.get('contentType')?.touched"
         >
-          <option *ngFor="let type of contentTypes" [value]="type">{{ type }}</option>
+          <option value="text">Texte</option>
+          <option value="video">Vidéo</option>
+          <option value="quiz">Quiz</option>
         </select>
         <div *ngIf="etapeForm.get('contentType')?.invalid && etapeForm.get('contentType')?.touched" class="error-feedback">
           <span *ngIf="etapeForm.get('contentType')?.errors?.['required']">Le type de contenu est requis</span>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="contentData">Données du contenu</label>
-        <input
-          type="text"
-          id="contentData"
-          formControlName="contentData"
-          class="form-control"
-          placeholder="URL de la vidéo, texte ou données du quiz"
-        />
-      </div>
+      <!-- Different content inputs based on content type -->
+      <ng-container [ngSwitch]="etapeForm.get('contentType')?.value">
+        <!-- Video content type -->
+        <div *ngSwitchCase="'video'" class="form-group">
+          <label for="contentData">URL de la vidéo</label>
+          <input
+            type="text"
+            id="contentData"
+            formControlName="contentData"
+            class="form-control"
+            placeholder="https://www.youtube.com/watch?v=..."
+          />
+          <div class="form-hint">
+            Entrez l'URL complète de la vidéo YouTube, Vimeo ou autre plateforme de streaming
+          </div>
+        </div>
+
+        <!-- Text content type -->
+        <div *ngSwitchCase="'text'" class="form-group">
+          <label for="contentDataText">Contenu textuel</label>
+          <textarea
+            id="contentDataText"
+            formControlName="contentData"
+            rows="10"
+            class="form-control"
+            placeholder="Entrez le contenu textuel ici..."
+          ></textarea>
+        </div>
+
+        <!-- Quiz content type -->
+        <div *ngSwitchCase="'quiz'" class="form-group">
+          <app-quiz-editor [parentForm]="etapeForm"></app-quiz-editor>
+        </div>
+      </ng-container>
 
       <div class="form-row">
         <div class="form-group">

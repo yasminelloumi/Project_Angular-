@@ -1,0 +1,101 @@
+<div [formGroup]="quizForm" class="quiz-editor">
+    <div class="quiz-header">
+      <h3>Éditeur de Quiz</h3>
+      <button type="button" class="btn btn-add" (click)="addQuestion()">
+        <span class="icon">+</span> Ajouter une question
+      </button>
+    </div>
+  
+    <div formArrayName="questions" class="questions-container">
+      <div *ngIf="questions.length === 0" class="empty-state">
+        Aucune question. Cliquez sur "Ajouter une question" pour commencer.
+      </div>
+  
+      <div *ngFor="let questionForm of questions.controls; let i = index" [formGroupName]="i" class="question-card">
+        <div class="question-header">
+          <h4>Question {{i + 1}}</h4>
+          <button type="button" class="btn btn-remove" (click)="removeQuestion(i)">
+            <span class="icon">×</span>
+          </button>
+        </div>
+  
+        <div class="form-group">
+          <label [for]="'question-text-' + i">Texte de la question</label>
+          <input
+            [id]="'question-text-' + i"
+            type="text"
+            formControlName="text"
+            class="form-control"
+            [class.is-invalid]="questionForm.get('text')?.invalid && questionForm.get('text')?.touched"
+          />
+          <div *ngIf="questionForm.get('text')?.invalid && questionForm.get('text')?.touched" class="error-feedback">
+            <span *ngIf="questionForm.get('text')?.errors?.['required']">Le texte de la question est requis</span>
+            <span *ngIf="questionForm.get('text')?.errors?.['minlength']">Le texte doit avoir au moins 5 caractères</span>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label [for]="'question-type-' + i">Type de question</label>
+          <select
+            [id]="'question-type-' + i"
+            formControlName="type"
+            class="form-control"
+            (change)="onQuestionTypeChange(i, $event)"
+          >
+            <option *ngFor="let type of questionTypes" [value]="type">
+              {{ type === 'multiple-choice' ? 'Choix multiples' : 'Vrai ou Faux' }}
+            </option>
+          </select>
+        </div>
+  
+        <div class="options-section">
+          <div class="options-header">
+            <h5>Options</h5>
+            <button 
+              *ngIf="questionForm.get('type')?.value !== 'true-false'"
+              type="button" 
+              class="btn btn-add-small" 
+              (click)="addOption(i)"
+            >
+              <span class="icon">+</span> Ajouter
+            </button>
+          </div>
+  
+          <div formArrayName="options" class="options-container">
+            <div *ngFor="let optionForm of getOptionsForQuestion(i).controls; let j = index" [formGroupName]="j" class="option-item">
+              <div class="option-content">
+                <div class="form-group option-text">
+                  <input
+                    type="text"
+                    formControlName="text"
+                    class="form-control"
+                    [class.is-invalid]="optionForm.get('text')?.invalid && optionForm.get('text')?.touched"
+                    [placeholder]="'Option ' + (j + 1)"
+                  />
+                  <div *ngIf="optionForm.get('text')?.invalid && optionForm.get('text')?.touched" class="error-feedback">
+                    <span *ngIf="optionForm.get('text')?.errors?.['required']">Le texte de l'option est requis</span>
+                  </div>
+                </div>
+  
+                <div class="option-controls">
+                  <div class="checkbox-container">
+                    <input type="checkbox" formControlName="isCorrect" [id]="'correct-' + i + '-' + j">
+                    <label [for]="'correct-' + i + '-' + j">Correcte</label>
+                  </div>
+  
+                  <button 
+                    *ngIf="questionForm.get('type')?.value !== 'true-false' && getOptionsForQuestion(i).length > 2"
+                    type="button" 
+                    class="btn btn-remove-small" 
+                    (click)="removeOption(i, j)"
+                  >
+                    <span class="icon">×</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
