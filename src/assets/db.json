@@ -29,7 +29,7 @@
       "email": "lucas.bernard@example.com",
       "password": "motDePasseLucas",
       "niveau": "Licence 3",
-      "firebaseUid": "",
+      "firebaseUid": "XahuKd6FSzWyCQxlJIH8FhmCit42",
       "role": "etudiant"
     },
     {
@@ -46,12 +46,12 @@
     {
       "id": "5",
       "NumeroUnique": 123456,
-      "Nom": "Bernard",
-      "Prenom": "Lucas",
-      "email": "lucas.bernard@example.com",
+      "Nom": "yasmine",
+      "Prenom": "elloumi",
+      "email": "elloumiyaamine@gmail.com",
       "password": "motDePasseLucas",
       "niveau": "Licence 3",
-      "firebaseUid": "",
+      "firebaseUid": "A2bs5XsozyRRw6taOA3ZjJEdHvI2",
       "role": "etudiant"
     },
     {

@@ -7,6 +7,7 @@ import { DonutChartComponent } from 'app/charts/donut-chart.component';
 import { BarChartComponent } from 'app/charts/bar-chart.component';
 import { PieChartComponent } from 'app/charts/pie-chart.component';
 import { ComponentsModule } from 'app/components/components.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,7 +44,7 @@ export class DashboardComponents implements OnInit {
     }
   };
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService,private router: Router) {}
 
   ngOnInit(): void {
     this.dataService.getEtudiants().subscribe(students => {
@@ -75,5 +76,8 @@ export class DashboardComponents implements OnInit {
     this.dataService.getCourseCompletions().subscribe(data => {
       this.courseCompletionsData = data;
     });
+  }
+  goToAdminHome() {
+    this.router.navigate(['/adminehome']);
   }
 }

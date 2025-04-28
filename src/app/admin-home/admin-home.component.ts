@@ -39,7 +39,7 @@ export class AdminDashboardComponent {
     {
       title: 'System Settings',
       description: 'Configure platform settings and preferences.',
-      icon: '⚙️',
+      icon: '📈',
       route: '/dashboard-admin',
       buttonText: 'Settings',
       buttonClass: 'btn-warning',
