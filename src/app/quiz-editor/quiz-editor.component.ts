@@ -23,27 +23,49 @@ export class QuizEditorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initQuizForm();
-
+  
     try {
       // Parse existing quiz data if available
       if (this.parentForm.get('contentData')?.value) {
+        // Expecting a JSON array in the format [{question, options, correctAnswer}]
         const data = JSON.parse(this.parentForm.get('contentData')?.value);
-        if (data && data.questions) {
-          this.quizData = data;
+  
+        if (Array.isArray(data)) {
+          // This is your simplified format
+          this.quizData = { questions: data };
           this.loadQuizData();
+        } else {
+          console.error("Invalid quiz data format");
         }
       }
     } catch (e) {
       console.error('Error parsing quiz data', e);
     }
-
+  
     // Subscribe to form changes to update parent form
     this.subscriptions.add(
       this.quizForm.valueChanges.subscribe(value => {
-        this.parentForm.get('contentData')?.setValue(JSON.stringify(value));
+        // Save the simplified structure directly (not as a string)
+        const simplifiedData = this.simplifyQuizData(value);
+        this.parentForm.get('contentData')?.setValue(simplifiedData);
       })
     );
   }
+  
+  // Transform the quiz data to the simplified format
+  simplifyQuizData(formValue: any): any[] {
+    return formValue.questions.map((question: any) => {
+      return {
+        question: question.text,
+        options: question.options.map((option: any) => option.text),
+        correctAnswer: question.options.find((option: any) => option.isCorrect)?.text
+      };
+    });
+  }
+  
+  
+
+  
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

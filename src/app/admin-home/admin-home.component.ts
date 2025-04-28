@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NavbarComponent } from 'app/components/navbar/navbar.component';
 import { ComponentsModule } from 'app/components/components.module';
 
 @Component({
@@ -41,7 +40,7 @@ export class AdminDashboardComponent {
       title: 'System Settings',
       description: 'Configure platform settings and preferences.',
       icon: '⚙️',
-      route: '/system-settings',
+      route: '/dashboard-admin',
       buttonText: 'Settings',
       buttonClass: 'btn-warning',
       stats: {

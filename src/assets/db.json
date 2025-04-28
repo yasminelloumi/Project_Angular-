@@ -207,8 +207,8 @@
           "description": "kljbvcxdnfgnhvjhmv mghbv",
           "ordre": 6,
           "estComplete": false,
-          "contentType": "text",
-          "contentData": "lkkh/njhgvhg/jkbhm",
+          "contentType": "quiz",
+          "contentData": "{\"questions\":[{\"id\":1745781838824,\"text\":\"rgtrgtr\",\"type\":\"true-false\",\"options\":[{\"id\":1745781844113,\"text\":\"Vrai\",\"isCorrect\":true},{\"id\":1745781844114,\"text\":\"Faux\",\"isCorrect\":false}]}]}",
           "id": 6
         }
       ]
@@ -301,7 +301,17 @@
           "ordre": 1,
           "estComplete": false,
           "contentType": "quiz",
-          "contentData": "{\"questions\":[{\"id\":1745780063817,\"text\":\" hbhnmj ,njbgfctrc\",\"type\":\"multiple-choice\",\"options\":[{\"id\":1745780069298,\"text\":\"Vrai\",\"isCorrect\":true},{\"id\":1745780069299,\"text\":\"Faux\",\"isCorrect\":false},{\"id\":1745780114305,\"text\":\"test lgvb\",\"isCorrect\":false}]},{\"id\":1745780146225,\"text\":\"\",\"type\":\"multiple-choice\",\"options\":[{\"id\":1745780146225,\"text\":\"\",\"isCorrect\":false},{\"id\":1745780146225,\"text\":\"\",\"isCorrect\":false}]}]}",
+          "contentData": [
+            {
+              "question": "gcjtvnm",
+              "options": [
+                "ASDFGHJK",
+                "XDGG",
+                "VHGCVFXC"
+              ],
+              "correctAnswer": "ASDFGHJK"
+            }
+          ],
           "id": 1
         }
       ]

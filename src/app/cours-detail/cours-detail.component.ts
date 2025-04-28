@@ -122,6 +122,12 @@ export class CoursDetailComponent implements OnInit {
       console.error('Navigation error:', err);
     });
   }
+  goBack(): void {
+    console.log("Retour button clicked");
+    this.router.navigate(['/cours']);
+  }
+  
+  
   
   
 }

@@ -4,6 +4,11 @@
     <div class="loading-spinner"></div>
     <p>Chargement du cours...</p>
   </div>
+  <button class="btn btn-light" [routerLink]="['/cours']">
+    <i class="material-icons">arrow_back</i> Retour
+  </button>
+  
+
 
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
