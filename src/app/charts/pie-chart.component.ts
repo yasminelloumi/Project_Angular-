@@ -16,11 +16,16 @@ Chart.register(...registerables);
     </div>
   `,
   styles: [`
-    .chart-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+   .chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.chart-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
   `]
 })
 export class PieChartComponent implements OnInit, OnChanges {

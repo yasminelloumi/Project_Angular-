@@ -17,10 +17,16 @@ Chart.register(...registerables);
   `,
   styles: [`
     .chart-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+        position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.chart-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+    
   `]
 })
 export class LineChartComponent implements OnInit, OnChanges {

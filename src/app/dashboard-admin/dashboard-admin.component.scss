@@ -1,93 +1,73 @@
-:root {
-    --bg-color: #f9fafb;
-    --card-bg: #ffffff;
-    --text-primary: #1f2937;
-    --text-secondary: #6b7280;
-    --border-radius: 1rem;
-    --shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
-  }
-  
-  .dashboard-container {
+.dashboard-container {
     width: 100%;
     padding: 2rem;
-    background-color: var(--bg-color);
+    background-color: #f5f5f5;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
   
     .main-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-  
       .content-wrapper {
-        animation: fadeIn 0.6s ease-in-out;
+        animation: fadeIn 0.5s ease-in-out;
   
         .dashboard-header {
           margin-bottom: 2rem;
-          text-align: center;
   
           h1 {
             font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
+            font-weight: 700;
+            color: #333;
           }
   
           .dashboard-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
+            font-size: 1.1rem;
+            color: #777;
             margin-top: 0.5rem;
           }
         }
   
         .stats-overview {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          display: flex;
           gap: 1.5rem;
-          margin-bottom: 2rem;
+          flex-wrap: wrap;
+          margin-bottom: 2.5rem;
   
           .stat-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 1.75rem;
+            flex: 1 1 220px;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            gap: 1.5rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
   
             &:hover {
-              transform: translateY(-8px) scale(1.02);
-              box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+              transform: translateY(-8px);
+              box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
             }
   
             .stat-icon {
-              background: rgba(0, 0, 0, 0.05);
+              background: rgba(0, 123, 255, 0.1);
               padding: 1rem;
               border-radius: 50%;
+              font-size: 2.5rem;
+              color: #007bff;
               display: flex;
               align-items: center;
               justify-content: center;
-              font-size: 2rem;
-              color: var(--text-primary);
             }
   
             .stat-content {
-              display: flex;
-              flex-direction: column;
-  
               .stat-label {
-                font-size: 0.95rem;
-                color: var(--text-secondary);
+                font-size: 1rem;
+                color: #555;
                 margin-bottom: 0.25rem;
-                font-weight: 500;
               }
   
               .stat-value {
                 font-size: 1.75rem;
                 font-weight: 700;
-                color: var(--text-primary);
+                color: #222;
               }
             }
           }
@@ -95,29 +75,30 @@
   
         .charts-container {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 1.5rem;
+          grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+          gap: 2rem;
   
           .chart-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
   
             .chart-title {
-              font-size: 1.25rem;
+              font-size: 1.5rem;
               font-weight: 600;
-              color: var(--text-primary);
-              margin-bottom: 1rem;
+              margin-bottom: 1.5rem;
+              color: #333;
               text-align: center;
             }
   
             .chart-container {
-              flex: 1;
-              min-height: 250px;
+              width: 100%;
+              height: 400px; // <-- Made the chart really big!
               display: flex;
               align-items: center;
               justify-content: center;
@@ -127,14 +108,76 @@
       }
     }
   }
+  .dashboard-container {
+    padding: 20px;
+    background-color: #f7f8fa;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .stats-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  .stat-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .stat-icon {
+    font-size: 32px;
+    margin-right: 15px;
+  }
+  
+  .stat-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+  }
+  
+  .chart-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chart-title {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .chart-container {
+    width: 100%;
+    height: 400px; 
+    position: relative;
+  }
+  
   
   // Fade-in animation
   @keyframes fadeIn {
-    from {
+    0% {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(10px);
     }
-    to {
+    100% {
       opacity: 1;
       transform: translateY(0);
     }
