@@ -8,8 +8,6 @@ import { Cours } from 'Modeles/Cours';
 import { Etape } from 'Modeles/Etape';
 import { ComponentsModule } from 'app/components/components.module';
 
-
-
 @Component({
   selector: 'app-cours-detail',
   standalone: true,
@@ -20,9 +18,14 @@ import { ComponentsModule } from 'app/components/components.module';
 export class CoursDetailComponent implements OnInit {
   cours?: Cours;
   etapes: Etape[] = [];
+  paginatedEtapes: Etape[] = [];
   isLoading: boolean = true;
   errorMessage: string = '';
   coursId?: number;
+
+  currentPage: number = 1;
+  pageSize: number = 5; // Nombre d'étapes par page
+  totalPages: number = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,12 +46,14 @@ export class CoursDetailComponent implements OnInit {
       this.isLoading = false;
       return;
     }
-    this.coursId = id; // Set coursId
+    this.coursId = id;
     this.isLoading = true;
     this.coursService.getCoursWithEtapes(id).subscribe({
       next: (data) => {
         this.cours = data;
         this.etapes = data.etapes || [];
+        this.totalPages = Math.ceil(this.etapes.length / this.pageSize);
+        this.updatePaginatedEtapes();
         this.isLoading = false;
       },
       error: (error) => {
@@ -57,6 +62,26 @@ export class CoursDetailComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  updatePaginatedEtapes(): void {
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.paginatedEtapes = this.etapes.slice(start, end);
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedEtapes();
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginatedEtapes();
+    }
   }
 
   deleteEtape(etapeId: number): void {
@@ -68,6 +93,11 @@ export class CoursDetailComponent implements OnInit {
       this.etapeService.deleteEtape(this.cours.id, etapeId).subscribe({
         next: () => {
           this.etapes = this.etapes.filter(e => e.id !== etapeId);
+          this.totalPages = Math.ceil(this.etapes.length / this.pageSize);
+          if (this.currentPage > this.totalPages) {
+            this.currentPage = this.totalPages || 1;
+          }
+          this.updatePaginatedEtapes();
         },
         error: (error) => {
           console.error('Error deleting step:', error);
@@ -106,6 +136,7 @@ export class CoursDetailComponent implements OnInit {
         const index = this.etapes.findIndex(e => e.id === etape.id);
         if (index !== -1) {
           this.etapes[index] = updated;
+          this.updatePaginatedEtapes();
         }
       },
       error: (error) => {
@@ -114,6 +145,7 @@ export class CoursDetailComponent implements OnInit {
       }
     });
   }
+
   debugNavigation(id: number): void {
     console.log('Navigating to add step for course ID:', id);
     this.router.navigate(['/cours', id, 'etape', 'new']).then(success => {
@@ -122,12 +154,9 @@ export class CoursDetailComponent implements OnInit {
       console.error('Navigation error:', err);
     });
   }
+
   goBack(): void {
     console.log("Retour button clicked");
     this.router.navigate(['/cours']);
   }
-  
-  
-  
-  
 }

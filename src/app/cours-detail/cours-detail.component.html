@@ -4,18 +4,16 @@
     <div class="loading-spinner"></div>
     <p>Chargement du cours...</p>
   </div>
-  <button class="btn btn-light" [routerLink]="['/cours']">
-    <i class="material-icons">arrow_back</i> Retour
-  </button>
+
   
-
-
+  
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
     <div class="mt-4">
       <a [routerLink]="['/cours']" class="btn btn-primary">Retour aux cours</a>
     </div>
   </div>
+  
 
   <div *ngIf="!isLoading && !errorMessage && cours" class="course-content">
     <nav class="breadcrumb">
@@ -25,6 +23,7 @@
     </nav>
 
     <header class="course-header">
+      
       <div>
         <h1>{{ cours.titre }}</h1>
         <span class="niveau-badge" [ngClass]="'niveau-' + cours.niveau.toLowerCase()">
@@ -35,6 +34,9 @@
       <div class="action-buttons">
         <a [routerLink]="['/cours', cours.id, 'edit']" class="btn btn-edit">Modifier le cours</a>
         <button (click)="deleteCours()" class="btn btn-delete">Supprimer le cours</button>
+        <button class="btn btn-light" (click)="goBack()">
+          <i class="material-icons">arrow_back</i> Retour
+        </button>
       </div>
     </header>
 
