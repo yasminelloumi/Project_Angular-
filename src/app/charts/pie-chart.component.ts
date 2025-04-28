@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Chart, ChartOptions, registerables } from 'chart.js';
 import { ChartData } from 'Modeles/chart-data';
 
-// Register Chart.js components
 Chart.register(...registerables);
 
 @Component({
@@ -16,37 +15,36 @@ Chart.register(...registerables);
     </div>
   `,
   styles: [`
-   .chart-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.chart-wrapper canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
+    .chart-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .chart-wrapper canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
   `]
 })
 export class PieChartComponent implements OnInit, OnChanges {
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
   @Input() data!: ChartData;
   @Input() options: ChartOptions = {};
-  
+
   private chart: Chart | null = null;
-  
+
   ngOnInit(): void {
     if (this.data) {
       this.createChart();
     }
   }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] && !changes['data'].firstChange) {
       this.updateChart();
     }
   }
-  
+
   private createChart(): void {
     setTimeout(() => {
       if (this.chartCanvas) {
@@ -70,7 +68,7 @@ export class PieChartComponent implements OnInit, OnChanges {
       }
     });
   }
-  
+
   private updateChart(): void {
     if (this.chart) {
       this.chart.data.labels = this.data.labels;
