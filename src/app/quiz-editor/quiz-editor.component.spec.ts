@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminHomeComponent  } from './admin-home.component';
+import { QuizEditorComponent } from './quiz-editor.component';
 
-describe('AdminHomeComponent', () => {
-  let component: AdminHomeComponent;
-  let fixture: ComponentFixture<AdminHomeComponent>;
+describe('QuizEditorComponent', () => {
+  let component: QuizEditorComponent;
+  let fixture: ComponentFixture<QuizEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminHomeComponent ]
+      imports: [ QuizEditorComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminHomeComponent);
+    fixture = TestBed.createComponent(QuizEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

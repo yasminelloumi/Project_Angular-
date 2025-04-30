@@ -27,24 +27,32 @@
     <form [formGroup]="coursForm" (ngSubmit)="onSubmit()" class="course-form">
       <div class="form-group">
         <label for="titre">Titre du cours</label>
-        <input type="text" id="titre" formControlName="titre" class="form-control"
-          [class.is-invalid]="coursForm.get('titre')?.invalid && coursForm.get('titre')?.touched" />
+        <input
+          type="text"
+          id="titre"
+          formControlName="titre"
+          class="form-control"
+          [class.is-invalid]="coursForm.get('titre')?.invalid && coursForm.get('titre')?.touched"
+        />
         <div *ngIf="coursForm.get('titre')?.invalid && coursForm.get('titre')?.touched" class="error-feedback">
           <span *ngIf="coursForm.get('titre')?.errors?.['required']">Le titre est requis</span>
           <span *ngIf="coursForm.get('titre')?.errors?.['minlength']">Le titre doit avoir au moins 3 caractères</span>
-          <span *ngIf="coursForm.get('titre')?.errors?.['maxlength']">Le titre ne peut pas dépasser 100
-            caractères</span>
+          <span *ngIf="coursForm.get('titre')?.errors?.['maxlength']">Le titre ne peut pas dépasser 100 caractères</span>
         </div>
       </div>
 
       <div class="form-group">
         <label for="contenu">Contenu du cours</label>
-        <textarea id="contenu" formControlName="contenu" rows="6" class="form-control"
-          [class.is-invalid]="coursForm.get('contenu')?.invalid && coursForm.get('contenu')?.touched"></textarea>
+        <textarea
+          id="contenu"
+          formControlName="contenu"
+          rows="6"
+          class="form-control"
+          [class.is-invalid]="coursForm.get('contenu')?.invalid && coursForm.get('contenu')?.touched"
+        ></textarea>
         <div *ngIf="coursForm.get('contenu')?.invalid && coursForm.get('contenu')?.touched" class="error-feedback">
           <span *ngIf="coursForm.get('contenu')?.errors?.['required']">Le contenu est requis</span>
-          <span *ngIf="coursForm.get('contenu')?.errors?.['minlength']">Le contenu doit avoir au moins 10
-            caractères</span>
+          <span *ngIf="coursForm.get('contenu')?.errors?.['minlength']">Le contenu doit avoir au moins 10 caractères</span>
         </div>
       </div>
 
@@ -53,6 +61,16 @@
         <select id="niveau" formControlName="niveau" class="form-control">
           <option *ngFor="let niveau of niveaux" [value]="niveau">{{ niveau }}</option>
         </select>
+      </div>
+
+      <div class="form-group">
+        <label for="imageUrl">URL de l'image</label>
+        <input
+          type="text"
+          id="imageUrl"
+          formControlName="imageUrl"
+          class="form-control"
+        />
       </div>
 
       <div class="form-actions">

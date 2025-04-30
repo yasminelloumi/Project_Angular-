@@ -24,6 +24,7 @@ import { CoursDetailComponent } from './cours-detail/cours-detail.component';
 import { CoursFormComponent } from './cours-form/cours-form.component';
 import { CoursListComponent } from './cours-list/cours-list.component';
 import { EtapeFormComponent } from './etape-form/etape-form.component';
+import { NgChartsModule } from 'ng2-charts';
 import { SafePipe } from './safe.pipe';
 
 const firebaseConfig = {
@@ -66,7 +67,8 @@ const firebaseConfig = {
     CoursFormComponent,
   CoursListComponent,
   EtapeFormComponent,
-  CoursDetailComponent,AdminDashboardComponent
+  CoursDetailComponent,AdminDashboardComponent,
+    NgChartsModule 
   ],
 
   bootstrap: [AppComponent]

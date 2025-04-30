@@ -1,96 +1,148 @@
 <app-navbar></app-navbar>
 <div class="form-container">
-    <div *ngIf="isLoading" class="loading">
-      <div class="loading-spinner"></div>
-      <p>Chargement...</p>
-    </div>
-  
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-      <div class="mt-4">
-        <a [routerLink]="['/cours', coursId]" class="btn btn-primary">Retour au cours</a>
-      </div>
-    </div>
-  
-    <div *ngIf="!isLoading && !errorMessage && cours">
-      <nav class="breadcrumb">
-        <a [routerLink]="['/cours']">Cours</a>
-        <span class="separator">/</span>
-        <a [routerLink]="['/cours', coursId]">{{ cours.titre }}</a>
-        <span class="separator">/</span>
-        <span>{{ isEditMode ? 'Modifier l\'étape' : 'Nouvelle étape' }}</span>
-      </nav>
-  
-      <div class="form-header">
-        <h1>{{ isEditMode ? 'Modifier l\'étape' : 'Ajouter une étape' }}</h1>
-      </div>
-  
-      <form [formGroup]="etapeForm" (ngSubmit)="onSubmit()" class="etape-form">
-        <div class="form-group">
-          <label for="titre">Titre de l'étape</label>
-          <input 
-            type="text" 
-            id="titre" 
-            formControlName="titre" 
-            class="form-control" 
-            [class.is-invalid]="etapeForm.get('titre')?.invalid && etapeForm.get('titre')?.touched"
-          />
-          <div *ngIf="etapeForm.get('titre')?.invalid && etapeForm.get('titre')?.touched" class="error-feedback">
-            <span *ngIf="etapeForm.get('titre')?.errors?.['required']">Le titre est requis</span>
-            <span *ngIf="etapeForm.get('titre')?.errors?.['minlength']">Le titre doit avoir au moins 3 caractères</span>
-            <span *ngIf="etapeForm.get('titre')?.errors?.['maxlength']">Le titre ne peut pas dépasser 100 caractères</span>
-          </div>
-        </div>
-  
-        <div class="form-group">
-          <label for="contenu">Contenu de l'étape</label>
-          <textarea 
-            id="contenu" 
-            formControlName="contenu" 
-            rows="6" 
-            class="form-control" 
-            [class.is-invalid]="etapeForm.get('contenu')?.invalid && etapeForm.get('contenu')?.touched"
-          ></textarea>
-          <div *ngIf="etapeForm.get('contenu')?.invalid && etapeForm.get('contenu')?.touched" class="error-feedback">
-            <span *ngIf="etapeForm.get('contenu')?.errors?.['required']">Le contenu est requis</span>
-            <span *ngIf="etapeForm.get('contenu')?.errors?.['minlength']">Le contenu doit avoir au moins 10 caractères</span>
-          </div>
-        </div>
-  
-        <div class="form-row">
-          <div class="form-group">
-            <label for="ordre">Ordre dans le cours</label>
-            <input 
-              type="number" 
-              id="ordre" 
-              formControlName="ordre" 
-              min="1" 
-              class="form-control" 
-              [class.is-invalid]="etapeForm.get('ordre')?.invalid && etapeForm.get('ordre')?.touched"
-            />
-            <div *ngIf="etapeForm.get('ordre')?.invalid && etapeForm.get('ordre')?.touched" class="error-feedback">
-              <span *ngIf="etapeForm.get('ordre')?.errors?.['required']">L'ordre est requis</span>
-              <span *ngIf="etapeForm.get('ordre')?.errors?.['min']">L'ordre doit être au moins 1</span>
-            </div>
-          </div>
-  
-          <div class="form-group checkbox-group">
-            <label class="checkbox-container">
-              <input type="checkbox" formControlName="estComplete" id="estComplete">
-              <span class="checkbox-label">Étape terminée</span>
-            </label>
-          </div>
-        </div>
-  
-        <div class="form-actions">
-          <button type="button" [routerLink]="['/cours', coursId]" class="btn btn-cancel">
-            Annuler
-          </button>
-          <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
-            <span *ngIf="isSubmitting" class="spinner"></span>
-            {{ isEditMode ? 'Mettre à jour' : 'Créer' }}
-          </button>
-        </div>
-      </form>
+  <div *ngIf="isLoading" class="loading">
+    <div class="loading-spinner"></div>
+    <p>Chargement...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+    <div class="mt-4">
+      <a [routerLink]="coursId ? ['/cours', coursId] : ['/cours']" class="btn btn-primary">Retour au cours</a>
     </div>
   </div>
+
+  <div *ngIf="!isLoading && !errorMessage && cours">
+    <nav class="breadcrumb">
+      <a [routerLink]="['/cours']">Cours</a>
+      <span class="separator">/</span>
+      <a [routerLink]="['/cours', coursId]">{{ cours.titre }}</a>
+      <span class="separator">/</span>
+      <span>{{ isEditMode ? 'Modifier l\'étape' : 'Nouvelle étape' }}</span>
+    </nav>
+
+    <div class="form-header">
+      <h1>{{ isEditMode ? 'Modifier l\'étape' : 'Ajouter une étape' }}</h1>
+    </div>
+
+    <form [formGroup]="etapeForm" (ngSubmit)="onSubmit()" class="etape-form">
+      <div class="form-group">
+        <label for="titre">Titre de l'étape</label>
+        <input
+          type="text"
+          id="titre"
+          formControlName="titre"
+          class="form-control"
+          [class.is-invalid]="etapeForm.get('titre')?.invalid && etapeForm.get('titre')?.touched"
+        />
+        <div *ngIf="etapeForm.get('titre')?.invalid && etapeForm.get('titre')?.touched" class="error-feedback">
+          <span *ngIf="etapeForm.get('titre')?.errors?.['required']">Le titre est requis</span>
+          <span *ngIf="etapeForm.get('titre')?.errors?.['minlength']">Le titre doit avoir au moins 3 caractères</span>
+          <span *ngIf="etapeForm.get('titre')?.errors?.['maxlength']">Le titre ne peut pas dépasser 100 caractères</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description de l'étape</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="6"
+          class="form-control"
+          [class.is-invalid]="etapeForm.get('description')?.invalid && etapeForm.get('description')?.touched"
+        ></textarea>
+        <div *ngIf="etapeForm.get('description')?.invalid && etapeForm.get('description')?.touched" class="error-feedback">
+          <span *ngIf="etapeForm.get('description')?.errors?.['required']">La description est requise</span>
+          <span *ngIf="etapeForm.get('description')?.errors?.['minlength']">La description doit avoir au moins 10 caractères</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="contentType">Type de contenu</label>
+        <select
+          id="contentType"
+          formControlName="contentType"
+          class="form-control"
+          [class.is-invalid]="etapeForm.get('contentType')?.invalid && etapeForm.get('contentType')?.touched"
+        >
+          <option value="text">Texte</option>
+          <option value="video">Vidéo</option>
+          <option value="quiz">Quiz</option>
+        </select>
+        <div *ngIf="etapeForm.get('contentType')?.invalid && etapeForm.get('contentType')?.touched" class="error-feedback">
+          <span *ngIf="etapeForm.get('contentType')?.errors?.['required']">Le type de contenu est requis</span>
+        </div>
+      </div>
+
+      <!-- Different content inputs based on content type -->
+      <ng-container [ngSwitch]="etapeForm.get('contentType')?.value">
+        <!-- Video content type -->
+        <div *ngSwitchCase="'video'" class="form-group">
+          <label for="contentData">URL de la vidéo</label>
+          <input
+            type="text"
+            id="contentData"
+            formControlName="contentData"
+            class="form-control"
+            placeholder="https://www.youtube.com/watch?v=..."
+          />
+          <div class="form-hint">
+            Entrez l'URL complète de la vidéo YouTube, Vimeo ou autre plateforme de streaming
+          </div>
+        </div>
+
+        <!-- Text content type -->
+        <div *ngSwitchCase="'text'" class="form-group">
+          <label for="contentDataText">Contenu textuel</label>
+          <textarea
+            id="contentDataText"
+            formControlName="contentData"
+            rows="10"
+            class="form-control"
+            placeholder="Entrez le contenu textuel ici..."
+          ></textarea>
+        </div>
+
+        <!-- Quiz content type -->
+        <div *ngSwitchCase="'quiz'" class="form-group">
+          <app-quiz-editor [parentForm]="etapeForm"></app-quiz-editor>
+        </div>
+      </ng-container>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="ordre">Ordre dans le cours</label>
+          <input
+            type="number"
+            id="ordre"
+            formControlName="ordre"
+            min="1"
+            class="form-control"
+            [class.is-invalid]="etapeForm.get('ordre')?.invalid && etapeForm.get('ordre')?.touched"
+          />
+          <div *ngIf="etapeForm.get('ordre')?.invalid && etapeForm.get('ordre')?.touched" class="error-feedback">
+            <span *ngIf="etapeForm.get('ordre')?.errors?.['required']">L'ordre est requis</span>
+            <span *ngIf="etapeForm.get('ordre')?.errors?.['min']">L'ordre doit être au moins 1</span>
+          </div>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="checkbox-container">
+            <input type="checkbox" formControlName="estComplete" id="estComplete">
+            <span class="checkbox-label">Étape terminée</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" [routerLink]="['/cours', coursId]" class="btn btn-cancel">
+          Annuler
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+          <span *ngIf="isSubmitting" class="spinner"></span>
+          {{ isEditMode ? 'Mettre à jour' : 'Créer' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

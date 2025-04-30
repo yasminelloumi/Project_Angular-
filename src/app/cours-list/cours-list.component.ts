@@ -7,10 +7,11 @@ import { CoursService } from '../services/course.service';
 import { Cours } from 'Modeles/Cours';
 import { ComponentsModule } from 'app/components/components.module';
 
+
 @Component({
   selector: 'app-cours-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule,ComponentsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ComponentsModule],
   templateUrl: './cours-list.component.html',
   styleUrls: ['./cours-list.component.scss']
 })
@@ -23,7 +24,7 @@ export class CoursListComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string = '';
 
-  constructor(private coursService: CoursService) { }
+  constructor(private coursService: CoursService) {}
 
   ngOnInit(): void {
     this.loadCours();
@@ -31,6 +32,7 @@ export class CoursListComponent implements OnInit {
 
   loadCours(): void {
     this.isLoading = true;
+    this.errorMessage = '';
     this.coursService.getAllCours().subscribe({
       next: (data) => {
         this.cours = data;
@@ -47,12 +49,13 @@ export class CoursListComponent implements OnInit {
 
   applyFilters(): void {
     this.filteredCours = this.cours.filter(cours => {
-      const matchesSearch = this.searchTerm === '' || 
+      const matchesSearch =
+        !this.searchTerm ||
         cours.titre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         cours.contenu.toLowerCase().includes(this.searchTerm.toLowerCase());
       
-      const matchesNiveau = this.selectedNiveau === '' ||
-        cours.niveau === this.selectedNiveau;
+      const matchesNiveau =
+        !this.selectedNiveau || cours.niveau === this.selectedNiveau;
       
       return matchesSearch && matchesNiveau;
     });
@@ -75,16 +78,20 @@ export class CoursListComponent implements OnInit {
   deleteCours(id: number, event: Event): void {
     event.preventDefault();
     event.stopPropagation();
-    
+
     if (confirm('Êtes-vous sûr de vouloir supprimer ce cours ? Cette action supprimera également toutes les étapes associées.')) {
+      this.isLoading = true; // Show loading state during deletion
+      this.errorMessage = '';
       this.coursService.deleteCours(id).subscribe({
         next: () => {
           this.cours = this.cours.filter(c => c.id !== id);
           this.applyFilters();
+          this.isLoading = false;
         },
         error: (error) => {
+          this.errorMessage = 'Erreur lors de la suppression du cours. Veuillez réessayer.';
           console.error('Error deleting course:', error);
-          alert('Erreur lors de la suppression du cours.');
+          this.isLoading = false;
         }
       });
     }

@@ -1,35 +1,40 @@
-<div class="content">
-    <h2>Edit Etudiant</h2>
-    <form>
-      <div class="form-group">
-        <label for="id">ID</label>
-        <input type="text" id="id" class="form-control" [(ngModel)]="etudiant.id" name="id" readonly>
-      </div>
-      <div class="form-group">
-        <label for="NumeroUnique">NumeroUnique</label>
-        <input type="text" id="NumeroUnique" class="form-control" [(ngModel)]="etudiant.NumeroUnique" name="NumeroUnique">
-      </div>
-      <div class="form-group">
-        <label for="Nom">Nom</label>
-        <input type="text" id="Nom" class="form-control" [(ngModel)]="etudiant.Nom" name="Nom">
-      </div>
-      <div class="form-group">
-        <label for="Prenom">Prenom</label>
-        <input type="text" id="Prenom" class="form-control" [(ngModel)]="etudiant.Prenom" name="Prenom">
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" class="form-control" [(ngModel)]="etudiant.email" name="email">
-      </div>
-      <div class="form-group">
-        <label for="niveau">Niveau</label>
-        <input type="text" id="niveau" class="form-control" [(ngModel)]="etudiant.niveau" name="niveau">
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" class="form-control" [(ngModel)]="etudiant.password" name="password">
-      </div>
+<div class="popup-overlay" (click)="cancel()"></div>
+
+<div class="popup-form">
+  <h2>Edit Etudiant</h2>
+  <form (click)="$event.stopPropagation()"> <!-- To prevent closing popup when clicking inside -->
+    <div class="form-group">
+      <label for="id">ID</label>
+      <input type="text" id="id" class="form-control" [(ngModel)]="etudiant.id" name="id" readonly>
+    </div>
+    <div class="form-group">
+      <label for="NumeroUnique">NumeroUnique</label>
+      <input type="text" id="NumeroUnique" class="form-control" [(ngModel)]="etudiant.NumeroUnique" name="NumeroUnique">
+    </div>
+    <div class="form-group">
+      <label for="Nom">Nom</label>
+      <input type="text" id="Nom" class="form-control" [(ngModel)]="etudiant.Nom" name="Nom">
+    </div>
+    <div class="form-group">
+      <label for="Prenom">Prenom</label>
+      <input type="text" id="Prenom" class="form-control" [(ngModel)]="etudiant.Prenom" name="Prenom">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control" [(ngModel)]="etudiant.email" name="email">
+    </div>
+    <div class="form-group">
+      <label for="niveau">Niveau</label>
+      <input type="text" id="niveau" class="form-control" [(ngModel)]="etudiant.niveau" name="niveau">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" class="form-control" [(ngModel)]="etudiant.password" name="password">
+    </div>
+
+    <div class="form-buttons">
       <button type="button" class="btn btn-primary" (click)="save()">Save</button>
       <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>

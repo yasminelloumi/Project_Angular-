@@ -1,4 +1,4 @@
-.course-detail-container {
+.etape-detail-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1.5rem;
@@ -57,7 +57,7 @@
     color: #666;
   }
   
-  .course-header {
+  .etape-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -66,13 +66,13 @@
     gap: 1rem;
   }
   
-  .course-header h1 {
+  .etape-header h1 {
     margin: 0 0 0.5rem 0;
     font-size: 2rem;
     color: #333;
   }
   
-  .niveau-badge {
+  .completion-status {
     padding: 0.25rem 0.75rem;
     border-radius: 999px;
     font-size: 0.75rem;
@@ -80,17 +80,12 @@
     display: inline-block;
   }
   
-  .niveau-débutant {
+  .completion-status.completed {
     background-color: #e6f4ea;
     color: #137333;
   }
   
-  .niveau-intermédiaire {
-    background-color: #fef7e0;
-    color: #b06000;
-  }
-  
-  .niveau-avancé {
+  .completion-status.not-completed {
     background-color: #fce8e6;
     color: #c53929;
   }
@@ -149,7 +144,8 @@
     background-color: #e0e0e0;
   }
   
-  .course-description {
+  .etape-description,
+  .etape-content-data {
     background-color: white;
     padding: 1.5rem;
     border-radius: 8px;
@@ -157,173 +153,54 @@
     margin-bottom: 2rem;
   }
   
-  .course-description h2 {
+  .etape-description h2,
+  .etape-content-data h2 {
     margin-top: 0;
     font-size: 1.25rem;
     color: #333;
     margin-bottom: 1rem;
   }
   
-  .course-description p {
+  .etape-description p,
+  .content-text p {
     margin: 0;
     color: #555;
     line-height: 1.6;
   }
   
-  .steps-section {
+  .content-video video,
+  .content-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .navigation {
     margin-top: 2rem;
-  }
-  
-  .steps-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-  
-  .steps-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  .no-steps {
-    text-align: center;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    color: #666;
-  }
-  
-  .steps-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .step-card {
-    display: flex;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    padding: 1.5rem;
-    gap: 1.5rem;
-    border-left: 4px solid #ddd;
-  }
-  
-  .step-card.completed {
-    border-left-color: #00A3A3;
-  }
-  
-  .step-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .step-order {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: #f0f0f0;
-    border-radius: 50%;
-    font-weight: bold;
-    color: #555;
-    flex-shrink: 0;
-  }
-  
-  .step-content {
-    flex-grow: 1;
-  }
-  
-  .step-content h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
-    color: #333;
-  }
-  
-  .step-content p {
-    margin: 0 0 1rem 0;
-    color: #555;
-    line-height: 1.6;
-  }
-  
-  .step-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-  
-  .completion-status {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #666;
-    font-size: 0.875rem;
-  }
-  
-  .status-indicator {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #ddd;
-  }
-  
-  .status-indicator.completed {
-    background-color: #00A3A3;
-  }
-  .material-icons {
-    font-size: 24px; /* default is 24px; increase it as needed */
-    vertical-align: middle;
-  }
-  
-  .btn .material-icons {
-    font-size: 28px; /* You can make this 32px or more if you want even bigger */
-  }
-  .btn-icon-only .material-icons {
-    font-size: 32px;
   }
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
-    .course-header {
+    .etape-header {
       flex-direction: column;
       align-items: flex-start;
     }
-    
+  
     .action-buttons {
       width: 100%;
     }
-    
+  
     .btn {
       flex: 1;
-    }
-    
-    .step-card {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .step-order {
-      align-self: flex-start;
-    }
-    
-    .completion-status {
-      align-self: flex-start;
-      margin-top: 0.5rem;
     }
   }
   
   @media (max-width: 576px) {
-    .steps-header {
-      flex-direction: column;
-      align-items: flex-start;
+    .etape-header {
       gap: 1rem;
     }
-    
-    .steps-header .btn {
+  
+    .btn {
       width: 100%;
     }
   }

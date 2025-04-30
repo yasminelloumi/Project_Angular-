@@ -1,0 +1,65 @@
+<app-navbar></app-navbar>
+<div class="etape-detail-container">
+  <div *ngIf="isLoading" class="loading">
+    <div class="loading-spinner"></div>
+    <p>Chargement de l'étape...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+    <div class="mt-4">
+      <a [routerLink]="['/cours', coursId]" class="btn btn-primary">Retour au cours</a>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && etape" class="etape-content">
+    <nav class="breadcrumb">
+      <a [routerLink]="['/cours']">Cours</a>
+      <span class="separator">/</span>
+      <a [routerLink]="['/cours', coursId]">Cours</a>
+      <span class="separator">/</span>
+      <span>{{ etape.titre }}</span>
+    </nav>
+
+    <header class="etape-header">
+      <div>
+        <h1>{{ etape.titre }}</h1>
+        <span class="completion-status" [ngClass]="etape.estComplete ? 'completed' : 'not-completed'">
+          {{ etape.estComplete ? 'Terminée' : 'Non terminée' }}
+        </span>
+      </div>
+      <div class="action-buttons">
+        <button (click)="toggleCompletion()" class="btn btn-toggle">
+          {{ etape.estComplete ? 'Marquer comme non terminée' : 'Marquer comme terminée' }}
+        </button>
+        <a [routerLink]="['/cours', coursId, 'etape', etape.id, 'edit']" class="btn btn-edit">Modifier</a>
+        <button (click)="deleteEtape()" class="btn btn-delete">Supprimer</button>
+      </div>
+    </header>
+
+    <div class="etape-description">
+      <h2>Description</h2>
+      <p>{{ etape.description }}</p>
+    </div>
+
+    <div class="etape-content-data">
+      <h2>Contenu</h2>
+      <div *ngIf="etape.contentType === 'text'" class="content-text">
+        <p>{{ etape.contentData }}</p>
+      </div>
+      <div *ngIf="etape.contentType === 'video'" class="content-video">
+        <video controls>
+          <source [src]="etape.contentData" type="video/mp4">
+          Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
+      </div>
+      <div *ngIf="etape.contentType === 'image'" class="content-image">
+        <img [src]="etape.contentData" alt="Contenu de l'étape" />
+      </div>
+    </div>
+
+    <div class="navigation">
+      <a [routerLink]="['/cours', coursId]" class="btn btn-primary">Retour au cours</a>
+    </div>
+  </div>
+</div>

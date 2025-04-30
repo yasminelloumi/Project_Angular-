@@ -7,17 +7,18 @@ import { CoursService } from '../services/course.service';
 import { Cours } from 'Modeles/Cours';
 import { ComponentsModule } from 'app/components/components.module';
 
+
 @Component({
   selector: 'app-cours-form',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule,ComponentsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, ComponentsModule],
   templateUrl: './cours-form.component.html',
   styleUrls: ['./cours-form.component.scss']
 })
 export class CoursFormComponent implements OnInit {
   coursForm!: FormGroup;
   isEditMode: boolean = false;
-  coursId?: number;
+  coursId?: number; // Numeric ID
   isLoading: boolean = false;
   isSubmitting: boolean = false;
   errorMessage: string = '';
@@ -28,7 +29,7 @@ export class CoursFormComponent implements OnInit {
     private coursService: CoursService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -39,7 +40,8 @@ export class CoursFormComponent implements OnInit {
     this.coursForm = this.fb.group({
       titre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       contenu: ['', [Validators.required, Validators.minLength(10)]],
-      niveau: ['Débutant', Validators.required]
+      niveau: ['Débutant', Validators.required],
+      imageUrl: [''] // Added imageUrl
     });
   }
 
@@ -49,21 +51,22 @@ export class CoursFormComponent implements OnInit {
       this.isEditMode = false;
     } else {
       this.isEditMode = true;
-      this.coursId = Number(id);
+      this.coursId = Number(id); // Convert string from URL to number
       this.loadCours();
     }
   }
 
   loadCours(): void {
     if (!this.coursId) return;
-    
+
     this.isLoading = true;
     this.coursService.getCoursWithEtapes(this.coursId).subscribe({
       next: (cours) => {
         this.coursForm.patchValue({
           titre: cours.titre,
           contenu: cours.contenu,
-          niveau: cours.niveau
+          niveau: cours.niveau,
+          imageUrl: cours.imageUrl
         });
         this.isLoading = false;
       },
@@ -86,8 +89,9 @@ export class CoursFormComponent implements OnInit {
 
     if (this.isEditMode && this.coursId) {
       this.coursService.updateCours(this.coursId, formValue).subscribe({
-        next: (cours) => {
-          this.router.navigate(['/cours', cours.id]);
+        next: () => {
+          this.isSubmitting = false;
+          this.router.navigate(['/cours', this.coursId]);
         },
         error: (error) => {
           this.errorMessage = 'Erreur lors de la mise à jour du cours';
@@ -98,6 +102,7 @@ export class CoursFormComponent implements OnInit {
     } else {
       this.coursService.createCours(formValue).subscribe({
         next: (cours) => {
+          this.isSubmitting = false;
           this.router.navigate(['/cours', cours.id]);
         },
         error: (error) => {

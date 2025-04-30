@@ -1,0 +1,110 @@
+<app-navbar></app-navbar>
+
+<div class="dashboard-container">
+  <div class="main-content">
+    <div class="content-wrapper fade-in">
+
+      <div class="dashboard-header">
+        <h1>Dashboard</h1>
+        <p class="dashboard-subtitle">Welcome to your admin dashboard</p>
+      </div>
+      
+      <div style="text-align: center; margin: 20px;">
+        <button (click)="goToAdminHome()" class="return-button">
+          Return to Admin Home
+        </button>
+      </div>
+      
+    </div>
+      <div class="stats-overview">
+        
+        <div class="stat-card" style="background-color: var(--primary-100);">
+          <div class="stat-icon">
+            <i class="stat-icon-inner">👩‍🎓</i>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">Students</p>
+            <h3 class="stat-value">{{ studentsCount }}</h3>
+          </div>
+        </div>
+
+        <div class="stat-card" style="background-color: var(--secondary-100);">
+          <div class="stat-icon">
+            <i class="stat-icon-inner">👨‍👩‍👧‍👦</i>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">Parents</p>
+            <h3 class="stat-value">{{ parentsCount }}</h3>
+          </div>
+        </div>
+
+        <div class="stat-card" style="background-color: var(--accent-100);">
+          <div class="stat-icon">
+            <i class="stat-icon-inner">📚</i>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">Courses</p>
+            <h3 class="stat-value">{{ coursesCount }}</h3>
+          </div>
+        </div>
+
+        <div class="stat-card" style="background-color: var(--success-100);">
+          <div class="stat-icon">
+            <i class="stat-icon-inner">📊</i>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">Avg. Course Steps</p>
+            <h3 class="stat-value">{{ avgCourseSteps }}</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="charts-container">
+        <div class="chart-card">
+          <h3 class="chart-title">Students by Level</h3>
+          <div class="chart-container">
+            <app-pie-chart 
+              *ngIf="studentsByLevelData"
+              [data]="studentsByLevelData"
+              [options]="chartOptions">
+            </app-pie-chart>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3 class="chart-title">Students vs Parents</h3>
+          <div class="chart-container">
+            <app-donut-chart 
+              *ngIf="studentParentComparisonData"
+              [data]="studentParentComparisonData"
+              [options]="chartOptions">
+            </app-donut-chart>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3 class="chart-title">Course Step Count</h3>
+          <div class="chart-container">
+            <app-bar-chart 
+              *ngIf="courseStatisticsData"
+              [data]="courseStatisticsData"
+              [options]="chartOptions">
+            </app-bar-chart>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3 class="chart-title">Course Completion Rates</h3>
+          <div class="chart-container">
+            <app-bar-chart 
+              *ngIf="courseCompletionsData"
+              [data]="courseCompletionsData"
+              [options]="chartOptions">
+            </app-bar-chart>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  
+</div>

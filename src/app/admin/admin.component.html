@@ -1,7 +1,4 @@
 <app-navbar></app-navbar>
-
-
-
 <div class="content">
   <br>
   <br>
@@ -17,13 +14,13 @@
   </div>
   <!-- Employees Stats Table -->
   <div class="card">
-    <div class="card-header card-header-warning">
+    <div class="card-header card-header-primary">
       <h4 class="card-title">Utulisateur</h4>
       <p class="card-category">les étudiant et leur parents</p>
     </div>
     <div class="card-body table-responsive">
       <table class="table table-hover">
-        <thead class="text-warning">
+        <thead class="text-primary">
           <th>ID</th>
           <th>NumeroUnique</th>
           <th>Nom</th>
@@ -45,10 +42,11 @@
             <td>{{ item.NomParent }}</td>
             <td>{{ item.EmailParent }}</td>
             <td>
-              <button class="btn btn-primary btn-sm" (click)="edit(item.id)">Edit</button>
-              <button class="btn btn-danger btn-sm" (click)="delete(item.id)">Delete</button>
+              <i class="material-icons text-success" style="cursor: pointer; margin-right: 8px;" (click)="edit(item.id)">edit</i>
+              <i class="material-icons text-danger" style="cursor: pointer;" (click)="delete(item.id)">delete</i>
             </td>
-          </tr>
+            
+            
           <tr *ngIf="dataSource.length === 0">
             <td colspan="9">No data available</td>
           </tr>

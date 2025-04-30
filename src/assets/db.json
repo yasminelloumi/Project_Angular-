@@ -29,7 +29,7 @@
       "email": "lucas.bernard@example.com",
       "password": "motDePasseLucas",
       "niveau": "Licence 3",
-      "firebaseUid": "",
+      "firebaseUid": "XahuKd6FSzWyCQxlJIH8FhmCit42",
       "role": "etudiant"
     },
     {
@@ -46,12 +46,12 @@
     {
       "id": "5",
       "NumeroUnique": 123456,
-      "Nom": "Bernard",
-      "Prenom": "Lucas",
-      "email": "lucas.bernard@example.com",
+      "Nom": "yasmine",
+      "Prenom": "elloumi",
+      "email": "elloumiyaamine@gmail.com",
       "password": "motDePasseLucas",
       "niveau": "Licence 3",
-      "firebaseUid": "",
+      "firebaseUid": "A2bs5XsozyRRw6taOA3ZjJEdHvI2",
       "role": "etudiant"
     },
     {
@@ -130,10 +130,10 @@
   ],
   "Cours": [
     {
-      "id": 1,
+      "id": "1",
       "titre": "Introduction to Programming",
       "contenu": "This course covers the basics of programming using Python.",
-      "niveau": "Level 1",
+      "niveau": "Débutant",
       "imageUrl": "assets/img/python.jpg",
       "etapes": [
         {
@@ -200,15 +200,24 @@
             }
           ],
           "ordre": 5,
-          "estComplete": false
+          "estComplete": true
+        },
+        {
+          "titre": "test",
+          "description": "kljbvcxdnfgnhvjhmv mghbv",
+          "ordre": 6,
+          "estComplete": false,
+          "contentType": "quiz",
+          "contentData": "{\"questions\":[{\"id\":1745781838824,\"text\":\"rgtrgtr\",\"type\":\"true-false\",\"options\":[{\"id\":1745781844113,\"text\":\"Vrai\",\"isCorrect\":true},{\"id\":1745781844114,\"text\":\"Faux\",\"isCorrect\":false}]}]}",
+          "id": 6
         }
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "titre": "Introduction to AI",
       "contenu": "Discover the basics of Artificial Intelligence.",
-      "niveau": "Beginner",
+      "niveau": "Débutant",
       "imageUrl": "assets/img/IA.jpg",
       "etapes": [
         {
@@ -276,6 +285,34 @@
           ],
           "ordre": 5,
           "estComplete": false
+        }
+      ]
+    },
+    {
+      "id": "4463",
+      "titre": "test",
+      "contenu": "frverwcvrfefrxzswsds",
+      "niveau": "Débutant",
+      "imageUrl": "assets/img/IA.jpg",
+      "etapes": [
+        {
+          "titre": "test ",
+          "description": "gvfhghiklkjmlkm",
+          "ordre": 1,
+          "estComplete": false,
+          "contentType": "quiz",
+          "contentData": [
+            {
+              "question": "gcjtvnm",
+              "options": [
+                "ASDFGHJK",
+                "XDGG",
+                "VHGCVFXC"
+              ],
+              "correctAnswer": "ASDFGHJK"
+            }
+          ],
+          "id": 1
         }
       ]
     }

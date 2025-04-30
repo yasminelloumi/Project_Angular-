@@ -22,6 +22,8 @@ import { CoursFormComponent } from './cours-form/cours-form.component';
 import { EtapeFormComponent } from './etape-form/etape-form.component';
 import { CoursDetailComponent } from './cours-detail/cours-detail.component';
 import { LevelContentComponent } from './level-content/level-content.component';
+import { EtapeDetailComponent } from './etape-detail/etape-detail.component';
+import { DashboardComponents } from './dashboard-admin/dashboard-admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route to login
@@ -34,12 +36,16 @@ const routes: Routes = [
   { path: 'cours/:id', component: CoursDetailComponent },
   { path: 'cours/:id/edit', component: CoursFormComponent },
   { path: 'cours/:coursId/etape/new', component: EtapeFormComponent },
+  { path: 'cours/:coursId/etape/:etapeId', component: EtapeDetailComponent },
   { path: 'cours/:coursId/etape/:etapeId/edit', component: EtapeFormComponent },
   { 
     path: 'adminehome',  component:  AdminDashboardComponent,
       
   },
-
+  { 
+    path: 'dashboard-admin', 
+    loadComponent: () => import('./dashboard-admin/dashboard-admin.component').then(m => m.DashboardComponents)
+  },
   {
     path: '',
     component: AdminLayoutComponent,
