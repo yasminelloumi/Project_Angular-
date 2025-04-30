@@ -7,22 +7,81 @@
     .main-content {
       .content-wrapper {
         animation: fadeIn 0.5s ease-in-out;
+        // Targeting the div with inline style text-align: center;
+div[style="text-align: center; margin: 20px;"] {
+  text-align: left !important; // Force left alignment
+}
+
+.return-button {
+  padding: 10px 20px;
+  background-color: #555555;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.return-button:hover {
+  background-color: #333333;
+}
+
   
         .dashboard-header {
+          text-align: center;
           margin-bottom: 2rem;
-  
+        
           h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #333;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #1a202c;
+            animation: pulse 2s infinite;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
           }
-  
+        
           .dashboard-subtitle {
-            font-size: 1.1rem;
-            color: #777;
-            margin-top: 0.5rem;
+            font-size: 1.2rem;
+            color: #555;
           }
         }
+        
+        // Adjust the container to remove center alignment and move the button left
+        .dashboard-header + div {
+          text-align: left;  // Ensures that the button is aligned left
+          margin: 20px 0;
+        }
+        
+        .return-button {
+          padding: 10px 20px;
+          background-color: #555555;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+        
+        .return-button:hover {
+          background-color: #333333;
+        }
+        
+        // Pulse animation for Dashboard title
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+        
+        
   
         .stats-overview {
           display: flex;
