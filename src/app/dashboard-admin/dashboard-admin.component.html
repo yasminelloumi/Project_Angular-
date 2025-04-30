@@ -8,8 +8,15 @@
         <h1>Dashboard</h1>
         <p class="dashboard-subtitle">Welcome to your admin dashboard</p>
       </div>
-
+      <div style="text-align: center; margin: 20px;">
+        <button (click)="goToAdminHome()" class="return-button">
+          Return to Admin Home
+        </button>
+      </div>
+      
+    </div>
       <div class="stats-overview">
+        
         <div class="stat-card" style="background-color: var(--primary-100);">
           <div class="stat-icon">
             <i class="stat-icon-inner">👩‍🎓</i>
@@ -98,11 +105,5 @@
       </div>
 
     </div>
-    <div style="text-align: center; margin: 20px;">
-      <button (click)="goToAdminHome()" class="return-button">
-        Return to Admin Home
-      </button>
-    </div>
-    
-  </div>
+  
 </div>

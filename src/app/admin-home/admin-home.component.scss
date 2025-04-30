@@ -109,11 +109,12 @@
 }
 
 .card-icon {
-  font-size: 2rem;
-  padding: 1rem;
+  font-size: 3rem; /* increase size */
+  padding: 1.25rem; /* optional, to balance spacing */
   background-color: #f8f9fa;
   border-radius: 12px;
 }
+
 
 .card-stats {
   display: flex;
@@ -165,6 +166,9 @@
 .btn-icon {
   margin-left: 0.5rem;
   transition: transform 0.2s ease;
+}
+.card-icon i {
+  font-size: 4rem;
 }
 
 .btn:hover .btn-icon {

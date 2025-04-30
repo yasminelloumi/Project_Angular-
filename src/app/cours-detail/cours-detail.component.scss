@@ -274,6 +274,17 @@
   .status-indicator.completed {
     background-color: #00A3A3;
   }
+  .material-icons {
+    font-size: 24px; /* default is 24px; increase it as needed */
+    vertical-align: middle;
+  }
+  
+  .btn .material-icons {
+    font-size: 28px; /* You can make this 32px or more if you want even bigger */
+  }
+  .btn-icon-only .material-icons {
+    font-size: 32px;
+  }
   
   /* Responsive adjustments */
   @media (max-width: 768px) {

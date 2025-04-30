@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+
 <div class="courses-container">
   <header class="page-header">
     <h1>Gestion des Cours</h1>
@@ -34,12 +35,12 @@
   </div>
 
   <div *ngIf="errorMessage && !isLoading" class="error-message">
-    {{ errorMessage }}
+    ⚠️ {{ errorMessage }}
     <button (click)="loadCours()" class="btn btn-primary mt-2">Réessayer</button>
   </div>
 
   <div *ngIf="!isLoading && !errorMessage && filteredCours.length === 0" class="no-courses">
-    <p>Aucun cours trouvé. Veuillez ajuster vos filtres ou ajouter un nouveau cours.</p>
+    📚 <p>Aucun cours trouvé. Veuillez ajuster vos filtres ou ajouter un nouveau cours.</p>
   </div>
 
   <div class="courses-grid" *ngIf="!isLoading && !errorMessage && filteredCours.length > 0">
@@ -60,10 +61,18 @@
       <p class="course-content">{{ cours.contenu }}</p>
 
       <div class="card-actions">
-        <a [routerLink]="['/cours', cours.id]" class="btn btn-view">Voir</a>
-        <a [routerLink]="['/cours', cours.id, 'edit']" class="btn btn-edit">Modifier</a>
-        <button (click)="deleteCours(cours.id, $event)" class="btn btn-delete">Supprimer</button>
+        <a [routerLink]="['/cours', cours.id]" class="btn btn-view">
+          <i class="material-icons">visibility</i>
+        </a>
+        <a [routerLink]="['/cours', cours.id, 'edit']" class="btn btn-edit">
+          <i class="material-icons">edit</i>
+        </a>
+        <button (click)="deleteCours(cours.id, $event)" class="btn btn-delete">
+          <i class="material-icons">delete</i>
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>
