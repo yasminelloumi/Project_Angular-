@@ -54,7 +54,7 @@ export class CourseLevelComponent implements OnInit {
 
   goToLevel(level: any): void {
     if (!level.disabled) {
-      this.router.navigate([`/cours/${this.courseId}/level/${level.id}`]);
+      this.router.navigate([`/course/${this.courseId}/level/${level.id}`]);
     }
   }
 }

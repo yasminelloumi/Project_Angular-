@@ -12,13 +12,15 @@ export class CoursService {
 
   constructor(private http: HttpClient) { }
 
-  getCourses(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/Cours');
+  getCourses(): Observable<Cours[]> {
+    return this.http.get<Cours[]>('http://localhost:3000/Cours');
   }
 
   getCourseById(id: number): Observable<any> {
     return this.http.get<any>(`http://localhost:3000/Cours/${id}`);
   }
+ 
+
 
   getAllCours(): Observable<Cours[]> {
     return this.http.get<Cours[]>(`${this.apiUrl}/Cours`);

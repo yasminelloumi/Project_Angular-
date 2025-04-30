@@ -55,7 +55,7 @@
       "role": "etudiant"
     },
     {
-      "id": "5",
+      "id": "6",
       "NumeroUnique": 654321,
       "Nom": "Durand",
       "Prenom": "Emma",
@@ -141,7 +141,7 @@
           "titre": "Step 1: Python Basics",
           "description": "Introduction to variables and data types.",
           "contentType": "video",
-          "contentData": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          "contentData": "assets/img/video.mp4",
           "ordre": 1,
           "estComplete": false
         },
@@ -180,12 +180,22 @@
           "contentData": [
             {
               "question": "What is a variable in Python?",
-              "options": ["A loop", "A condition", "A container for data", "A function"],
+              "options": [
+                "A loop",
+                "A condition",
+                "A container for data",
+                "A function"
+              ],
               "correctAnswer": "A container for data"
             },
             {
               "question": "Which keyword is used for a loop in Python?",
-              "options": ["if", "for", "function", "class"],
+              "options": [
+                "if",
+                "for",
+                "function",
+                "class"
+              ],
               "correctAnswer": "for"
             }
           ],
@@ -245,12 +255,22 @@
           "contentData": [
             {
               "question": "What does AI stand for?",
-              "options": ["Artificial Intelligence", "Automated Information", "Advanced Interaction", "Artificial Interaction"],
+              "options": [
+                "Artificial Intelligence",
+                "Automated Information",
+                "Advanced Interaction",
+                "Artificial Interaction"
+              ],
               "correctAnswer": "Artificial Intelligence"
             },
             {
               "question": "Which field uses AI for diagnosis?",
-              "options": ["Finance", "Healthcare", "Education", "Construction"],
+              "options": [
+                "Finance",
+                "Healthcare",
+                "Education",
+                "Construction"
+              ],
               "correctAnswer": "Healthcare"
             }
           ],

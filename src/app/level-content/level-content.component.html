@@ -1,1 +1,84 @@
-<p>level-content works!</p>
+<div class="level-container">
+  <!-- Loading state -->
+  <div *ngIf="loading" class="loading-state">
+    <p>Loading...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="error-state">
+    <p>{{ error }}</p>
+    <button (click)="router.navigate(['/', ''])" type="button">Back to Home</button>
+  </div>
+
+  <!-- Main content -->
+  <div *ngIf="!loading && !error && currentLevel" class="content-wrapper">
+    <h2>{{ currentLevel.titre }}</h2>
+    <p class="description">{{ currentLevel.description }}</p>
+
+    <!-- Debug contentType -->
+    <p>Debug: contentType = {{ currentLevel.contentType }}</p>
+
+    <!-- Text content -->
+    <div *ngIf="currentLevel.contentType === 'text'" class="text-content">
+      <p>{{ currentLevel.contentData }}</p>
+      <button (click)="goToNextLevel()" type="button">Continue</button>
+    </div>
+
+    <!-- Video content -->
+    <div *ngIf="currentLevel.contentType === 'video'" class="video-content">
+      <div class="video-wrapper">
+        <!-- Use <video> for local files -->
+        <video
+          *ngIf="currentLevel.contentData && !currentLevel.contentData.startsWith('http')"
+          [src]="currentLevel.contentData"
+          controls
+          class="video-player"
+        >
+          Your browser does not support the video tag.
+        </video>
+
+        <!-- Use <iframe> for YouTube or external URLs -->
+        <iframe
+          *ngIf="currentLevel.contentData && currentLevel.contentData.startsWith('http')"
+          [src]="getSafeUrl(currentLevel.contentData)"
+          frameborder="0"
+          allowfullscreen
+          class="video-frame"
+        ></iframe>
+
+        <!-- Fallback if contentData is invalid -->
+        <p *ngIf="!currentLevel.contentData" class="error-message">Video not available.</p>
+      </div>
+      <button (click)="goToNextLevel()" type="button">Continue</button>
+    </div>
+
+    <!-- Quiz content -->
+    <div *ngIf="currentLevel.contentType === 'quiz'" class="quiz-content">
+      <div *ngIf="!quizSubmitted">
+        <div *ngFor="let question of quizQuestions; let i = index" class="question-card">
+          <h3>Question {{ i + 1 }}: {{ question.question }}</h3>
+          <div *ngFor="let option of question.options" class="option">
+            <label>
+              <input
+                type="radio"
+                [name]="'question' + i"
+                [value]="option"
+                (change)="onAnswerSelected(i, option)"
+              />
+              {{ option }}
+            </label>
+          </div>
+        </div>
+        <button [disabled]="quizAnswers.includes('')" (click)="submitQuiz()" type="button">
+          Submit
+        </button>
+      </div>
+
+      <div *ngIf="quizSubmitted" class="quiz-results">
+        <h3>Results</h3>
+        <p>Score: {{ quizScore }} / {{ quizQuestions.length }}</p>
+        <button (click)="goToNextLevel()" type="button">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>

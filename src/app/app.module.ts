@@ -24,6 +24,7 @@ import { CoursDetailComponent } from './cours-detail/cours-detail.component';
 import { CoursFormComponent } from './cours-form/cours-form.component';
 import { CoursListComponent } from './cours-list/cours-list.component';
 import { EtapeFormComponent } from './etape-form/etape-form.component';
+import { SafePipe } from './safe.pipe';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDu5VmAEsVFy_AiddbbMixP8eE9w5JCI_4",
@@ -43,6 +44,7 @@ const firebaseConfig = {
     ConfirmdialogComponent,
     LoginComponent,
     RegisterComponent,
+    SafePipe,
    
     //LevelContentComponent,
     //CourseLevelComponent

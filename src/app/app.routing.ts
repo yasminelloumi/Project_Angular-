@@ -71,10 +71,10 @@ const routes: Routes = [
   },
 
   {
-    path: 'cours/:courseId/level/:levelId',
-    pathMatch: 'full',
+    path: 'course/:id/level/:levelId', 
+    pathMatch: 'full',    
     component: LevelContentComponent
-  },
+  },  
 
   { path: '**', redirectTo: 'login' }, // Fallback to login
 ];
