@@ -14,9 +14,8 @@
       "id": "2",
       "NumeroUnique": 987654,
       "Nom": "Lemoine",
-      "Prenom": "Alice",
+      "Prenom": "Alicee",
       "email": "alice.lemoine@example.com",
-      "password": "motDePasseAlice",
       "niveau": "Master 1",
       "firebaseUid": "eTnonBOPAZXibyQX94dhruO4EYh2",
       "role": "etudiant"
@@ -141,7 +140,7 @@
           "titre": "Step 1: Python Basics",
           "description": "Introduction to variables and data types.",
           "contentType": "video",
-          "contentData": "assets/img/video.mp4",
+          "contentData": "assets/img/python.mp4",
           "ordre": 1,
           "estComplete": false
         },

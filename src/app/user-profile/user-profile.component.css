@@ -1,0 +1,241 @@
+/* Nouveau style pour e-learning kids */
+.main-content {
+    background-color: #f0f9ff;
+    padding: 20px 0;
+    min-height: 100vh;
+  }
+  
+  .container-fluid {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Carte principale */
+  .student-card {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border: none;
+    overflow: hidden;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .student-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background-image:url("assets/img/kids3.png");
+    z-index: 0;
+  }
+  
+  .card-header {
+    color :#f8f9fa;
+   
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .card-header h4 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+  }
+  
+  .card-header .card-category {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-weight: bold;
+    
+  }
+  
+  .card-body {
+    padding: 30px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Avatar */
+  .card-profile .card-avatar {
+    
+    margin: 20px auto 20px;
+    border-radius: 20%;
+    overflow: hidden;
+    border: 0px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card-profile .card-avatar img {
+    width: 132%;
+    height: 100%;
+  }
+  
+  /* Boutons */
+  .btn-primary {
+    background: linear-gradient(135deg, #a69aff 0%, #fad0c4 100%);
+    border: none;
+    border-radius: 50px;
+    color: rgb(0, 0, 0);
+    padding: 12px 30px;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(250, 208, 196, 0.4);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(250, 208, 196, 0.6);
+  }
+  
+  .btn-primary mat-icon {
+    margin-right: 8px;
+  }
+  
+  /* Champs de formulaire */
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #b3e5fc;
+  }
+  
+  ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #4fc3f7;
+  }
+  
+  ::ng-deep .mat-input-element {
+    caret-color: #4fc3f7;
+  }
+  
+  ::ng-deep .mat-form-field-label {
+    color: #90a4ae;
+  }
+  
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: #4fc3f7;
+  }
+  
+  .mat-icon {
+    color: #4fc3f7;
+  }
+  
+  /* Carte de profil */
+  .card-profile {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .student-badge {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(161, 196, 253, 0.4);
+  }
+  
+  .student-badge mat-icon {
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+    color: white;
+  }
+  
+  .student-level {
+    color: #4fc3f7;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+  
+  .student-name {
+    color: #37474f;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+  }
+  
+  .student-id {
+    color: #78909c;
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+
+  
+ 
+  .achievement-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .badge-item {
+    background: white;
+    border-radius: 50px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .badge-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .badge-item mat-icon {
+    color: #ffb74d;
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+  }
+  
+  .badge-item span {
+    color: #455a64;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-header-primary h4 {
+      font-size: 1.5rem;
+    }
+    
+    .student-name {
+      font-size: 1.5rem;
+    }
+  }

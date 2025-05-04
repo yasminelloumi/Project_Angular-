@@ -39,7 +39,7 @@ export class CourseLevelComponent implements OnInit {
     private route: ActivatedRoute,
     private courseService: CoursService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.courseId = Number(this.route.snapshot.paramMap.get('id'));
@@ -82,7 +82,7 @@ export class CourseLevelComponent implements OnInit {
 
   goToLevel(level: Level): void {
     if (!level.disabled && level.id !== null) {
-      this.router.navigate([`/cours/${this.courseId}/level/${level.id}`]);
+      this.router.navigate([`/course/${this.courseId}/level/${level.id}`]);
     }
   }
 }

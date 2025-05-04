@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Default route to login
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  
   { path: 'admin', component: AdminComponent },
   { path: 'admin/:id/edit', component: EtudiantFormComponent },
   { path: 'cours', component: CoursListComponent },
@@ -38,12 +39,12 @@ const routes: Routes = [
   { path: 'cours/:coursId/etape/new', component: EtapeFormComponent },
   { path: 'cours/:coursId/etape/:etapeId', component: EtapeDetailComponent },
   { path: 'cours/:coursId/etape/:etapeId/edit', component: EtapeFormComponent },
-  { 
-    path: 'adminehome',  component:  AdminDashboardComponent,
-      
+  {
+    path: 'adminehome', component: AdminDashboardComponent,
+
   },
-  { 
-    path: 'dashboard-admin', 
+  {
+    path: 'dashboard-admin',
     loadComponent: () => import('./dashboard-admin/dashboard-admin.component').then(m => m.DashboardComponents)
   },
   {
@@ -56,10 +57,10 @@ const routes: Routes = [
       { path: 'typography', component: TypographyComponent },
       { path: 'icons', component: IconsComponent },
       { path: 'notifications', component: NotificationsComponent },
-      { path: 'upgrade',pathMatch: 'full', component: UpgradeComponent },
-      
+      { path: 'upgrade', pathMatch: 'full', component: UpgradeComponent },
+
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      
+  
       {
         path: '',
         loadChildren: () =>
@@ -76,11 +77,7 @@ const routes: Routes = [
     component: CourseLevelComponent,
   },
 
-  {
-    path: 'course/:id/level/:levelId', 
-    pathMatch: 'full',    
-    component: LevelContentComponent
-  },  
+  { path: 'course/:coursId/level/:etapeId', component: LevelContentComponent },
 
   { path: '**', redirectTo: 'login' }, // Fallback to login
 ];

@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, from, of } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +44,12 @@ login(email: string, password: string): Promise<any> {
       horizontalPosition: horizontalPosition,
       panelClass: ['custom-snackbar']
     });
+  }
+ 
+  getCurrentUserUid(): Observable<string | null> {
+    return this.fireauth.authState.pipe(
+      map(user => user ? user.uid : null)
+    );
   }
 
   //sign out method

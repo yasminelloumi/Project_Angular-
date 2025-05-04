@@ -1,105 +1,111 @@
 <div class="main-content">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-8">
-              <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title">Edit Profile</h4>
-                      <p class="card-category">Complete your profile</p>
-                  </div>
-                  <div class="card-body">
-                      <form>
-                          <div class="row">
-                              <div class="col-md-5">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Company (disabled)" disabled>
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-3">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Username">
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email address" type="email">
-                                  </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Fist Name" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Last Name" type="text">
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-12">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Adress" type="text">
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="City" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Country" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Postal Code" type="text">
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-12">
-                                <label>About Me</label>
-                                <mat-form-field class="example-full-width">
-                                   <textarea matInput placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."></textarea>
-                                 </mat-form-field>
-                                  <!-- <div class="form-group">
-
-                                      <div class="form-group">
-                                          <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                                          <textarea class="form-control" rows="5"></textarea>
-                                      </div>
-                                  </div> -->
-                              </div>
-                          </div>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
-                          <div class="clearfix"></div>
-                      </form>
-                  </div>
-              </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card student-card">
+          <div class="card-header">
+            <h4 class="card-title">My Super Profile</h4>
+            <p class="card-category">Let's learn and grow together!</p>
           </div>
-          <div class="col-md-4">
-              <div class="card card-profile">
-                  <div class="card-avatar">
-                      <a href="javascript:void(0)">
-                          <img class="img" src="./assets/img/faces/marc.jpg" />
-                      </a>
-                  </div>
-                  <div class="card-body">
-                      <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                      <h4 class="card-title">Alec Thompson</h4>
-                      <p class="card-description">
-                          Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                      </p>
-                      <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>
-                  </div>
+          <div class="card-body">
+            <div *ngIf="loading" class="text-center">
+              <mat-spinner class="mx-auto spinner-color"></mat-spinner>
+              <p class="loading-text">Loading your super profile...</p>
+            </div>
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Student ID</mat-label>
+                    <input matInput placeholder="Your special ID" formControlName="NumeroUnique">
+                
+                    <mat-error *ngIf="profileForm.get('NumeroUnique')?.hasError('required')">
+                      We need your special ID!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Your email" type="email" formControlName="email">
+                  
+                    <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+                      Email is required
+                    </mat-error>
+                    <mat-error *ngIf="profileForm.get('email')?.hasError('email')">
+                      Please enter a valid email
+                    </mat-error>
+                  </mat-form-field>
+                </div>
               </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="Your first name" type="text" formControlName="Prenom">
+                    
+                    <mat-error *ngIf="profileForm.get('Prenom')?.hasError('required')">
+                      What's your first name?
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="Your last name" type="text" formControlName="Nom">
+               
+                    <mat-error *ngIf="profileForm.get('Nom')?.hasError('required')">
+                      What's your last name?
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Grade Level</mat-label>
+                    <input matInput placeholder="Your grade" type="text" formControlName="niveau">
+                    
+                    <mat-error *ngIf="profileForm.get('niveau')?.hasError('required')">
+                      What grade are you in?
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="New password (optional)" type="password" formControlName="password">
+                 
+                    <mat-error *ngIf="profileForm.get('password')?.hasError('minlength')">
+                      Password needs 6+ characters
+                    </mat-error>
+                    <mat-hint>Only if you want to change it</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button type="submit" class="btn btn-primary update-button" [disabled]="profileForm.invalid">
+                 Save 
+              </button>
+            </form>
           </div>
+        </div>
       </div>
+      <div class="col-md-4">
+        <div class="card card-profile">
+          <div class="card-avatar">
+            <img class="img" src="assets/img/bot.gif" />
+          </div>
+          <div class="card-body" *ngIf="etudiant">
+           
+            <h5 class="student-level">{{etudiant.niveau}} Grade</h5>
+            <h3 class="student-name">{{etudiant.Prenom}} {{etudiant.Nom}}</h3>
+            <p class="student-id">
+              <mat-icon>fingerprint</mat-icon> ID: {{etudiant.NumeroUnique}}
+            </p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

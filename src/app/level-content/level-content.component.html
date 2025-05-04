@@ -1,84 +1,124 @@
-<div class="level-container">
-  <!-- Loading state -->
-  <div *ngIf="loading" class="loading-state">
-    <p>Loading...</p>
+<div class="level-content-wrapper">
+  <!-- Arrière-plan -->
+  <div class="background-image"></div>
+
+  <!-- Personnage kangourou -->
+  <div class="kangaroo-character">
+    <img src="assets/img/logo2.gif" alt="Math World Mascotte" />
   </div>
 
-  <!-- Error state -->
-  <div *ngIf="error" class="error-state">
-    <p>{{ error }}</p>
-    <button (click)="router.navigate(['/', ''])" type="button">Back to Home</button>
-  </div>
-
-  <!-- Main content -->
-  <div *ngIf="!loading && !error && currentLevel" class="content-wrapper">
-    <h2>{{ currentLevel.titre }}</h2>
-    <p class="description">{{ currentLevel.description }}</p>
-
-    <!-- Debug contentType -->
-    <p>Debug: contentType = {{ currentLevel.contentType }}</p>
-
-    <!-- Text content -->
-    <div *ngIf="currentLevel.contentType === 'text'" class="text-content">
-      <p>{{ currentLevel.contentData }}</p>
-      <button (click)="goToNextLevel()" type="button">Continue</button>
-    </div>
-
-    <!-- Video content -->
-    <div *ngIf="currentLevel.contentType === 'video'" class="video-content">
-      <div class="video-wrapper">
-        <!-- Use <video> for local files -->
-        <video
-          *ngIf="currentLevel.contentData && !currentLevel.contentData.startsWith('http')"
-          [src]="currentLevel.contentData"
-          controls
-          class="video-player"
-        >
-          Your browser does not support the video tag.
-        </video>
-
-        <!-- Use <iframe> for YouTube or external URLs -->
-        <iframe
-          *ngIf="currentLevel.contentData && currentLevel.contentData.startsWith('http')"
-          [src]="getSafeUrl(currentLevel.contentData)"
-          frameborder="0"
-          allowfullscreen
-          class="video-frame"
-        ></iframe>
-
-        <!-- Fallback if contentData is invalid -->
-        <p *ngIf="!currentLevel.contentData" class="error-message">Video not available.</p>
+  <!-- Conteneur principal -->
+  <div class="level-container">
+    <!-- En-tête -->
+    <header class="level-header">
+      <div class="logo">
+        <img src="assets/img/Elearning.png" alt="Logo Math World" />
       </div>
-      <button (click)="goToNextLevel()" type="button">Continue</button>
+      <div class="header-icons">
+        <button class="icon-btn question-btn" aria-label="Aide">?</button>
+        <button class="icon-btn close-btn" aria-label="Fermer" (click)="goToCourses()">✕</button>
+      </div>
+    </header>
+
+    <!-- État de chargement -->
+    <div *ngIf="isLoading" class="loading">
+      <div class="loading-spinner"></div>
+      <p>Chargement du niveau...</p>
     </div>
 
-    <!-- Quiz content -->
-    <div *ngIf="currentLevel.contentType === 'quiz'" class="quiz-content">
-      <div *ngIf="!quizSubmitted">
-        <div *ngFor="let question of quizQuestions; let i = index" class="question-card">
-          <h3>Question {{ i + 1 }}: {{ question.question }}</h3>
-          <div *ngFor="let option of question.options" class="option">
-            <label>
-              <input
-                type="radio"
-                [name]="'question' + i"
-                [value]="option"
-                (change)="onAnswerSelected(i, option)"
-              />
-              {{ option }}
-            </label>
-          </div>
+    <!-- État d'erreur -->
+    <div *ngIf="errorMessage" class="error-message">
+      <p>{{ errorMessage }}</p>
+      <div class="button-group">
+        <button (click)="retryLoad()" class="btn btn-primary">Réessayer</button>
+        <a [routerLink]="['/course']" class="btn btn-back">Retour aux cours</a>
+      </div>
+    </div>
+
+    <!-- Contenu du niveau -->
+    <div *ngIf="!isLoading && !errorMessage && etape" class="level-content">
+      <!-- Titre -->
+      <h1 class="level-title">{{ etape.titre }}</h1>
+      <p class="level-description">{{ etape.description }}</p>
+
+      <!-- Contenu -->
+      <!-- Contenu texte -->
+      <div *ngIf="etape.contentType === 'text'" class="content-text">
+        <p>{{ etape.contentData }}</p>
+      </div>
+
+      <!-- Contenu vidéo -->
+      <div *ngIf="etape.contentType === 'video'" class="content-video">
+        <div class="video-wrapper">
+          <video
+            *ngIf="etape.contentData && !etape.contentData.toString().startsWith('http')"
+            [src]="etape.contentData"
+            controls
+            class="video-player"
+            aria-label="Vidéo éducative"
+          >
+            Votre navigateur ne prend pas en charge la lecture de vidéos.
+          </video>
+          <iframe
+            *ngIf="etape.contentData && etape.contentData.toString().startsWith('http')"
+            [src]="getSafeUrl(etape.contentData.toString())"
+            frameborder="0"
+            allowfullscreen
+            class="video-frame"
+            aria-label="Vidéo intégrée"
+          ></iframe>
+          <p *ngIf="!etape.contentData" class="error-message">Vidéo non disponible.</p>
         </div>
-        <button [disabled]="quizAnswers.includes('')" (click)="submitQuiz()" type="button">
-          Submit
-        </button>
       </div>
 
-      <div *ngIf="quizSubmitted" class="quiz-results">
-        <h3>Results</h3>
-        <p>Score: {{ quizScore }} / {{ quizQuestions.length }}</p>
-        <button (click)="goToNextLevel()" type="button">Continue</button>
+      <!-- Contenu image -->
+      <div *ngIf="etape.contentType === 'image'" class="content-image">
+        <img [src]="etape.contentData" alt="Image du niveau" />
+      </div>
+
+      <!-- Contenu quiz -->
+      <div *ngIf="etape.contentType === 'quiz'" class="content-quiz">
+        <div *ngIf="!quizSubmitted">
+          <div *ngIf="quizQuestions.length > 0; else noQuestions">
+            <div *ngFor="let question of quizQuestions; let i = index" class="question-card">
+              <h3>Question {{ i + 1 }}: {{ question.text }}</h3>
+              <div *ngFor="let option of question.options" class="option">
+                <label>
+                  <input
+                    type="radio"
+                    [name]="'question' + i"
+                    [value]="option.text"
+                    [checked]="quizAnswers[i] === option.text"
+                    (change)="onAnswerSelected(i, option.text)"
+                    [attr.aria-label]="option.text"
+                  />
+                  {{ option.text }}
+                </label>
+              </div>
+            </div>
+          </div>
+          <ng-template #noQuestions>
+            <p>Aucune question disponible pour ce quiz.</p>
+          </ng-template>
+        </div>
+
+        <div *ngIf="quizSubmitted" class="quiz-results">
+          <h3>Résultats</h3>
+          <p>Score: {{ quizScore }} / {{ quizQuestions.length }}</p>
+        </div>
+      </div>
+
+      <!-- Boutons -->
+      <div class="button-group">
+        <button *ngIf="etape.contentType !== 'quiz' || quizSubmitted" (click)="goToNextLevel()" class="btn btn-primary">Suivant</button>
+        <button *ngIf="etape.contentType === 'quiz' && !quizSubmitted && quizQuestions.length > 0" [disabled]="quizAnswers.includes(null)" (click)="submitQuiz()" class="btn btn-primary">Valider</button>
+        <button (click)="goToCourseMenu()" class="btn btn-back">Retour</button>
       </div>
     </div>
+  </div>
+
+  <!-- Personnage oiseau -->
+  <div class="bird-character">
+    <img src="assets/img/logo2.gif" alt="Math World Mascotte" />
   </div>
 </div>

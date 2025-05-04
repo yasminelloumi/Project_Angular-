@@ -1,195 +1,217 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CoursService } from '../services/course.service';
+import { EtapeService } from '../services/etape.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { Etape } from 'Modeles/Etape';
-import { Quiz } from 'Modeles/Quiz';
+import { QuizQuestion, QuizOption } from 'Modeles/Quiz';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ComponentsModule } from '../components/components.module';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-level-content',
+  standalone: true,
+  imports: [CommonModule, RouterModule, ComponentsModule],
   templateUrl: './level-content.component.html',
-  styleUrls: ['./level-content.component.css']
+  styleUrls: ['./level-content.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LevelContentComponent implements OnInit, OnDestroy, AfterViewInit {
-  courseId: string = '';
-  levelId: string = '';
-  currentLevel: Etape | null = null;
-  loading: boolean = true;
-  error: string | null = null;
+export class LevelContentComponent implements OnInit, OnDestroy {
+  coursId?: number;
+  etapeId?: number;
+  etape: Etape | null = null;
+  isLoading = true;
+  errorMessage = '';
 
-  quizQuestions: Quiz[] = [];
-  quizAnswers: string[] = [];
-  quizSubmitted: boolean = false;
-  quizScore: number = 0;
+  quizQuestions: QuizQuestion[] = [];
+  quizAnswers: (string | null)[] = [];
+  quizSubmitted = false;
+  quizScore = 0;
 
-  private subscriptions: Subscription = new Subscription();
+  private subscriptions = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private courseService: CoursService,
+    private etapeService: EtapeService,
     private sanitizer: DomSanitizer,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.route.paramMap.subscribe(params => {
-        this.courseId = params.get('id') || '';
-        this.levelId = params.get('levelId') || '';
-
-        console.log('Full URL:', this.router.url);
-        console.log('Parameters:', {
-          courseId: this.courseId,
-          levelId: this.levelId,
-          typeCourseId: typeof this.courseId,
-          typeLevelId: typeof this.levelId
-        });
-
-        if (!this.courseId || !this.levelId) {
-          this.handleError(`Missing IDs in URL: courseId=${this.courseId}, levelId=${this.levelId}`);
-          return;
-        }
-
-        this.loadContent();
-      })
-    );
+    this.loadEtape();
   }
 
-  ngAfterViewInit(): void {
-    this.cdr.detectChanges(); // Force change detection after the view is initialized
+  // Public method to navigate back to courses
+  goToCourses(): void {
+    this.router.navigate(['/course']);
   }
 
-  loadContent(): void {
-    this.loading = true;
-    this.error = null;
+  loadEtape(): void {
+    const coursIdParam = this.route.snapshot.paramMap.get('coursId');
+    const etapeIdParam = this.route.snapshot.paramMap.get('etapeId');
+
+    this.coursId = coursIdParam ? Number(coursIdParam) : undefined;
+    this.etapeId = etapeIdParam ? Number(etapeIdParam) : undefined;
+
+    if (
+      !this.coursId ||
+      !this.etapeId ||
+      isNaN(this.coursId) ||
+      isNaN(this.etapeId) ||
+      this.coursId <= 0 ||
+      this.etapeId <= 0
+    ) {
+      this.handleError('Invalid course or level ID. Please check the URL.');
+      return;
+    }
+
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.quizSubmitted = false;
+    this.quizScore = 0;
 
     this.subscriptions.add(
-      this.courseService.getCourses().subscribe({
-        next: (courses) => {
-          console.log('Received courses:', courses);
+      this.etapeService.getEtape(this.coursId, this.etapeId).subscribe({
+        next: (etape) => {
+          this.etape = etape;
 
-          const courseIdNum = Number(this.courseId);
-          if (isNaN(courseIdNum)) {
-            this.handleError('Invalid course ID');
-            return;
+          if (etape.contentType === 'quiz') {
+            let quizData = etape.contentData;
+            if (typeof quizData === 'string') {
+              try {
+                const parsedData = JSON.parse(quizData);
+                quizData = parsedData.questions || [];
+              } catch (e) {
+                this.handleError('Invalid quiz data format.');
+                return;
+              }
+            }
+            this.quizQuestions = this.normalizeQuizData(quizData);
+            this.quizAnswers = new Array(this.quizQuestions.length).fill(null);
           }
 
-          const foundCourse = courses.find(c => c.id === courseIdNum);
-          if (!foundCourse) {
-            this.handleError('Course not found');
-            return;
-          }
-
-          const levelIdNum = Number(this.levelId);
-          if (isNaN(levelIdNum)) {
-            this.handleError('Invalid step ID');
-            return;
-          }
-
-          this.currentLevel = foundCourse.etapes?.find(
-            (e: Etape) => e.id === levelIdNum
-          ) || null;
-
-          if (!this.currentLevel) {
-            this.handleError('Step not found');
-            return;
-          }
-
-          if (this.currentLevel.contentType === 'quiz') {
-            this.quizQuestions = Array.isArray(this.currentLevel.contentData)
-              ? this.currentLevel.contentData
-              : [];
-            this.quizAnswers = new Array(this.quizQuestions.length).fill('');
-            this.quizSubmitted = false;
-            this.quizScore = 0;
-          }
-
-          console.log('Current level:', this.currentLevel);
-          this.loading = false;
-          console.log('State after loading:', {
-            loading: this.loading,
-            error: this.error,
-            currentLevel: this.currentLevel,
-            condition: !this.loading && !this.error && this.currentLevel
-          });
-
-          // Force change detection with a slight delay
-          setTimeout(() => {
-            this.cdr.detectChanges();
-          }, 0);
+          this.isLoading = false;
+          this.cdr.markForCheck();
         },
         error: (err) => {
-          this.handleError(`Load error: ${err.message}`);
-        }
-      })
-    );
-  }
-
-  getSafeUrl(url: string): SafeResourceUrl {
-    if (!url || !url.startsWith('http')) {
-      console.warn('Invalid URL for iframe:', url);
-      return this.sanitizer.bypassSecurityTrustResourceUrl('');
-    }
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-  }
-
-  onAnswerSelected(questionIndex: number, option: string): void {
-    this.quizAnswers[questionIndex] = option;
-  }
-
-  submitQuiz(): void {
-    this.quizScore = 0;
-    this.quizQuestions.forEach((question, index) => {
-      if (this.quizAnswers[index] === question.correctAnswer) {
-        this.quizScore++;
-      }
-    });
-    this.quizSubmitted = true;
-    this.cdr.detectChanges();
-  }
-
-  goToNextLevel(): void {
-    this.subscriptions.add(
-      this.courseService.getCourses().subscribe(courses => {
-        const courseIdNum = Number(this.courseId);
-        if (isNaN(courseIdNum)) {
-          this.handleError('Invalid course ID');
-          return;
-        }
-
-        const course = courses.find(c => c.id === courseIdNum);
-        if (!course) {
-          this.handleError('Course not found');
-          return;
-        }
-
-        const levelIdNum = Number(this.levelId);
-        if (isNaN(levelIdNum)) {
-          this.handleError('Invalid step ID');
-          return;
-        }
-
-        const currentIndex = course.etapes.findIndex(
-          (e: Etape) => e.id === levelIdNum
-        );
-        const nextLevel = course.etapes[currentIndex + 1];
-
-        if (nextLevel) {
-          this.router.navigate([`/course/${this.courseId}/level/${nextLevel.id}`]);
-        } else {
-          this.router.navigate([`/course/${this.courseId}`]);
+          this.handleError(
+            err.status === 404
+              ? `Level or course not found (Course ID: ${this.coursId}, Level ID: ${this.etapeId})`
+              : 'Error loading level.'
+          );
         }
       })
     );
   }
 
   private handleError(message: string): void {
-    this.error = message;
-    this.loading = false;
-    console.error(message);
-    this.cdr.detectChanges();
+    this.errorMessage = message;
+    this.isLoading = false;
+    if (!environment.production) {
+      console.error(message);
+    }
+    this.cdr.markForCheck();
+  }
+
+  private normalizeQuizData(quizData: any): QuizQuestion[] {
+    if (!Array.isArray(quizData)) {
+      this.handleError('Quiz data is not an array.');
+      return [];
+    }
+
+    return quizData.map((q: any, index: number) => {
+      if ('id' in q && 'text' in q && 'type' in q && 'options' in q) {
+        return {
+          id: q.id,
+          text: q.text,
+          type: q.type as 'multiple-choice' | 'true-false',
+          options: q.options.map((opt: any) => ({
+            id: opt.id || Math.random(),
+            text: opt.text,
+            isCorrect: opt.isCorrect
+          }))
+        };
+      }
+
+      if ('question' in q && 'options' in q && 'correctAnswer' in q) {
+        return {
+          id: index + 1,
+          text: q.question,
+          type: 'multiple-choice',
+          options: q.options.map((opt: string, optIndex: number) => ({
+            id: optIndex + 1,
+            text: opt,
+            isCorrect: opt === q.correctAnswer
+          }))
+        };
+      }
+
+      this.handleError(`Unexpected quiz question format at index ${index}.`);
+      return {
+        id: index + 1,
+        text: 'Invalid question',
+        type: 'multiple-choice',
+        options: []
+      };
+    });
+  }
+
+  getSafeUrl(url: string): SafeResourceUrl {
+    if (!url || !url.startsWith('http')) {
+      this.handleError('Invalid video URL.');
+      return this.sanitizer.bypassSecurityTrustResourceUrl('');
+    }
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  onAnswerSelected(questionIndex: number, optionText: string): void {
+    this.quizAnswers[questionIndex] = optionText;
+    this.cdr.markForCheck();
+  }
+
+  submitQuiz(): void {
+    this.quizScore = 0;
+    this.quizQuestions.forEach((question, index) => {
+      const selectedAnswer = this.quizAnswers[index];
+      const correctOption = question.options.find(opt => opt.isCorrect);
+      if (correctOption && selectedAnswer === correctOption.text) {
+        this.quizScore++;
+      }
+    });
+    this.quizSubmitted = true;
+    this.cdr.markForCheck();
+  }
+
+  goToNextLevel(): void {
+    if (!this.coursId || !this.etapeId) {
+      this.handleError('Invalid course or level ID.');
+      return;
+    }
+
+    this.subscriptions.add(
+      this.etapeService.getEtapesByCours(this.coursId).subscribe({
+        next: (etapes) => {
+          const currentIndex = etapes.findIndex(e => e.id === this.etapeId);
+          const nextLevel = etapes[currentIndex + 1];
+
+          if (nextLevel) {
+            this.router.navigate([`/course/${this.coursId}/level/${nextLevel.id}`]);
+          } else {
+            this.router.navigate([`/course/${this.coursId}`]);
+          }
+        },
+        error: (err) => {
+          this.handleError('Error navigating to next level.');
+        }
+      })
+    );
+  }
+
+  retryLoad(): void {
+    this.loadEtape();
   }
 
   ngOnDestroy(): void {

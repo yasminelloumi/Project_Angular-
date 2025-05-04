@@ -85,7 +85,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
     { path: 'Cours/:id',        component: CourseLevelComponent },
-    {path: 'course/:id/level/:levelId', component: LevelContentComponent},
+     {path: 'course/:coursId/level/:etapeId', component: LevelContentComponent},
 ];
 
 

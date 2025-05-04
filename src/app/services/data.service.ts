@@ -58,7 +58,12 @@ export class DataService {
   updateEtudiant(etudiant: Etudiant): Observable<Etudiant> {
     return this.http.put<Etudiant>(`${this.etudiantsUrl}/${etudiant.id}`, etudiant);
   }
-
+  getEtudiantByFirebaseUid(firebaseUid: string): Observable<Etudiant | null> {
+    return this.http.get<Etudiant[]>(`${this.etudiantsUrl}?firebaseUid=${firebaseUid}`).pipe(
+      map(etudiants => etudiants.length > 0 ? etudiants[0] : null)
+     
+    );
+  }
   deleteEtudiantById(id: number): Observable<void> {
     return this.http.delete<void>(`${this.etudiantsUrl}/${id}`);
   }
