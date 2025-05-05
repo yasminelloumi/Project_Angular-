@@ -32,7 +32,9 @@
       </div>
       
       <div *ngIf="!passed" class="try-again-content">
-        <div class="try-again-icon">😊</div>
+        <div class="try-again-icon">
+          <img src="https://media1.giphy.com/media/TaT1tsRCJ58PgiUMCp/200w.gif?cid=6c09b952u3vkefe9mlus8vwx0bt7n0m680vvb5538b29nyk6&ep=v1_gifs_search&rid=200w.gif&ct=g" alt="">
+        </div>
         <h2>Keep Learning!</h2>
         <p>You scored {{ score }} out of {{ totalQuestions }}</p>
         <p class="try-again-message">That's {{ getScorePercentage() }}%. You need 50% to pass.</p>
