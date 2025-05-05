@@ -45,8 +45,13 @@ export class LevelContentComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.loadEtape();
+    this.subscriptions.add(
+      this.route.params.subscribe(() => {
+        this.loadEtape();
+      })
+    );
   }
+  
 
   goToCourses(): void {
     console.log('goToCourses called');
