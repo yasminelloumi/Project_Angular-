@@ -49,6 +49,7 @@ export class LevelContentComponent implements OnInit, OnDestroy {
   }
 
   goToCourses(): void {
+    console.log('goToCourses called');
     this.router.navigate(['/course']);
   }
 
@@ -186,6 +187,7 @@ export class LevelContentComponent implements OnInit, OnDestroy {
   }
 
   submitQuiz(): void {
+    console.log('submitQuiz called');
     this.quizScore = 0;
     this.quizQuestions.forEach((question, index) => {
       const selectedAnswer = this.quizAnswers[index];
@@ -213,6 +215,7 @@ export class LevelContentComponent implements OnInit, OnDestroy {
   }
 
   goToNextLevel(): void {
+    console.log('goToNextLevel called');
     if (!this.coursId || !this.etapeId) {
       this.handleError('Invalid course or level ID.');
       return;
