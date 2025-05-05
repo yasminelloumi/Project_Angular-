@@ -31,8 +31,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onStartCourse() {
-    const audio = new Audio('assets/img/click.mp3');
-    audio.play();
+    
     console.log('Super ! Tu as commencé un nouveau cours ! 🎉');
   }
 }

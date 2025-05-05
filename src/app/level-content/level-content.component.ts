@@ -50,14 +50,14 @@ export class LevelContentComponent implements OnInit, OnDestroy {
 
   goToCourses(): void {
     console.log('goToCourses called');
-    this.router.navigate(['/course']);
+    this.router.navigate([`/Cours/${this.coursId}`]);
   }
 
   goToCourseMenu(): void {
     if (this.coursId) {
       this.router.navigate([`/course/${this.coursId}`]);
     } else {
-      this.router.navigate(['/course']);
+      this.router.navigate(['/Cours']);
     }
   }
 
