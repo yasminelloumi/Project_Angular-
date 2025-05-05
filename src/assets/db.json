@@ -260,13 +260,13 @@
             }
           ],
           "ordre": 5,
-          "estComplete": true
+          "estComplete": false
         },
         {
           "titre": "test",
           "description": "kljbvcxdnfgnhvjhmv mghbv",
           "ordre": 6,
-          "estComplete": false,
+          "estComplete": true,
           "contentType": "quiz",
           "contentData": "{\"questions\":[{\"id\":1745781838824,\"text\":\"rgtrgtr\",\"type\":\"true-false\",\"options\":[{\"id\":1745781844113,\"text\":\"Vrai\",\"isCorrect\":true},{\"id\":1745781844114,\"text\":\"Faux\",\"isCorrect\":false}]}]}",
           "id": 6

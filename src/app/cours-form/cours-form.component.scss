@@ -3,6 +3,16 @@
     margin: 0 auto;
     padding: 1.5rem;
   }
+  .full-background-wrapper {
+    min-height: 100vh;
+    background-image: url('/assets/img/c5d118cf7c0634e0c5f5cbe051f95f33.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+  }
+  
   
   .loading {
     display: flex;

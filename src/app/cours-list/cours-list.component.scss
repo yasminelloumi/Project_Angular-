@@ -2,6 +2,16 @@
   padding: 4rem;
   max-width: 1200px;
   margin: auto;
+  /* REMOVE this line */
+  /* background-image: url('/assets/img/c5d118cf7c0634e0c5f5cbe051f95f33.jpg'); */
+}
+
+.full-background-wrapper {
+  min-height: 100vh;
+  background-image: url('/assets/img/c5d118cf7c0634e0c5f5cbe051f95f33.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .page-header {
