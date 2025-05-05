@@ -9,11 +9,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '../components/components.module';
 import { environment } from '../../environments/environment';
+import { CertificateComponent } from 'app/certificate/certificate.component';
+
 
 @Component({
   selector: 'app-level-content',
   standalone: true,
-  imports: [CommonModule, RouterModule, ComponentsModule],
+  imports: [CommonModule, RouterModule, ComponentsModule, CertificateComponent],
   templateUrl: './level-content.component.html',
   styleUrls: ['./level-content.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -29,6 +31,8 @@ export class LevelContentComponent implements OnInit, OnDestroy {
   quizAnswers: (string | null)[] = [];
   quizSubmitted = false;
   quizScore = 0;
+  quizPassed = false;
+  showCertificate = false;
 
   private subscriptions = new Subscription();
 
@@ -44,9 +48,16 @@ export class LevelContentComponent implements OnInit, OnDestroy {
     this.loadEtape();
   }
 
-  // Public method to navigate back to courses
   goToCourses(): void {
     this.router.navigate(['/course']);
+  }
+
+  goToCourseMenu(): void {
+    if (this.coursId) {
+      this.router.navigate([`/course/${this.coursId}`]);
+    } else {
+      this.router.navigate(['/course']);
+    }
   }
 
   loadEtape(): void {
@@ -72,6 +83,8 @@ export class LevelContentComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
     this.quizSubmitted = false;
     this.quizScore = 0;
+    this.quizPassed = false;
+    this.showCertificate = false;
 
     this.subscriptions.add(
       this.etapeService.getEtape(this.coursId, this.etapeId).subscribe({
@@ -181,7 +194,21 @@ export class LevelContentComponent implements OnInit, OnDestroy {
         this.quizScore++;
       }
     });
+    
     this.quizSubmitted = true;
+    this.quizPassed = this.quizScore >= (this.quizQuestions.length / 2);
+    
+    // Show certificate popup after a short delay
+    setTimeout(() => {
+      this.showCertificate = true;
+      this.cdr.markForCheck();
+    }, 1000);
+    
+    this.cdr.markForCheck();
+  }
+
+  closeCertificate(): void {
+    this.showCertificate = false;
     this.cdr.markForCheck();
   }
 

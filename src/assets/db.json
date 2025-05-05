@@ -14,8 +14,9 @@
       "id": "2",
       "NumeroUnique": 987654,
       "Nom": "Lemoine",
-      "Prenom": "Alicee",
+      "Prenom": "Alice",
       "email": "alice.lemoine@example.com",
+      "password": "motDePasseAlice",
       "niveau": "Master 1",
       "firebaseUid": "eTnonBOPAZXibyQX94dhruO4EYh2",
       "role": "etudiant"
@@ -196,6 +197,66 @@
                 "class"
               ],
               "correctAnswer": "for"
+            },
+            {
+              "question": "What is the output of `print(2 + 3)`?",
+              "options": [
+                "5",
+                "23",
+                "Error",
+                "None"
+              ],
+              "correctAnswer": "5"
+            },
+            {
+              "question": "Which of the following is a Python data type?",
+              "options": [
+                "int",
+                "float",
+                "str",
+                "All of the above"
+              ],
+              "correctAnswer": "All of the above"
+            },
+            {
+              "question": "What is the purpose of a function in programming?",
+              "options": [
+                "To store data",
+                "To perform a specific task",
+                "To create loops",
+                "To define variables"
+              ],
+              "correctAnswer": "To perform a specific task"
+            },
+            {
+              "question": "Which symbol is used for comments in Python?",
+              "options": [
+                "#",
+                "//",
+                "/*",
+                "--"
+              ],
+              "correctAnswer": "#"
+            },
+            {
+              "question": "What is the output of `print(type(5))`?",
+              "options": [
+                "<class 'int'>",
+                "<class 'str'>",
+                "<class 'float'>",
+                "<class 'list'>"
+              ],
+              "correctAnswer": "<class 'int'>"
+            },
+            {
+              "question": "Which function is used to read input from the user in Python?",
+              "options": [
+                "input()",
+                "read()",
+                "scan()",
+                "get()"
+              ],
+              "correctAnswer": "input()"
             }
           ],
           "ordre": 5,

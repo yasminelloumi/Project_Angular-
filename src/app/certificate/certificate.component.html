@@ -1,0 +1,43 @@
+<div class="certificate-overlay" (click)="closePopup()">
+    <div class="certificate-container" [ngClass]="{'passed': passed}" (click)="$event.stopPropagation()">
+      <button class="close-button" (click)="closePopup()">✕</button>
+      
+      <div *ngIf="passed" class="certificate-content">
+        <h2 class="certificate-title">Certificate of Achievement</h2>
+        <div class="certificate-decoration"></div>
+        
+        <div class="certificate-body">
+          <p class="certificate-congrats">Congratulations!</p>
+          <p class="certificate-name">{{ studentName }}</p>
+          <p class="certificate-text">has successfully completed</p>
+          <p class="certificate-course">{{ courseName }}</p>
+          <p class="certificate-text">with a score of</p>
+          <p class="certificate-score">{{ score }} / {{ totalQuestions }}</p>
+          <p class="certificate-percentage">({{ getScorePercentage() }}%)</p>
+          
+          <div class="certificate-date">
+            <p>{{ currentDate | date:'longDate' }}</p>
+            <div class="certificate-line"></div>
+            <p>Date</p>
+          </div>
+        </div>
+        
+        <div class="certificate-stars">
+          <span class="star">⭐</span>
+          <span class="star">⭐</span>
+          <span class="star">⭐</span>
+        </div>
+        
+        <button class="print-button" (click)="window.print()">Print Certificate</button>
+      </div>
+      
+      <div *ngIf="!passed" class="try-again-content">
+        <div class="try-again-icon">😊</div>
+        <h2>Keep Learning!</h2>
+        <p>You scored {{ score }} out of {{ totalQuestions }}</p>
+        <p class="try-again-message">That's {{ getScorePercentage() }}%. You need 50% to pass.</p>
+        <p>Don't worry! You can try again and improve your score.</p>
+        <button class="try-again-button" (click)="closePopup()">Try Again</button>
+      </div>
+    </div>
+  </div>

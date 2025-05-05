@@ -27,6 +27,7 @@ import { EtapeFormComponent } from './etape-form/etape-form.component';
 import { NgChartsModule } from 'ng2-charts';
 import { SafePipe } from './safe.pipe';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyDu5VmAEsVFy_AiddbbMixP8eE9w5JCI_4",
   authDomain: "e-learning-f2bb9.firebaseapp.com",
@@ -46,6 +47,7 @@ const firebaseConfig = {
     LoginComponent,
     RegisterComponent,
     SafePipe,
+    
    
     //LevelContentComponent,
     //CourseLevelComponent

@@ -20,7 +20,7 @@
 }
 
 .map-background {
-  width: 100%;
+  width: 73%;
   height: 100%;
   object-fit: contain; /* Conserve les proportions de l'image sans zoom */
   object-position: center; /* Centre l'image */

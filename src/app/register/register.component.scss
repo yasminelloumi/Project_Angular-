@@ -1,10 +1,15 @@
-// Variables for consistent theming
-$primary-color: #17a2b8;
-$danger-color: #dc3545;
-$card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+
+// Theme variables
+$primary-color: #34d399; // Emerald green
+$secondary-color: #f59e0b; // Amber
+$accent-color: #ff6f61; // Coral
+$background-color: #e0f7fa; // Light cyan
+$text-color: #1f2937; // Dark gray
+$card-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 $transition-time: 0.3s;
 
-// Global styles for the entire page (using ::ng-deep to apply globally)
+// Global styles
 :host {
   display: block;
   height: 100vh;
@@ -12,6 +17,7 @@ $transition-time: 0.3s;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-family: 'Bubblegum Sans', cursive, sans-serif;
 }
 
 .page-wrapper {
@@ -50,126 +56,183 @@ $transition-time: 0.3s;
   }
 }
 
-// Container styling
+
+@keyframes bubbleFloat {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+// Container
 .container-fluid {
   padding: 0 15px;
   position: relative;
   z-index: 2;
-  
-  .row {
-    &.mt-5 {
-      margin-top: 5rem;
-    }
+
+  .row.mt-5 {
+    margin-top: 3rem;
 
     .col-4 {
-      max-width: 450px; // Increased from 400px to make the card larger
+      max-width: 450px;
       margin: 0 auto;
 
       .card {
         border: none;
-        border-radius: 8px;
+        border-radius: 20px;
         box-shadow: $card-shadow;
-        transition: transform $transition-time ease;
         background: rgba(255, 255, 255, 0.95);
+        border: 4px solid #fefcbf;
+        transition: transform $transition-time ease;
 
         &:hover {
-          transform: translateY(-2px);
+          transform: translateY(-5px);
         }
 
         .card-body {
-          padding: 2.5rem; // Increased from 2rem to give more internal space
+          padding: 2.5rem;
+
+          .logo-container {
+            .site-logo {
+              width: 120px;
+              height: auto;
+              border-radius: 20px;
+              box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+              animation: wiggle 5s ease-in-out infinite;
+            }
+
+            @keyframes wiggle {
+              0%, 100% { transform: rotate(0deg); }
+              86% { transform: rotate(0deg); }
+              88% { transform: rotate(5deg); }
+              90% { transform: rotate(-5deg); }
+              92% { transform: rotate(5deg); }
+              94% { transform: rotate(-5deg); }
+              96% { transform: rotate(0deg); }
+            }
+
+            .site-logo:hover {
+              transform: scale(1.2) rotate(10deg);
+            }
+          }
 
           form {
             .mb-3 {
               margin-bottom: 1.5rem;
 
               h4 {
-                font-size: 1.5rem;
+                font-size: 2rem;
+                color: $primary-color;
                 margin-bottom: 1.5rem;
-                color: #343a40;
-                opacity: 0.7;
+                text-shadow: 2px 2px 0px #fefcbf;
               }
 
               .form-label {
-                font-weight: 500;
-                color: #495057;
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: $text-color;
               }
 
               .form-control {
-                border-radius: 4px;
+                border-radius: 15px;
                 padding: 0.75rem 1rem;
-                border: 1px solid #ced4da;
-                transition: border-color $transition-time ease;
+                border: 3px solid $primary-color;
+                background: #fefcbf;
+                font-size: 1.1rem;
+                transition: border-color $transition-time ease, box-shadow $transition-time ease;
 
                 &:focus {
-                  border-color: $primary-color;
-                  box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+                  border-color: $secondary-color;
+                  box-shadow: 0 0 0 0.2rem rgba($secondary-color, 0.25);
+                  background: #ffffff;
+                }
+
+                &::placeholder {
+                  color: #6b7280;
+                  opacity: 0.7;
                 }
               }
             }
 
-            .btn-info {
-              background-color: $primary-color;
+            .btn-primary {
+              background: $primary-color;
               border: none;
-              padding: 0.75rem 2rem;
-              border-radius: 4px;
-              transition: background-color $transition-time ease;
+              padding: 0.75rem;
+              border-radius: 50px;
+              font-size: 1.4rem;
+              font-weight: 700;
+              box-shadow: 0 8px 0 darken($primary-color, 10%), 0 15px 20px rgba(0, 0, 0, 0.15);
+              transition: all $transition-time ease;
 
               &:hover {
-                background-color: darken($primary-color, 10%);
+                background: darken($primary-color, 10%);
+                transform: translateY(-3px);
+                box-shadow: 0 10px 0 darken($primary-color, 10%), 0 15px 25px rgba(0, 0, 0, 0.2);
+              }
+
+              &:active {
+                transform: translateY(3px);
+                box-shadow: 0 5px 0 darken($primary-color, 10%), 0 8px 15px rgba(0, 0, 0, 0.1);
               }
 
               &:disabled {
                 opacity: 0.7;
                 cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
               }
             }
 
-            .row {
-              margin-top: 1rem;
-
-              a {
-                color: #6c757d;
+            .row.mb-3 {
+              .link {
+                color: $text-color;
+                font-size: 1.1rem;
+                text-decoration: none;
                 transition: color $transition-time ease;
 
                 &:hover {
-                  color: $primary-color;
+                  color: $accent-color;
                 }
 
-                span.text-danger {
-                  color: $danger-color;
-                  font-weight: 500;
+                .text-danger {
+                  color: $accent-color;
+                  font-weight: 600;
 
                   &:hover {
-                    color: darken($danger-color, 10%);
+                    color: darken($accent-color, 10%);
                   }
                 }
               }
+            }
 
-              &.mt-2 {
-                margin-top: 1.5rem;
+            .google-btn {
+              text-decoration: none;
+              cursor: pointer;
 
-                a {
-                  .card {
-                    cursor: pointer;
-                    background-color: #f8f9fa;
+              .google-card {
+                background: #ffffff;
+                border: 3px solid #4285f4; // Google blue
+                border-radius: 15px;
+                transition: background-color $transition-time ease;
 
-                    .card-body {
-                      padding: 0.75rem;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      gap: 0.5rem;
+                .card-body {
+                  padding: 0.75rem;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 0.5rem;
+                  color: #4285f4;
+                  font-size: 1.2rem;
+                  font-weight: 600;
 
-                      img {
-                        vertical-align: middle;
-                      }
-                    }
-
-                    &:hover {
-                      background-color: #e9ecef;
-                    }
+                  .google-logo {
+                    width: 24px;
+                    height: 24px;
+                    vertical-align: middle;
                   }
+                }
+
+                &:hover {
+                  background: #f1f5f9;
+                  transform: translateY(-2px);
                 }
               }
             }
@@ -180,12 +243,65 @@ $transition-time: 0.3s;
   }
 }
 
+// Responsive adjustments
 @media (max-width: 768px) {
   .container-fluid {
-    .row {
+    .row.mt-5 {
       .col-4 {
-        max-width: 90%; // Adjusted for responsiveness on smaller screens
+        max-width: 90%;
         padding: 0 15px;
+
+        .card {
+          .card-body {
+            padding: 2rem;
+
+            .logo-container .site-logo {
+              width: 100px;
+            }
+
+            form {
+              .mb-3 h4 {
+                font-size: 1.8rem;
+              }
+
+              .form-control {
+                font-size: 1rem;
+              }
+
+              .btn-primary {
+                font-size: 1.2rem;
+                padding: 0.6rem;
+              }
+
+              .row.mb-3 .link {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .container-fluid {
+    .row.mt-5 {
+      margin-top: 2rem;
+
+      .col-4 {
+        .card {
+          border-radius: 15px;
+          border-width: 3px;
+
+          .card-body {
+            padding: 1.5rem;
+
+            .logo-container .site-logo {
+              width: 80px;
+            }
+          }
+        }
       }
     }
   }

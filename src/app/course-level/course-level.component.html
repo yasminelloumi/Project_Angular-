@@ -12,6 +12,7 @@
   <div *ngIf="!isLoading && !errorMessage">
     <div class="map-container" *ngIf="selectedCourse">
       <img src="assets/img/map3.png" alt="Carte des niveaux" class="map-background" />
+      
 
       <!-- Boucle sur les niveaux -->
       <div
@@ -19,6 +20,7 @@
         class="level-wrapper"
         [ngStyle]="{ top: level.position.top, left: level.position.left }"
       >
+      
         <button
           class="level-btn"
           [ngClass]="{ completed: level.estComplete, disabled: level.disabled }"
@@ -31,8 +33,11 @@
         </button>
         <!-- Indicateur "START HERE!" pour le niveau 1 -->
         <div *ngIf="i === 0" class="start-here">START HERE!</div>
+        
       </div>
+     
     </div>
+    
 
     <!-- Message si aucun cours n'est trouvé -->
     <div *ngIf="!selectedCourse" class="no-course">
