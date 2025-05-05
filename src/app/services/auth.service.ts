@@ -14,7 +14,7 @@ export class AuthService {
   constructor(
     private fireauth: AngularFireAuth,
     private router: Router,
-    private snackBar: MatSnackBar  // Added this line
+    private snackBar: MatSnackBar 
   ) { }
 
   // auth.service.ts
